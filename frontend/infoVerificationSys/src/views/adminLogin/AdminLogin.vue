@@ -1,13 +1,17 @@
 <template>
-
+  <el-collapse>
+    test
+  </el-collapse>
 </template>
-
 <script>
   export default {
-    name: 'AdminLogin'
+    name: 'AdminLogin',
+    data () {
+      return {
+        msg: 'Welcome to Your Vue.js App'
+      }
+    }
   }
 </script>
 
-<style scoped>
 
-</style>

@@ -1,7 +1,7 @@
 {
   "name": "info_verfication_sys",
   "version": "1.0.0",
-  "description": "the frontend of infoVerficationSys to assist HK&MAC&TW students to enroll in NJU",
+  "description": "the frontend of infoVerificationSys to assist HK&MAC&TW students to enroll in NJU",
   "author": "Chen Gengyang",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "mint-ui": "^2.2.13",
+    "element-ui": "^2.6.3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -35,15 +35,6 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
-    "eslint": "^4.15.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.2.0",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "eslint-plugin-vue": "^4.0.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
