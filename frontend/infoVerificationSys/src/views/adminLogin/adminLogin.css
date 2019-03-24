@@ -1,0 +1,42 @@
+
+.container {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+.el-header {
+    background: linear-gradient(to right, #3023ae,#7645c1, #c86dd7);
+    color: white;
+    font-size: 20px;
+    text-align: left;
+    line-height: 60px;
+}
+
+.el-aside {
+    background-color: #070049;
+    color: white;
+    text-align: left;
+}
+
+.el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+}
+.title-font {
+    writing-mode: bt-rl;
+    margin:15px;
+    font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu, serif;
+    font-size: 15px;
+    letter-spacing: 0;
+
+}
+
+
+
+

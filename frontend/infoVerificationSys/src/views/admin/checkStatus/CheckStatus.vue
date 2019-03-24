@@ -1,13 +1,5 @@
 <template>
 
 </template>
-
-<script>
-  export default {
-    name: 'CheckStatus'
-  }
-</script>
-
-<style scoped>
-
-</style>
+<script src="./checkStatus.js"></script>
+<style scoped src="./checkStatus.css"></style>

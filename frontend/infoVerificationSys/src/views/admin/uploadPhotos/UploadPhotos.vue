@@ -1,5 +1,7 @@
 <template>
-
+    <el-collapse>
+        test
+    </el-collapse>
 </template>
 
 <script>

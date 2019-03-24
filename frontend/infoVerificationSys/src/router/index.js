@@ -11,7 +11,7 @@ import UploadPhotos from '@/views/admin/uploadPhotos/UploadPhotos.vue'
 Vue.use(Router)
 
 const router = new Router({
-  routers: [
+  routes: [
     {
       path: '/',
       name: '管理员登陆',

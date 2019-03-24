@@ -2,12 +2,5 @@
 
 </template>
 
-<script>
-  export default {
-    name: 'CheckInfo'
-  }
-</script>
-
-<style scoped>
-
-</style>
+<script src="./checkInfo.js"></script>
+<style scoped src="./checkInfo.css"></style>

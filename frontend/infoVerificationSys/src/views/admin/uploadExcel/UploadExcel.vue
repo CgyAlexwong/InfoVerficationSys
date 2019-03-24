@@ -1,9 +1,11 @@
 <template>
-
+    <el-collapse>
+        excel
+    </el-collapse>
 </template>
 
 <script>
-  export default {
+  export default{
     name: 'UploadExcel'
   }
 </script>
