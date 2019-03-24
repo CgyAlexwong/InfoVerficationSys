@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  import { Vue, Component } from 'vue-property-decorator';
-  export default class App extends Vue {
-  }
+    export default {
+        name: 'App'
+    }
 </script>
 
 <style>

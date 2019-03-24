@@ -9,13 +9,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 
-new Vue({
-  el: '#app',
-  router:router,
-  component:{App},
-});
+const app = new Vue({
+    router: router,
+    render: h => h(App)
+}).$mount('#app');
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new
 new Vue({
