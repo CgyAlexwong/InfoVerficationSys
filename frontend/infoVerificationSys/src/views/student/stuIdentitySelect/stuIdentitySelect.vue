@@ -11,18 +11,18 @@
     </mt-header>
 
     <!--地区选择 mt-radio -->
-    <div class="box">
+    <div class="box" >
       <mt-radio
         title="请选择你来自的地区"
-        v-model="value"
-        :options="['香港', '澳门', '台湾']" >
+        v-model="origin"
+        :options="options">
       </mt-radio>
     </div>
 
     <!--填写身份证号 mt-field -->
     <div>
-      <mt-field label="身份证号" placeholder="请输入你的身份证号" v-model="username" slot="right"></mt-field>
-      <mt-button size="small" @click="go">确认</mt-button>
+      <mt-field label="身份证号" placeholder="请输入你的身份证号" v-model="idNumber" ></mt-field>
+      <mt-button size="small" @click="submit">确认</mt-button>
       <router-view></router-view>
     </div>
   </div>
@@ -36,12 +36,29 @@ import { MessageBox } from 'mint-ui';
 import { Field } from 'mint-ui';
 import MtField from "mint-ui/packages/field/src/field";
 import { userJuniorLogin } from "../../../utils/stuAPI";
+import qs from 'qs';
 
 export default {
   name: 'Identity',
   components: {MtField, Field,MessageBox,MtRadio, MtHeader, MtButton },
   data () {
     return {
+      origin:'',
+      idNumber:'',
+      options : [
+        {
+          label: '香港',
+          value: 2
+        },
+        {
+          label: '澳门',
+          value: 3
+        },
+        {
+          label: '台湾',
+          value: 1
+        }
+      ]
     }
   },
   methods:{
@@ -59,12 +76,18 @@ export default {
 
     // 发送信息确认，弹框提示
     submit:function () {
+      console.log(this.origin);
+      console.log(this.idNumber);
+      console.log({
+        identityNum:this.idNumber,
+        origin:this.origin
+      });
       userJuniorLogin({
-        identityNum:this.username,
-        origin:this.value
+        identityNum:this.identityNum,
+        origin:this.origin
         }
       ).then(response =>{
-        if(response.data == true){
+        if(response.data === true){
           this.$router.push('/stu/faceVerify')
         }else{
           MessageBox.confirm('', {
@@ -73,11 +96,11 @@ export default {
             confirmButtonText: '反馈',
             cancelButtonText: '重试'
           }).then(action => {
-            if (action == 'confirm') {     //反馈的回调
+            if (action === 'confirm') {     //反馈的回调
               this.feedBack()
             }
           }).catch(err => {
-            if (err == 'cancel') {     //重试的回调
+            if (err === 'cancel') {     //重试的回调
               console.log("重试");
             }
           })

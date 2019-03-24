@@ -15,12 +15,13 @@
   "dependencies": {
     "axios": "^0.18.0",
     "mint-ui": "^2.2.13",
+    "qs": "latest",
     "require": "^2.4.20",
     "vue": "^2.5.2",
     "vue-property-decorator": "^8.0.0",
     "vue-require": "^1.0.1",
-    "vue-router": "^3.0.1",
-    "qs": "latest"
+    "vue-resource": "^1.5.1",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
