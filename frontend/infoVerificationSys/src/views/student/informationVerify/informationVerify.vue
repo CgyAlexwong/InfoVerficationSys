@@ -16,27 +16,27 @@
 
       <mt-tab-container v-model="selected" slot>
         <mt-tab-container-item id="1">
-          <mt-cell title="考生号：" v-model="candidateNum"/>
-          <mt-cell title="姓名：" v-model="name"/>
+          <mt-cell title="考生号：" v-model="examNum"/>
+          <mt-cell title="姓名：" v-model="stuName"/>
           <mt-cell title="性别：" v-model="sex"/>
           <mt-cell title="民族：" v-model="nation"/>
-          <mt-cell title="出生日期：" v-model="birthDate"/>
-          <mt-cell title="报考科类：" v-model="type"/>
+          <mt-cell title="出生日期：" v-model="birthdate"/>
+          <mt-cell title="报考科类：" v-model="subject"/>
           <mt-cell title="电子邮件：" v-model="email"/>
-          <mt-cell title="联系电话：" v-model="tel"/>
+          <mt-cell title="联系电话：" v-model="phoneNumber"/>
           <mt-cell title="身份证：" v-model="identityNum"/>
           <mt-button v-model="unchangeablePart" @click="change1">确认</mt-button>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
           <mt-field label="毕业中学：" v-model="graduateSchool"></mt-field>
-          <mt-field label="移动电话：" v-model="mobileTel"></mt-field>
-          <mt-field label="邮政编码：" v-model="postalCode"></mt-field>
+          <mt-field label="移动电话：" v-model="mobileNumber"></mt-field>
+          <mt-field label="邮政编码：" v-model="postal"></mt-field>
           <mt-field label="通讯地址：" v-model="address"></mt-field>
-          <mt-field label="紧急联系人：" v-model="emergencyContact.name"></mt-field>
-          <mt-field label="紧急联系人电话：" v-model="emergencyContact.tel"></mt-field>
-          <mt-field label="紧急联系人地址：" v-model="emergencyContact.address"></mt-field>
+          <mt-field label="紧急联系人：" v-model="emergencyContact.emergencyContactPerson"></mt-field>
+          <mt-field label="紧急联系人电话：" v-model="emergencyContact.emergencyContactNumber"></mt-field>
+          <mt-field label="紧急联系人地址：" v-model="emergencyContact.emergencyContactAddress"></mt-field>
           <mt-field label="外文姓名：" v-model="foreignName"></mt-field>
-          <mt-field label="毕业年份：" v-model="graduateYear"></mt-field>
+          <mt-field label="毕业年份：" v-model="graduateDate"></mt-field>
           <mt-button v-model="changeablePart" @click="change2">确认</mt-button>
         </mt-tab-container-item>
       </mt-tab-container>
@@ -65,25 +65,25 @@ export default {
       unchangeablePart:0,
       changeablePart:0,
 
-      candidateNum:'',
-      name:'',
+      examNum:'',
+      stuName:'',
       foreignName:'',
       sex:'',
       nation:'',
-      birthDate:'',
-      type:'',
-      graduateYear:'',
+      birthdate:'',
+      subject:'',
+      graduateDate:'',
       graduateSchool:'',
       email:'',
-      tel:'',
-      mobileTel:'',
+      phoneNumber:'',
+      mobileNumber:'',
       identityNum:'',
-      postalCode:'',
+      postal:'',
       address:'',
       emergencyContact:{
-        name:'',
-        tel:'',
-        address:''
+        emergencyContactPerson:'',
+        emergencyContactNumber:'',
+        emergencyContactAddress:''
       }
     }
   },
@@ -91,24 +91,24 @@ export default {
   mounted:function(){
     getInfo(
     ).then(response => {
-      this.candidateNum = response.candidateNum;
-      this.name = response.name;
+      this.examNum = response.examNum;
+      this.stuName = response.stuName;
       this.foreignName = response.foreignName;
-      this.sex = response.sex;
+      this.sex = response.sex===1 ? '男':'女';
       this.nation = response.nation;
-      this.birthDate = response.birthDate;
-      this.type = response.type;
-      this.graduateYear = response.graduateYear;
+      this.birthdate = response.birthdate;
+      this.subject = response.subject;
+      this.graduateDate = response.graduateDate;
       this.graduateSchool = response.graduateSchool;
       this.email = response.email;
-      this.tel = response.tel;
-      this.mobileTel = response.mobileTel;
+      this.phoneNumber = response.phoneNumber;
+      this.mobileNumber = response.mobileNumber;
       this.identityNum = response.identityNum;
-      this.postalCode = response.postalCode;
+      this.postal = response.postal;
       this.address = response.address;
-      this.emergencyContact.name = response.emergencyContact.name;
-      this.emergencyContact.tel = response.emergencyContact.tel;
-      this.emergencyContact.address = response.emergencyContact.address
+      this.emergencyContact.emergencyContactPerson = response.emergencyContact.emergencyContactPerson;
+      this.emergencyContact.emergencyContactNumber = response.emergencyContact.emergencyContactNumber;
+      this.emergencyContact.emergencyContactAddress = response.emergencyContact.emergencyContactAddress
     })
   },
   methods:{
@@ -127,28 +127,28 @@ export default {
     submit:function(){
       console.log({
         foreignName: this.foreignName,
-        graduateYear: this.graduateYear,
+        graduateDate: this.graduateDate,
         graduateSchool: this.graduateSchool,
-        mobileTel: this.mobileTel,
-        postalCode: this.postalCode,
+        mobileNumber: this.mobileNumber,
+        postal: this.postal,
         address: this.address,
         UserEmergencyContact: {
-          name:this.emergencyContact.name,
-          tel:this.emergencyContact.tel,
-          address:this.emergencyContact.address
+          emergencyContactPerson:this.emergencyContact.emergencyContactPerson,
+          emergencyContactNumber:this.emergencyContact.emergencyContactNumber,
+          emergencyContactAddress:this.emergencyContact.emergencyContactAddress
         }
       });
       setUserInfo({
         foreignName: this.foreignName,
-        graduateYear: this.graduateYear,
+        graduateDate: this.graduateDate,
         graduateSchool: this.graduateSchool,
-        mobileTel: this.mobileTel,
-        postalCode: this.postalCode,
+        mobileNumber: this.mobileNumber,
+        postal: this.postal,
         address: this.address,
-        emergencyContact: {
-          name:this.emergencyContact.name,
-          tel:this.emergencyContact.tel,
-          address:this.emergencyContact.address
+        UserEmergencyContact: {
+          emergencyContactPerson:this.emergencyContact.emergencyContactPerson,
+          emergencyContactNumber:this.emergencyContact.emergencyContactNumber,
+          emergencyContactAddress:this.emergencyContact.emergencyContactAddress
         }
       }).then(response =>{
         if (response.succeed === true){

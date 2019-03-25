@@ -14,14 +14,14 @@
     <div class="box" >
       <mt-radio
         title="请选择你来自的地区"
-        v-model="origin"
+        v-model="originPlace"
         :options="options">
       </mt-radio>
     </div>
 
     <!--填写身份证号 mt-field -->
     <div>
-      <mt-field label="身份证号" placeholder="请输入你的身份证号" v-model="idNumber" ></mt-field>
+      <mt-field label="身份证号" placeholder="请输入你的身份证号" v-model="identityNum" ></mt-field>
       <mt-button size="small" @click="go">确认</mt-button>
       <router-view></router-view>
     </div>
@@ -39,12 +39,12 @@ import { userJuniorLogin } from "../../../utils/stuAPI";
 import qs from 'qs';
 
 export default {
-  name: 'Identity',
+  stuName: 'Identity',
   components: {MtField, Field,MessageBox,MtRadio, MtHeader, MtButton },
   data () {
     return {
-      origin:'',
-      idNumber:'',
+      originPlace:'',
+      identityNum:'',
       options : [
         {
           label: '香港',
@@ -77,12 +77,12 @@ export default {
     // 发送信息确认，弹框提示
     submit:function () {
       console.log({
-        identityNum:this.idNumber,
-        origin:this.origin
+        identityNum:this.identityNum,
+        originPlace:this.originPlace
       });
       userJuniorLogin({
-        identityNum:this.idNumber,
-        region:parseInt(this.origin)
+        identityNum:this.identityNum,
+        region:parseInt(this.originPlace)
         }
       ).then(response =>{
         if(response.succeed === true){
