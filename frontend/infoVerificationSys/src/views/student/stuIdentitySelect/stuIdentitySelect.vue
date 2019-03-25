@@ -22,7 +22,7 @@
     <!--填写身份证号 mt-field -->
     <div>
       <mt-field label="身份证号" placeholder="请输入你的身份证号" v-model="idNumber" ></mt-field>
-      <mt-button size="small" @click="submit">确认</mt-button>
+      <mt-button size="small" @click="go">确认</mt-button>
       <router-view></router-view>
     </div>
   </div>
@@ -48,15 +48,15 @@ export default {
       options : [
         {
           label: '香港',
-          value: 2
+          value: '2'
         },
         {
           label: '澳门',
-          value: 3
+          value: '3'
         },
         {
           label: '台湾',
-          value: 1
+          value: '1'
         }
       ]
     }
@@ -76,22 +76,20 @@ export default {
 
     // 发送信息确认，弹框提示
     submit:function () {
-      console.log(this.origin);
-      console.log(this.idNumber);
       console.log({
         identityNum:this.idNumber,
         origin:this.origin
       });
       userJuniorLogin({
-        identityNum:this.identityNum,
-        origin:this.origin
+        identityNum:this.idNumber,
+        region:parseInt(this.origin)
         }
       ).then(response =>{
-        if(response.data === true){
+        if(response.succeed === true){
           this.$router.push('/stu/faceVerify')
         }else{
           MessageBox.confirm('', {
-            message: '地区或身份证号错误',
+            message: response.msg,
             title: '提示',
             confirmButtonText: '反馈',
             cancelButtonText: '重试'

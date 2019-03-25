@@ -1,6 +1,6 @@
 // stuAPI 定义学生部分接口
 import axios from 'axios';
-
+// import student from '../views/student/stuIdentitySelect/stuIdentitySelect'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
   ? 'http://101.132.35.81:3141'
@@ -11,7 +11,8 @@ let http = axios.create({
   baseURL: 'http://localhost:3142/',
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+    'idNumber': '171250639'
   },
   transformRequest: [function (data) {
     let newData = '';
@@ -46,8 +47,13 @@ export default {
   }
 }
 
+// 00 反馈
+// 留下联系信息 stuName String, contact String, remark String
+export const feedBack = params => {
+  return axios.post('/userBasicFunc/feedback',  params).then(res => res.data)
+}
 
-// 01身份选择
+// 01 身份选择
 // 检查通行证号是否存在
 export const userJuniorLogin = params => {
   return axios.post('/login/userJuniorLogin',  params).then(res => res.data)
