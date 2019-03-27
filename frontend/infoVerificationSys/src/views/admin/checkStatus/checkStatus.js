@@ -111,7 +111,10 @@ export default {
     handleInfoEdit(row){
       //编辑
       this.dialogFormVisible = true
-      this.stuInfoForm = (Object).assign({},row)
+      //this.stuInfoForm = (Object).assign({},row)
+      this.$nextTick(() => {
+        this.getUserInfo(row.identityNum)
+      })
     },
 
     //确认关闭
@@ -165,8 +168,5 @@ export default {
         })
     },
 
-    handleDelete (index, row) {
-      console.log(index, row)
-    },
   },
 }
