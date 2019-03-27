@@ -17,6 +17,9 @@
                 <el-menu-item index="2" route="/admin/checkStudentStatus" style="margin-left:5px">
                     <i class="el-icon-picture" style="color: #ffffff"></i>查看学生状态
                 </el-menu-item>
+                <el-menu-item index="3" route="/admin/checkFeedback" style="margin-left:5px">
+                    <i class="el-icon-menu" style="color:#ffffff"></i>查看学生反馈
+                </el-menu-item>
             </el-menu>
         </el-header>
         <el-container>
@@ -24,24 +27,6 @@
                 <!-- <div class="title-font">南京大学台港澳学生信息校验系统</div>-->
             </el-aside>
             <el-main class="main">
-                <template>
-                    <div class="block">
-                        <span class="demonstration">默认 Hover 指示器触发</span>
-                        <el-carousel height="150px">
-                            <el-carousel-item v-for="item in 4" :key="item">
-                                <h3>{{ item }}</h3>
-                            </el-carousel-item>
-                        </el-carousel>
-                    </div>
-                    <div class="block">
-                        <span class="demonstration">Click 指示器触发</span>
-                        <el-carousel trigger="click" height="150px">
-                            <el-carousel-item v-for="item in 4" :key="item">
-                                <h3>{{ item }}</h3>
-                            </el-carousel-item>
-                        </el-carousel>
-                    </div>
-                </template>
                 <router-view></router-view>
             </el-main>
         </el-container>

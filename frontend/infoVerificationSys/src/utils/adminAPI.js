@@ -30,3 +30,8 @@ export const getUserInfo = () => {
 export const changeUserInfo = (params) => {
   return axios.post('/adminBasicFunc/changeUserInfo', params)
 }
+
+// 查看学生反馈
+export const getFeedback = () => {
+  return axios.get('/adminBasicFunc/check')
+}
