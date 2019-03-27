@@ -1,33 +1,35 @@
 <template>
     <div class="wrapper">
         <el-table
-                :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-                style="width: 100%; margin: 0 auto;" max-height="1000px" stripe highlight-current-row
+                :data="filteredTableData" style="width: 100%; margin: 0 auto;" max-height="1000px" stripe
+                highlight-current-row
         >
-            <el-table-column header-align="center" align="center" width="170px" ixed label="姓名" prop="name"></el-table-column>
-            <el-table-column header-align="center" align="center" width="230px" label="身份证号码" prop="identityNum"></el-table-column>
+            <el-table-column header-align="center" align="center" width="170px" ixed label="姓名"
+                             prop="name"></el-table-column>
+            <el-table-column header-align="center" align="center" width="230px" label="身份证号码"
+                             prop="identityNum"></el-table-column>
             <el-table-column header-align="center" align="center" :width="checkWidth" label="人脸识别校验" prop="faceCheck">
                 <template slot-scope="scope">
-                    <el-button v-if="tableData.faceCheck" type="primary" plain disabled>通过</el-button>
-                    <el-button v-if="!tableData.faceCheck" type="danger"  plain disabled>未通过</el-button>
+                    <el-button v-if="scope.row.faceCheck" type="primary" plain disabled>通过</el-button>
+                    <el-button v-if="!scope.row.faceCheck" type="danger" plain disabled>未通过</el-button>
                 </template>
             </el-table-column>
             <el-table-column header-align="center" align="center" :width="checkWidth" label="OCR校验" prop="ocrCheck">
                 <template slot-scope="scope">
-                    <el-button v-if="tableData.ocrCheck" type="primary" plain disabled>通过</el-button>
-                    <el-button v-if="!tableData.ocrCheck" type="danger" plain disabled>未通过</el-button>
+                    <el-button v-if="scope.row.ocrCheck" type="primary" plain disabled>通过</el-button>
+                    <el-button v-if="!scope.row.ocrCheck" type="danger" plain disdabled>未通过</el-button>
                 </template>
             </el-table-column>
             <el-table-column header-align="center" align="center" :width="checkWidth" label="基本信息校验" prop="infoCheck">
                 <template slot-scope="scope">
-                    <el-button v-if="tableData.infoCheck" type="primary"  plain disabled>通过</el-button>
-                    <el-button v-if="!tableData.infoCheck" type="danger"  plain disabled>未通过</el-button>
+                    <el-button v-if="scope.row.infoCheck" type="primary" plain disabled>通过</el-button>
+                    <el-button v-if="!scope.row.infoCheck" type="danger" plain disabled>未通过</el-button>
                 </template>
             </el-table-column>
             <el-table-column header-align="center" align="center" :width="checkWidth" label="电子签名认证" prop="signCheck">
                 <template slot-scope="scope">
-                    <el-button v-if="tableData.signCheck" type="primary"  plain disabled>通过</el-button>
-                    <el-button v-if="!tableData.signCheck" type="danger"  plain disabled>未通过</el-button>
+                    <el-button v-if="scope.row.signCheck" type="primary" plain disabled>通过</el-button>
+                    <el-button v-if="!scope.row.signCheck" type="danger" plain disabled>未通过</el-button>
                 </template>
             </el-table-column>
             <el-table-column align="right">
@@ -35,9 +37,10 @@
                     <el-input v-model="search" style="width: 300px" size="medium" placeholder="请输入姓名搜索"/>
                 </template>
                 <template slot-scope="scope">
-                    <el-button size="medium" round icon="el-icon-edit"  @click="handleInfoEdit(scope.row)">修改学生信息
+                    <el-button size="medium" round icon="el-icon-edit" @click="handleInfoEdit(scope.row)">修改学生信息
                     </el-button>
-                    <el-button size="medium" round icon="el-icon-star-off" type="danger" @click="handleStatusEdit(scope.row)">编辑学生审核状态
+                    <el-button size="medium" round icon="el-icon-star-off" type="danger"
+                               @click="handleStatusEdit(scope.row)">编辑学生审核状态
                     </el-button>
                 </template>
             </el-table-column>
@@ -76,7 +79,7 @@
         </el-dialog>
         <el-dialog title="学生基本信息" :visible.sync="dialogFormVisible">
             <el-form :model="stuInfoForm">
-                <el-form-item label="考生号" :label-width="formLabelWidth" >
+                <el-form-item label="考生号" :label-width="formLabelWidth">
                     <el-input v-model="stuInfoForm.examNum"></el-input>
                 </el-form-item>
                 <el-form-item label="姓名" :label-width="formLabelWidth">
