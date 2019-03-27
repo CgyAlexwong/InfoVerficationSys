@@ -11,19 +11,6 @@ export default {
   name: 'App',
   components: {
     'myHeader': Header
-  },
-  methods:{
-    getData () {
-      var that = this.$http.get('api/sysuser/list')
-        .then(function (response) {
-          console.log(response.data)
-          console.log(this)
-          that.serverData = response.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    }
   }
 }
 </script>

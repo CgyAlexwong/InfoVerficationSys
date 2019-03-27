@@ -1,41 +1,39 @@
 // stuAPI 定义学生部分接口
-import axios from 'axios';
-import student from '../views/student/stuIdentitySelect/stuIdentitySelect'
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+import axios from 'axios'
+// import student from '../views/student/stuIdentitySelect/stuIdentitySelect.vue'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
   ? 'http://101.132.35.81:3141'
-  : 'http://localhost:3142';
-
+  : 'http://localhost:3142'
 
 let http = axios.create({
   baseURL: 'http://localhost:3142/',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-    'identityNum': '171250639',
-    'ok': student.data().identityNum
+    'identityNum': ''
   },
   transformRequest: [function (data) {
-    let newData = '';
+    let newData = ''
     for (let k in data) {
       if (data.hasOwnProperty(k) === true) {
-        newData += encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&';
+        newData += encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&'
       }
     }
-    return newData;
+    return newData
   }]
-});
+})
 
-function apiAxios(method, url, params, response) {
+function apiAxios (method, url, params, response) {
   http({
     method: method,
     url: url,
     data: method === 'POST' || method === 'PUT' ? params : null,
-    params: method === 'GET' || method === 'DELETE' ? params : null,
+    params: method === 'GET' || method === 'DELETE' ? params : null
   }).then(function (res) {
-    response(res);
+    response(res)
   }).catch(function (err) {
-    response(err);
+    response(err)
   })
 }
 
@@ -51,35 +49,35 @@ export default {
 // 00 反馈
 // 留下联系信息 stuName String, contact String, remark String
 export const feedBack = params => {
-  return axios.post('/userBasicFunc/feedback',  params).then(res => res.data)
+  return axios.post('/userBasicFunc/feedback', params).then(res => res.data)
 }
 
 // 01 身份选择
 // 检查通行证号是否存在
 export const userJuniorLogin = params => {
-  return axios.post('/login/userJuniorLogin',  params).then(res => res.data)
+  return axios.post('/login/userJuniorLogin', params).then(res => res.data)
 }
 
 // 02 人脸识别
 // 上传人脸照片文件匹配 File photo, HttpServletRequest request
 export const recognize = params => {
-  return axios.post('/faceRecognition/recognize',  params).then(res => res.data)
+  return axios.post('/faceRecognition/recognize', params).then(res => res.data)
 }
 
 // 03 OCR识别
 // 上传通行证正面 File identification, HttpServletRequest request
 export const doOCR = params => {
-  return axios.post('/OCR/doOCR',  params).then(res => res.data)
+  return axios.post('/OCR/doOCR', params).then(res => res.data)
 }
 // 上传通行证反面 File identification, HttpServletRequest request
 export const doOCRNegative = params => {
-  return axios.post('/OCR/doOCRNegative',  params).then(res => res.data)
+  return axios.post('/OCR/doOCRNegative', params).then(res => res.data)
 }
 
 // 04基本信息校验
 // 获取基本信息
 export const getInfo = params => {
-  return axios.get('/userBasicFunc/getInfo', {params:params})
+  return axios.get('/userBasicFunc/getInfo', {params: params})
 }
 // 提交验证的信息
 export const setUserInfo = params => {
@@ -88,6 +86,6 @@ export const setUserInfo = params => {
 
 // 05电子签名
 // 提交电子签名
-export const sign = params => {
+export const setSignature = params => {
   return axios.post('/userBasicFunc/sign', params).then(res => res.data)
 }

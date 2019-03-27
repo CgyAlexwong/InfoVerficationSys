@@ -18,9 +18,8 @@
         :options="options">
       </mt-radio>
     </div>
-
     <!--填写身份证号 mt-field -->
-    <div>
+    <div id='identityInput'>
       <mt-field label="身份证号" placeholder="请输入你的身份证号" v-model="identityNum" ></mt-field>
       <mt-button size="small" @click="go">确认</mt-button>
       <router-view></router-view>
@@ -39,7 +38,7 @@ import { userJuniorLogin } from "../../../utils/stuAPI";
 import qs from 'qs';
 
 export default {
-  stuName: 'Identity',
+  name: 'Identity',
   components: {MtField, Field,MessageBox,MtRadio, MtHeader, MtButton },
   data () {
     return {
@@ -121,5 +120,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  #iidentityInput{
+    text-align: center;
+    width: 300px;
+  }
+  #a{
+    text-align: center;
+    width: 300px;
+  }
 </style>

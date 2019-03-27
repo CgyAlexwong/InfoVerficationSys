@@ -1,0 +1,55 @@
+.visaDetailTop p{
+  margin: 0;
+  text-align: center;
+  color: #000;
+  font-size: 1em;
+  position: relative;
+}
+.visaDetailTop p span{
+  color: #fff;
+  font-size: 1.2em;
+}
+.visaDetailTop p:first-of-type{
+  float: left;
+}
+.visaDetailTop p:nth-of-type(2){
+  float: right;
+}
+.canvasBox{
+  padding: 10px 5px;
+  box-sizing: border-box;
+  flex: 1;
+}
+canvas{
+  border: 1px solid #26a2ff;
+}
+.btnBox{
+  height: 60px;
+  padding: 5px;
+  text-align: right;
+  line-height: 30px;
+}
+.btnBox button:first-of-type{
+  border: 1px solid #26a2ff;
+  background: transparent;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+.btnBox button:last-of-type{
+  border: 1px solid #26a2ff;
+  background: #26a2ff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+@media only screen and (min-width: 750px){
+  .signatureBox{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+}

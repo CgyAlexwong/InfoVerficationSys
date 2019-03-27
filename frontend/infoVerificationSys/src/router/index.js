@@ -5,6 +5,7 @@ import IdentitySelect from '../views/student/stuIdentitySelect/stuIdentitySelect
 import FaceVerify from '../views/student/faceVerify/faceVerify'
 import InformationVerify from '../views/student/informationVerify/informationVerify'
 import ESignature from '../views/student/ESignature/ESignature'
+import End from '../components/end'
 
 // 基本路由URL
 export default [
@@ -64,6 +65,15 @@ export default [
     meta:{
       num:5,
       title:'电子签名加密'
+    }
+  },
+  {
+    path:'/end',
+    name:'end',
+    component: End,
+    meta:{
+      num:6,
+      title:'完成啦！'
     }
   }
   ]
