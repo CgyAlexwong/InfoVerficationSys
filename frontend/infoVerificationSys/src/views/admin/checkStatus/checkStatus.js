@@ -94,6 +94,7 @@ export default {
             });
         }
     },
+
     methods: {
         //获取学生状态
         getStatus() {
@@ -108,18 +109,21 @@ export default {
                     })
                 })
         },
-        //修改学生状态
-        handleStatusEdit(row) {
-            // 编辑
-            this.dialogFormVisible2 = true
-            this.tableData = (Object).assign({}, row)
-        },
         //修改学生信息
         handleInfoEdit(row) {
             //编辑
             this.dialogFormVisible = true
-            this.stuInfoForm = (Object).assign({}, row)
+            //this.stuInfoForm = (Object).assign({},row)
+            this.$nextTick(() => {
+                this.getUserInfo(row.identityNum)
+            })
         },
+        // //修改学生信息
+        // handleInfoEdit(row) {
+        //     //编辑
+        //     this.dialogFormVisible = true
+        //     this.stuInfoForm = (Object).assign({}, row)
+        // },
 
         //确认关闭
         handleDialogClose() {
@@ -171,7 +175,6 @@ export default {
                     }
                 })
         },
-
         handleDelete(index, row) {
             console.log(index, row)
         },
