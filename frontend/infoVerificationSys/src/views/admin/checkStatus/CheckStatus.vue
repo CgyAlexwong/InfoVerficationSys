@@ -8,76 +8,54 @@
                              prop="name"></el-table-column>
             <el-table-column header-align="center" align="center" width="230px" label="身份证号码"
                              prop="identityNum"></el-table-column>
-            <el-table-column header-align="center" align="center" :width="checkWidth" label="人脸识别校验" prop="faceCheck">
+            <el-table-column  sortable header-align="center" align="center" :width="checkWidth" label="人脸识别校验" prop="faceCheck">
                 <template slot-scope="scope">
                     <el-button v-if="scope.row.faceCheck" type="primary" plain disabled>通过</el-button>
-                    <el-button v-if="!scope.row.faceCheck" type="danger" plain disabled>未通过</el-button>
+                    <el-tooltip class="top item" effect="dark" content="点击修改状态" placement="top">
+                        <el-button @click="changeFace(scope.row)"  v-if="!scope.row.faceCheck" type="danger" plain >未通过</el-button>
+                    </el-tooltip>
                 </template>
             </el-table-column>
-            <el-table-column header-align="center" align="center" :width="checkWidth" label="OCR校验" prop="ocrCheck">
+            <el-table-column sortable header-align="center" align="center" :width="checkWidth" label="OCR校验" prop="ocrCheck">
                 <template slot-scope="scope">
                     <el-button v-if="scope.row.ocrCheck" type="primary" plain disabled>通过</el-button>
-                    <el-button v-if="!scope.row.ocrCheck" type="danger" plain disabled>未通过</el-button>
+                    <el-tooltip class="top item" effect="dark" content="点击修改状态" placement="top">
+                        <el-button @click="changeOCR(scope.row)" v-if="!scope.row.ocrCheck" type="danger" plain >未通过</el-button>
+                    </el-tooltip>
                 </template>
             </el-table-column>
-            <el-table-column header-align="center" align="center" :width="checkWidth" label="基本信息校验" prop="infoCheck">
+            <el-table-column sortable header-align="center" align="center" :width="checkWidth" label="基本信息校验" prop="infoCheck">
                 <template slot-scope="scope">
                     <el-button v-if="scope.row.infoCheck" type="primary" plain disabled>通过</el-button>
-                    <el-button v-if="!scope.row.infoCheck" type="danger" plain disabled>未通过</el-button>
+                    <el-tooltip class="top item" effect="dark" content="点击修改状态" placement="top">
+                        <el-button @click="changeInfo(scope.row)" v-if="!scope.row.infoCheck" type="danger" plain >未通过</el-button>
+                    </el-tooltip>
                 </template>
             </el-table-column>
-            <el-table-column header-align="center" align="center" :width="checkWidth" label="电子签名认证" prop="signCheck">
+            <el-table-column sortable header-align="center" align="center" :width="checkWidth" label="电子签名认证" prop="signCheck">
                 <template slot-scope="scope">
                     <el-button v-if="scope.row.signCheck" type="primary" plain disabled>通过</el-button>
-                    <el-button v-if="!scope.row.signCheck" type="danger" plain disabled>未通过</el-button>
+                    <el-tooltip class="top item" effect="dark" content="点击修改状态" placement="top">
+                        <el-button @click="changeSign(scope.row)" v-if="!scope.row.signCheck" type="danger" plain >未通过</el-button>
+                    </el-tooltip>
                 </template>
             </el-table-column>
             <el-table-column align="right">
-                <template slot="header" slot-scope="scope">
-                    <el-input v-model="search" style="width: 300px" size="medium" placeholder="请输入姓名搜索"/>
-                </template>
                 <template slot-scope="scope">
                     <el-button size="medium" round icon="el-icon-edit" @click="handleInfoEdit(scope.row)">修改学生信息
                     </el-button>
                     <el-button size="medium" round icon="el-icon-star-off" type="danger"
-                               @click="handleStatusEdit(scope.row)">编辑学生审核状态
+                               @click="totalStatusEdit(scope.row)"
+                               :disabled="scope.row.faceCheck===true&&scope.row.ocrCheck===true&&scope.row.infoCheck===true&&scope.row.signCheck===true">一键修改为已通过
                     </el-button>
+                </template>
+                <template slot="header" slot-scope="scope">
+                    <el-input v-model="search" style="width: 300px" size="medium" placeholder="请输入姓名搜索"/>
                 </template>
             </el-table-column>
         </el-table>
-        <el-dialog title="学生校验状态" :visible.sync="dialogFormVisible2" :before-close="handleDialogClose">
-            <el-form :model="tableData">
-                <el-form-item label="人脸识别校验">
-                    <el-radio-group v-model="tableData.faceCheck">
-                        <el-radio :label="false">未通过</el-radio>
-                        <el-radio :label="true">已通过</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="OCR校验">
-                    <el-radio-group v-model="tableData.ocrCheck">
-                        <el-radio :label="false">未通过</el-radio>
-                        <el-radio :label="true">已通过</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="基本信息校验">
-                    <el-radio-group v-model="tableData.infoCheck">
-                        <el-radio :label="false">未通过</el-radio>
-                        <el-radio :label="true">已通过</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="电子签名认证">
-                    <el-radio-group v-model="tableData.signCheck">
-                        <el-radio :label="false">未通过</el-radio>
-                        <el-radio :label="true">已通过</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible2 = false">取 消</el-button>
-                <el-button type="primary" @click="editStatusSubmit">提交修改</el-button>
-            </div>
-        </el-dialog>
-        <el-dialog title="学生基本信息" :visible.sync="dialogFormVisible">
+
+        <el-dialog title="学生基本信息" :visible.sync="dialogFormVisible" :before-close="handleDialogClose">
             <el-form :model="stuInfoForm">
                 <el-form-item label="考生号" :label-width="formLabelWidth">
                     <el-input v-model="stuInfoForm.examNum"></el-input>
@@ -159,6 +137,7 @@
                 <el-button type="primary" @click="editInfoSubmit">提交修改</el-button>
             </div>
         </el-dialog>
+
     </div>
 </template>
 
