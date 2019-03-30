@@ -3,9 +3,9 @@
         <el-header class="header">
             <el-menu :default-active="$route.path" background-color="transparent" router text-color="#000000"
                      active-text-color="#d3d3d3" class="nav" mode="horizontal" @select="handleSelect">
-                <el-submenu index="1">
+                <el-submenu index="1" >
                     <template slot="title">
-                        <i class="el-icon-message" style="color: #ffffff"></i>上传学生信息
+                        <i class="el-icon-message" style="color: #ffffff;"></i>上传学生信息
                     </template>
                     <el-menu-item index="/admin/uploadExcel">
                         <i class="el-icon-document" style="color: darkblue"></i>上传Excel

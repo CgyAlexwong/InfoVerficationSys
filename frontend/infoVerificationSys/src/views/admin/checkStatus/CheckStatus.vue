@@ -17,7 +17,7 @@
             <el-table-column header-align="center" align="center" :width="checkWidth" label="OCR校验" prop="ocrCheck">
                 <template slot-scope="scope">
                     <el-button v-if="scope.row.ocrCheck" type="primary" plain disabled>通过</el-button>
-                    <el-button v-if="!scope.row.ocrCheck" type="danger" plain disdabled>未通过</el-button>
+                    <el-button v-if="!scope.row.ocrCheck" type="danger" plain disabled>未通过</el-button>
                 </template>
             </el-table-column>
             <el-table-column header-align="center" align="center" :width="checkWidth" label="基本信息校验" prop="infoCheck">

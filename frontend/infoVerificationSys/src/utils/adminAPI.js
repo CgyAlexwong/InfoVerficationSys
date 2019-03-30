@@ -35,3 +35,7 @@ export const changeUserInfo = (params) => {
 export const getFeedback = () => {
   return axios.get('/adminBasicFunc/check')
 }
+//修改学生反馈
+export const changeIsHandle = (params) => {
+  return axios.post('/adminBasicFunc/changeIsHandle',params)
+}
