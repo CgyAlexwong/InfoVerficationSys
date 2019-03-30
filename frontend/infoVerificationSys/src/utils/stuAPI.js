@@ -1,6 +1,8 @@
 // stuAPI 定义学生部分接口
 import axios from 'axios'
-// import student from '../views/student/stuIdentitySelect/stuIdentitySelect.vue'
+import Cookies from 'js-cookie'
+
+// import student from '../views/student/identitySelect/identitySelect.vue'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
   ? 'http://101.132.35.81:3141'
@@ -11,7 +13,7 @@ let http = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-    'identityNum': ''
+    'identityNum': Cookies.get('id')
   },
   transformRequest: [function (data) {
     let newData = ''

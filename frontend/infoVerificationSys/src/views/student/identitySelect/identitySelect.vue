@@ -1,28 +1,29 @@
-<!--第一部分 身份选择-->
+<!-- 第一部分 身份选择 -->
 
 <template>
   <div id="identity">
-    <!--新的header-->
+    <!-- 新的header -->
     <mt-header fixed title="（1 / 5）身份选择">
       <router-link to="/stu" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
-      <mt-button icon="field-error" slot="right" @click="close"></mt-button>
     </mt-header>
 
-    <!--地区选择 mt-radio -->
-    <div class="box" >
+    <!-- 地区选择 mt-radio -->
+    <div id="box" >
       <mt-radio
-        title="请选择你来自的地区"
+        title="请选择你来自的地区："
         v-model="originPlace"
         :options="options">
       </mt-radio>
     </div>
-    <!--填写身份证号 mt-field -->
+    <!-- 填写身份证号 mt-field -->
+    <p>请输入你的身份证号：</p>
     <div id='identityInput'>
-      <mt-field label="身份证号" placeholder="请输入你的身份证号" v-model="identityNum" ></mt-field>
-      <mt-button size="small" @click="go">确认</mt-button>
-      <router-view></router-view>
+      <mt-field label="身份证号：" placeholder="请输入你的身份证号" v-model="identityNum" ></mt-field>
+    </div>
+    <div id="checkButton">
+      <button size="small" @click="go">确认</button>
     </div>
   </div>
 </template>
@@ -35,11 +36,12 @@ import { MessageBox } from 'mint-ui';
 import { Field } from 'mint-ui';
 import MtField from "mint-ui/packages/field/src/field";
 import { userJuniorLogin } from "../../../utils/stuAPI";
-import qs from 'qs';
+import Cookies from 'js-cookie';
+import MtCell from "mint-ui/packages/cell/src/cell";
 
 export default {
   name: 'Identity',
-  components: {MtField, Field,MessageBox,MtRadio, MtHeader, MtButton },
+  components: {MtCell, MtField, Field,MessageBox,MtRadio, MtHeader, MtButton },
   data () {
     return {
       originPlace:'',
@@ -65,14 +67,6 @@ export default {
     go:function(){
       this.$router.push('/stu/faceVerify')
     },
-
-    // 关闭界面
-    close: function () {
-      window.opener=null;
-      window.open('','_self');
-      window.close()
-    },
-
     // 发送信息确认，弹框提示
     submit:function () {
       console.log({
@@ -85,8 +79,24 @@ export default {
         }
       ).then(response =>{
         if(response.succeed === true){
+          console.log(response.msg);
+          Cookies.set('id',this.identityNum);
           this.$router.push('/stu/faceVerify')
-        }else{
+        } else if(response.msg === '无照片信息'){
+          MessageBox.alert('', {
+            message: response.msg,
+            title: '提示',
+            confirmButtonText: '反馈'
+          }).then(action => {
+            if (action === 'confirm') {     //反馈的回调
+              this.$router.push('/feedback')
+            }
+          }).catch(err => {
+            if (err === 'cancel') {     //重试的回调
+              console.log("重试");
+            }
+          })
+        } else {
           MessageBox.confirm('', {
             message: response.msg,
             title: '提示',
@@ -94,7 +104,7 @@ export default {
             cancelButtonText: '重试'
           }).then(action => {
             if (action === 'confirm') {     //反馈的回调
-              this.feedBack()
+              this.$router.push('/feedback')
             }
           }).catch(err => {
             if (err === 'cancel') {     //重试的回调
@@ -105,27 +115,36 @@ export default {
       })
     },
 
-    // 反馈
-    feedBack:function () {
-      MessageBox.prompt('', {
-        title: '反馈',
-        message: '负责老师的地址为:……<br>请尽快与老师联系并留下你的联系方式<br>请输入你的联系方式:'
-      }).then(({value, action}) => {
-
-      })
-    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #iidentityInput{
-    text-align: center;
-    width: 300px;
+  p{
+    font-size: 12px;
+    margin: 9px;
+    display: block;
+    color: #888;
+    text-align: left;
   }
-  #a{
-    text-align: center;
-    width: 300px;
+  #box{
+    border: 1px dashed #ffffff;
+    border-top-width: 5px;
+    border-bottom-color: #888888;
+  }
+  #identityInput{
+    border: 1px dashed #ffffff;
+    border-bottom-color: #888888;
+  }
+  #checkButton{
+    text-align: right;
+  }
+  button{
+    margin: 8px 3px 3px;
+    border: 1px solid #26a2ff;
+    background: #26a2ff;
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px 10px;
   }
 </style>

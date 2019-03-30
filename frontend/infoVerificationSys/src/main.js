@@ -4,9 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/router'
 import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
+import './main.css'
 
 Vue.use(MintUI)
+document.getElementsByTagName('body')[0].style.zoom = 0.9
 
 Vue.config.productionTip = false
 

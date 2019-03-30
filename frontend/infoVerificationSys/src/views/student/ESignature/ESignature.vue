@@ -6,7 +6,6 @@
       <router-link to="/stu/identity" slot="left">
         <mt-button icon="back" @click="warn">返回</mt-button>
       </router-link>
-      <mt-button icon="field-error" slot="right" @click="close"></mt-button>
     </mt-header>
     <div class="canvasBox" ref="canvasHW">
       <canvas @touchstart='touchStart'
@@ -18,61 +17,57 @@
               @mouseup="mouseUp"></canvas>
       <div class="btnBox">
         <button @click="overwrite">重写</button>
-        <button @click="save">提交签名</button>
+        <button @click="go">提交签名</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>/* eslint-disable */
-import MtHeader from "mint-ui/packages/header/src/header";
-import MtButton from "mint-ui/packages/button/src/button";
+import MtHeader from 'mint-ui/packages/header/src/header'
+import MtButton from 'mint-ui/packages/button/src/button';
 import { MessageBox } from 'mint-ui'
-import {setSignature} from "../../../utils/stuAPI";
+import {setSignature} from '../../../utils/stuAPI';
+import Cookies from 'js-cookie';
 
 export default {
-  name: "ESignature",
+  name: 'ESignature',
   components: {MtButton, MtHeader},
-  data(){
-    return{
-      points:[],
-      canvasTxt:null,
-      startX:0,
-      startY:0,
-      moveY:0,
-      moveX:0,
-      endY:0,
-      endX:0,
-      w:null,
-      h:null,
-      isDown:false
+  data () {
+    return {
+      points: [],
+      canvasTxt: null,
+      startX: 0,
+      startY: 0,
+      moveY: 0,
+      moveX: 0,
+      endY: 0,
+      endX: 0,
+      w: null,
+      h: null,
+      isDown: false,
     }
   },
-  mounted(){
-    let canvas=this.$refs.canvasF;
+  mounted () {
+    let canvas = this.$refs.canvasF;
     canvas.height = this.$refs.canvasHW.offsetHeight - 60;
-    canvas.width =this.$refs.canvasHW.offsetWidth-10;
-    this.canvasTxt=canvas.getContext("2d");
+    canvas.width = this.$refs.canvasHW.offsetWidth - 10;
+    this.canvasTxt = canvas.getContext('2d')
   },
-  methods:{
-    warn:function () {
-      MessageBox.alert('',{
-        title:"提示",
-        message:"你已完成前阶段任务，无法返回"
+  methods: {
+    warn: function () {
+      MessageBox.alert('', {
+        title: '提示',
+        message: '你已完成前阶段任务，无法返回'
       })
     },
-    close: function () {
-      window.opener = null;
-      window.open('', '_self');
-      window.close()
-    },
-    //电脑设备事件
-    mouseDown(ev){
+    // 电脑设备事件
+    mouseDown (ev) {
       ev = ev || event;
       ev.preventDefault();
       console.log(ev);
-      if(1){
-        let obj={
+      if (1) {
+        let obj = {
           x:ev.offsetX,
           y:ev.offsetY
         };
@@ -196,10 +191,13 @@ export default {
     save() {
       let url = this.$refs.canvasF.toDataURL('image/png');
       console.log(url);
+      let ESignature = this.dataURLtoFile(url,'ESignature');
+      console.log(ESignature);
       setSignature({
-        signature:url
+        signature: ESignature
       }).then(res =>{
-        if (res.succeed){
+        if (res.succeed === true){
+          Cookies.remove('id');
           this.$router.push('/end')
         }
       }).catch(err =>{
@@ -225,6 +223,6 @@ export default {
 }
 </script>
 
-<style scoped  src = './ESignature.css'>
+<style scoped src="./ESignature.css">
 
 </style>

@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else if (to.meta.num < from.meta.num) {
     document.title = from.meta.title
-    to.path = from.path
+    to.path = this.path
     next(to.path)
   } else {
     document.title = to.meta.title

@@ -21,7 +21,7 @@
   flex: 1;
 }
 canvas{
-  border: 1px solid #26a2ff;
+  border: 3px solid #26a2ff;
 }
 .btnBox{
   height: 60px;
@@ -51,5 +51,9 @@ canvas{
     min-height: 100%;
     box-sizing: border-box;
     overflow: visible;
+  }
+  img{
+    max-width: 100px;
+    max-height: 100px;
   }
 }

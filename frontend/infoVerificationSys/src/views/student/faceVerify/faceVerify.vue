@@ -6,14 +6,18 @@
       <router-link to="/stu/identity" slot="left">
         <mt-button icon="back" @click="warn">返回</mt-button>
       </router-link>
-      <mt-button icon="field-error" slot="right" @click="close"></mt-button>
     </mt-header>
-    <div>
+    <p>请拍摄你的正脸照：</p>
+    <div id="camera">
       <mt-button @click="appear">点击拍照</mt-button>
     </div>
     <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
+    <p>预览：</p>
+    <div id="load">
+      <img :src="img" alt="人脸照片">
+    </div>
     <div>
-      <mt-button @click="go">提交</mt-button>
+      <button id="commit" @click="go">提交</button>
     </div>
   </div>
 </template>
@@ -31,7 +35,8 @@ import {MessageBox} from 'mint-ui'
             name: '拍照',
             method : this.getCamera	// 调用methods中的函数
           }],
-          sheetVisible:false
+          sheetVisible:false,
+          img:'../../../assets/da8e974dc.jpg'
         }
       },
       methods:{
@@ -41,11 +46,6 @@ import {MessageBox} from 'mint-ui'
         },
         go:function () {
           this.$router.push('/stu/OCRVerify')
-        },
-        close: function () {
-          window.opener=null;
-          window.open('','_self');
-          window.close()
         },
         warn:function () {
           MessageBox.alert('',{
@@ -58,5 +58,23 @@ import {MessageBox} from 'mint-ui'
 </script>
 
 <style scoped>
-
+  p{
+    font-size: 12px;
+    margin: 9px;
+    padding-top: 9px;
+    display: block;
+    color: #888;
+    text-align: left;
+  }
+  #camera{
+    margin: 10px;
+    padding: 9px;
+  }
+  #commit{
+    border: 1px solid #26a2ff;
+    background: #26a2ff;
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px 10px;
+  }
 </style>

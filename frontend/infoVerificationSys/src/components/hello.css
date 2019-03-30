@@ -1,5 +1,7 @@
-h1, h2 {
+p {
+  font-size: x-large;
   font-weight: normal;
+  text-align: center;
 }
 ul {
   list-style-type: none;

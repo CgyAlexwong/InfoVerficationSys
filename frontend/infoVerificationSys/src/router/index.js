@@ -1,11 +1,12 @@
 /* eslint-disable */
 import HelloWorld from '../components/HelloWorld'
 import OCRVerify from '../views/student/OCRVerify/OCRVerify'
-import IdentitySelect from '../views/student/stuIdentitySelect/stuIdentitySelect'
+import IdentitySelect from '../views/student/identitySelect/identitySelect'
 import FaceVerify from '../views/student/faceVerify/faceVerify'
 import InformationVerify from '../views/student/informationVerify/informationVerify'
 import ESignature from '../views/student/ESignature/ESignature'
 import End from '../components/end'
+import Feedback from '../components/feedback'
 
 // 基本路由URL
 export default [
@@ -68,11 +69,20 @@ export default [
     }
   },
   {
+    path:'/feedback',
+    name:'feedback',
+    component: Feedback,
+    meta:{
+      num:6,
+      title:'信息反馈'
+    }
+  },
+  {
     path:'/end',
     name:'end',
     component: End,
     meta:{
-      num:6,
+      num:7,
       title:'完成啦！'
     }
   }

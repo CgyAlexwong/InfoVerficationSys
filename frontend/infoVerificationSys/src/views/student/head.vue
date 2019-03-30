@@ -11,14 +11,12 @@
 
 // header界面
 <script>/* eslint-disable */
-  import Vue from 'vue'
-  import { Button } from 'mint-ui'
-  import { Header } from 'mint-ui'
-  Vue.component(Header.name, Header)
-  Vue.component(Button.name, Button)
+import MtButton from "mint-ui/packages/button/src/button";
+import MtHeader from "mint-ui/packages/header/src/header";
 
-  export default {
-    methods: {
+export default {
+  components: {MtHeader, MtButton},
+  methods: {
       // 关闭界面
       close: function () {
         window.opener=null;
@@ -26,11 +24,6 @@
         window.close()
       }
     },
-    // 组件
-    components: {
-      'mt-button': Button,
-      'mt-header': Header
-    }
   }
 </script>
 
