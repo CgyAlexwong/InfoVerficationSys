@@ -13,7 +13,11 @@
         <mt-button @click="appear">点击拍照</mt-button>
       </div>
       <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
-      <div>
+      <p>预览：</p>
+      <div id="loadFront">
+        <img :src="img1" alt="人脸照片" style="width: 80%">
+      </div>
+      <div id="commitFrontBox">
         <button id='commitFront' @click="changeBackState" v-bind:disabled="frontCommitState">提交</button>
       </div>
     </div>
@@ -23,7 +27,11 @@
         <mt-button @click="appear" v-bind:disabled="backCommitAble">点击拍照</mt-button>
       </div>
       <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
-      <div>
+      <p>预览：</p>
+      <div id="loadBack">
+        <img :src="img2" alt="人脸照片" style="width: 80%">
+      </div>
+      <div id="commitBackBox">
         <button id='commitBack' @click="go" v-bind:disabled="backCommitAble">提交</button>
       </div>
     </div>
@@ -46,7 +54,9 @@ export default {
       }],
       frontCommitState:false,
       backCommitAble:true,
-      sheetVisible:false
+      sheetVisible:false,
+      img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
+      img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true'
     }
   },
   methods:{
@@ -79,6 +89,10 @@ export default {
     display: block;
     color: #888;
     text-align: left;
+  }
+  #commitFrontBox,#commitBackBox{
+    margin: 10px 5px 5px;
+    text-align: right;
   }
   #commitFront,#commitBack{
     border: 1px solid #26a2ff;

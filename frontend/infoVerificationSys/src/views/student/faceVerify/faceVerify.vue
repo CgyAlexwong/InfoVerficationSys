@@ -14,9 +14,9 @@
     <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
     <p>预览：</p>
     <div id="load">
-      <img :src="img" alt="人脸照片">
+      <img :src="img" alt="人脸照片" style="width: 80%">
     </div>
-    <div>
+    <div id="commitBox">
       <button id="commit" @click="go">提交</button>
     </div>
   </div>
@@ -36,7 +36,7 @@ import {MessageBox} from 'mint-ui'
             method : this.getCamera	// 调用methods中的函数
           }],
           sheetVisible:false,
-          img:'../../../assets/da8e974dc.jpg'
+          img:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true'
         }
       },
       methods:{
@@ -69,6 +69,10 @@ import {MessageBox} from 'mint-ui'
   #camera{
     margin: 10px;
     padding: 9px;
+  }
+  #commitBox{
+    margin: 10px 5px 5px;
+    text-align: right;
   }
   #commit{
     border: 1px solid #26a2ff;

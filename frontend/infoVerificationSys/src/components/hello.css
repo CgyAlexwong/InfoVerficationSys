@@ -1,3 +1,6 @@
+#hello{
+  padding: 10px;
+}
 p {
   font-size: x-large;
   font-weight: normal;
@@ -13,4 +16,7 @@ li {
 }
 a {
   color: #42b983;
+}
+#helloPic{
+  border-radius: 50%;
 }

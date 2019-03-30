@@ -7,7 +7,7 @@ import MintUI from 'mint-ui'
 import './main.css'
 
 Vue.use(MintUI)
-document.getElementsByTagName('body')[0].style.zoom = 0.9
+// document.getElementsByTagName('body')[0].style.zoom = 0.9
 
 Vue.config.productionTip = false
 

@@ -17,7 +17,7 @@
               @mouseup="mouseUp"></canvas>
       <div class="btnBox">
         <button @click="overwrite">重写</button>
-        <button @click="go">提交签名</button>
+        <button @click="save">提交签名</button>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@ export default {
       endX: 0,
       w: null,
       h: null,
-      isDown: false,
+      isDown: false
     }
   },
   mounted () {
@@ -190,11 +190,9 @@ export default {
     //保存
     save() {
       let url = this.$refs.canvasF.toDataURL('image/png');
-      console.log(url);
-      let ESignature = this.dataURLtoFile(url,'ESignature');
-      console.log(ESignature);
+      console.log(url.length);
       setSignature({
-        signature: ESignature
+        signature: url
       }).then(res =>{
         if (res.succeed === true){
           Cookies.remove('id');
