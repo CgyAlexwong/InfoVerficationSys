@@ -87,6 +87,7 @@ export default {
 <style scoped>
   #helloPic{
     border-radius: 50%;
+    padding: 10px 10px 0;
   }
   p{
     font-size: 12px;
@@ -111,11 +112,13 @@ export default {
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
+    font-size: 8px;
   }
   #remark{
-    border: 3px solid #26a2ff;
+    outline: none;
+    border: 3px dashed #888888;
     font-family: SimHei,fantasy;
-    font-size: 15px;
+    font-size: 14px;
   }
   #commitBox{
     text-align: right;

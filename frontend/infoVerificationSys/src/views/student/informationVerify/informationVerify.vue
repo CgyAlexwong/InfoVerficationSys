@@ -221,7 +221,7 @@ export default {
     height: 0
   }
   #navbar {
-    height: 600px;
+    height: 590px;
   }
   #a{
     text-align: left;

@@ -15,8 +15,10 @@ export default {
 <style scoped>
   #helloPic{
     border-radius: 50%;
+    padding-top: 10px;
   }
   h1, h2 {
+    margin: 12px 0 12px;
     font-weight: normal;
   }
 </style>

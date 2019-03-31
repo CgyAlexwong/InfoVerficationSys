@@ -187,7 +187,7 @@
   background-position:bottom;
 }
 .mint-cell-wrapper {
-  background-size: 120% 1px;
+  background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: top left;
   background-origin: content-box;
@@ -198,11 +198,11 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  font-size: 16px;
-  line-height: 1;
+  font-size: 14px;
+  line-height: 0;
   min-height: inherit;
   overflow: hidden;
-  padding: 0 10px;
+  padding: 0 5px;
   width: 100%;
 }
 .mint-cell-mask {}
@@ -741,7 +741,7 @@
 /* z-index */
 .mint-tab-item {
   display: block;
-  padding: 7px 0;
+  padding: 0;
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -763,7 +763,7 @@
 .mint-tab-item-label {
   color: inherit;
   font-size: 12px;
-  line-height: 1
+  line-height: 0
 }
 
 .mint-tab-container-item {
@@ -1130,7 +1130,7 @@
   margin: 0;
 }
 .mint-actionsheet-listitem {
-  border-bottom: solid 1px #e0e0e0;
+  margin: 0;
 }
 .mint-actionsheet-listitem, .mint-actionsheet-button {
   display: block;

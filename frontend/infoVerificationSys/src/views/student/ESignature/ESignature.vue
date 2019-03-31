@@ -17,7 +17,7 @@
               @mouseup="mouseUp"></canvas>
       <div class="btnBox">
         <button @click="overwrite">重写</button>
-        <button @click="save">提交签名</button>
+        <button @click="go">提交签名</button>
       </div>
     </div>
   </div>

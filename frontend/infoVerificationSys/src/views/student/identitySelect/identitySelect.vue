@@ -65,6 +65,7 @@ export default {
   methods:{
     // 测试方法，直接进入下一环节
     go:function(){
+      Cookies.set('id','171250639')
       this.$router.push('/stu/faceVerify')
     },
     // 发送信息确认，弹框提示
@@ -123,6 +124,7 @@ export default {
   p{
     font-size: 12px;
     margin: 9px;
+    padding-top: 3px;
     display: block;
     color: #888;
     text-align: left;

@@ -85,7 +85,6 @@ export default {
   p{
     font-size: 12px;
     margin: 9px;
-    padding-top: 9px;
     display: block;
     color: #888;
     text-align: left;
@@ -100,5 +99,8 @@ export default {
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
+  }
+  #commitBack:disabled{
+    opacity: 0.6;
   }
 </style>
