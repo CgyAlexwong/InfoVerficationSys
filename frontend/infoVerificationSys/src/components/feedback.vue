@@ -9,22 +9,25 @@
   <!-- 名字输入 -->
   <P>请输入你的名字：</P>
   <div id='nameInput'>
-    <mt-field label="名字：" placeholder="请输入你的名字" v-model="stuName" ></mt-field>
+    <mt-field label="姓名：" placeholder="请输入你的姓名" v-model="stuName" @input="nameCheck"></mt-field>
+    <dd v-if="!nameValid">{{nameMessage}}</dd>
   </div>
   <!-- 联系方式输入 -->
   <P>请选择并输入你的联系方式：</P>
   <div id="picker">
     <mt-actionsheet :actions="actions" v-model="sheetVisible" cancel-text=""></mt-actionsheet>
     <button id="choose" @click="openSheet">选择联系方式</button>
-    <mt-field :label="pickerValue+'：'" placeholder="请输入你的联系方式" v-model="contact" ></mt-field>
+    <mt-field :label="pickerValue" placeholder="请输入你的联系方式" v-model="contact" @input="contactCheck"></mt-field>
+    <dd v-if="!contactValid">{{contactMessage}}</dd>
   </div>
   <!-- 备注输入 -->
-  <p>请输入你想备注的信息（可选）：</p>
+  <p>请输入你想反馈的信息（可选，不超过50字）：</p>
   <div>
-    <textarea id="remark" placeholder="请输入备注内容" style="width: 90%;height: 100px" v-model="remark"></textarea>
+    <textarea id="remark" placeholder="请输入备注内容" style="width: 90%;height: 100px" v-model="remark" @input="remarkCheck"></textarea>
+    <dd v-if="!remarkValid">{{remarkMessage}}</dd>
   </div>
   <div id="commitBox">
-    <button id="commit" @click="commit">提交</button>
+    <button id="commit" @click="go">提交</button>
   </div>
 </div>
 </template>
@@ -33,6 +36,8 @@
 import MtButton from 'mint-ui/packages/button/src/button'
 import MtHeader from 'mint-ui/packages/header/src/header'
 import MtField from 'mint-ui/packages/field/src/field'
+import {feedBack} from '../utils/stuAPI'
+import {checkChinese, checkPhoneNumber, checkEMail, checkQQ, checkWeChat} from '../utils/checkList'
 
 export default {
   name: 'end',
@@ -40,10 +45,16 @@ export default {
   data () {
     return {
       stuName: '',
+      nameValid: true,
+      nameMessage: '',
       contact: '',
+      contactValid: true,
+      contactMessage: '',
       remark: '',
+      remarkValid: true,
+      remarkMessage: '',
       sheetVisible: false,
-      pickerValue: '移动电话',
+      pickerValue: '移动电话：',
       actions: [{
         name: '移动电话',
         method: this.mobile
@@ -56,7 +67,7 @@ export default {
         name: 'QQ',
         method: this.QQ
       },
-      {name: '微信',
+      {name: '微信号',
         method: this.WeChat
       }]
     }
@@ -66,19 +77,75 @@ export default {
       this.sheetVisible = this.sheetVisible !== true
     },
     mobile () {
-      this.pickerValue = '移动电话'
+      this.pickerValue = '移动电话：'
+      this.contact = ''
     },
     email () {
-      this.pickerValue = 'email'
+      this.pickerValue = 'e-mail：'
+      this.contact = ''
     },
     QQ () {
-      this.pickerValue = 'QQ'
+      this.pickerValue = 'QQ：'
+      this.contact = ''
     },
     WeChat () {
-      this.pickerValue = '微信'
+      this.pickerValue = '微信号：'
+      this.contact = ''
     },
-    commit () {
-      console.log(this.remark)
+    nameCheck () {
+      let result = checkChinese(this.stuName)
+      this.nameValid = result.res
+      this.nameMessage = result.msg
+    },
+    contactCheck () {
+      if (this.pickerValue === '移动电话：') {
+        let result = checkPhoneNumber(this.contact)
+        this.contactValid = result.res
+        this.contactMessage = result.msg
+      } else if (this.pickerValue === 'e-mail：') {
+        let result = checkEMail(this.contact)
+        this.contactValid = result.res
+        this.contactMessage = result.msg
+      } else if (this.pickerValue === 'QQ：') {
+        let result = checkQQ(this.contact)
+        this.contactValid = result.res
+        this.contactMessage = result.msg
+      } else if (this.pickerValue === '微信号：') {
+        let result = checkWeChat(this.contact)
+        this.contactValid = result.res
+        this.contactMessage = result.msg
+      }
+    },
+    remarkCheck () {
+      if (this.remark.length > 50) {
+        this.remarkValid = false
+        this.remarkMessage = '字数超过50字！'
+      } else {
+        this.remarkValid = true
+        this.remarkMessage = ''
+      }
+    },
+    go () {
+      this.$router.push('/')
+    },
+    submit () {
+      if (this.stuName !== '' && this.contact !== '' && this.nameValid && this.contactValid) {
+        feedBack({
+          stuName: this.stuName,
+          contact: this.pickerValue + this.contact,
+          remark: this.remark
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+      } else if (this.stuName === '') {
+        this.nameValid = false
+        this.nameMessage = '姓名不能为空！'
+      } else if (this.contact === '') {
+        this.contactValid = false
+        this.contactMessage = '联系方式不能为空！'
+      }
     }
   }
 }
@@ -96,6 +163,14 @@ export default {
     color: #888;
     text-align: left;
   }
+  dd{
+    font-size: 12px;
+    padding-left: 110px;
+    margin:0 0 9px;
+    display: block;
+    color: #f44336;
+    text-align: left;
+  }
   #nameInput{
     border: 1px dashed #ffffff;
     border-bottom-color: #888888;
@@ -106,7 +181,7 @@ export default {
     border-bottom-color: #888888;
   }
   #choose{
-    margin-left: 5px;
+    margin-left: 8px;
     border: 1px solid #26a2ff;
     background: #26a2ff;
     color: #fff;
@@ -119,6 +194,9 @@ export default {
     border: 3px dashed #888888;
     font-family: SimHei,fantasy;
     font-size: 14px;
+  }
+  #remark::placeholder {
+    opacity: 0.6;
   }
   #commitBox{
     text-align: right;

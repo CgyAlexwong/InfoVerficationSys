@@ -17,7 +17,7 @@
               @mouseup="mouseUp"></canvas>
       <div class="btnBox">
         <button @click="overwrite">重写</button>
-        <button @click="go">提交签名</button>
+        <button id='check' @click="go" :disabled="!submitable">提交签名</button>
       </div>
     </div>
   </div>
@@ -45,7 +45,9 @@ export default {
       endX: 0,
       w: null,
       h: null,
-      isDown: false
+      isDown: false,
+
+      submitable: false
     }
   },
   mounted () {
@@ -81,6 +83,7 @@ export default {
         this.canvasTxt.closePath();
         this.points.push(obj);
         this.isDown=true;
+        this.submitable = true
       }
     },
     //移动设备事件
@@ -100,6 +103,7 @@ export default {
         this.canvasTxt.stroke();
         this.canvasTxt.closePath();
         this.points.push(obj);
+        this.submitable = true
       }
     },
     //电脑设备事件
@@ -121,6 +125,7 @@ export default {
         this.startY=obj.y;
         this.startX=obj.x;
         this.points.push(obj);
+        this.submitable = true
       }
     },
     //移动设备事件
@@ -142,6 +147,7 @@ export default {
         this.startY=obj.y;
         this.startX=obj.x;
         this.points.push(obj);
+        this.submitable = true
       }
     },
     //电脑设备事件
@@ -161,6 +167,7 @@ export default {
         this.points.push(obj);
         this.points.push({x:-1,y:-1});
         this.isDown=false;
+        this.submitable = true
       }
     },
     //移动设备事件
@@ -180,6 +187,7 @@ export default {
         this.canvasTxt.closePath();
         this.points.push(obj);
         this.points.push({x:-1,y:-1});
+        this.submitable = true
       }
     },
     //重写
@@ -188,7 +196,7 @@ export default {
       this.points=[];
     },
     //保存
-    save() {
+    submit() {
       let url = this.$refs.canvasF.toDataURL('image/png');
       console.log(url.length);
       setSignature({

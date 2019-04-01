@@ -29,27 +29,53 @@
           <mt-cell id="a" title="联系电话：" v-model="phoneNumber"/>
           <mt-cell id="aSpecial" title="身份证：" v-model="identityNum"/>
           </div>
-          <br>
           <button id = 'check1' v-bind:disabled="unchangeablePart" @click="change1">确认</button>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
           <p>以下信息可修改但必须填写</p>
           <div id = 'changeablePart'>
-          <mt-field id='b' label="毕业中学：" v-model="graduateSchool" placeholder="请输入你的毕业中学名称"></mt-field>
-          <mt-field id='b' label="移动电话：" v-model="mobileNumber" placeholder="请输入你的移动电话"></mt-field>
-          <mt-field id='b' label="邮政编码：" v-model="postal" placeholder="请输入你的邮政编码"></mt-field>
-          <mt-field id='b' label="通讯地址：" v-model="address" placeholder="请输入你的通讯地址"></mt-field>
-          <mt-field id='b' label="紧急联系人：" v-model="emergencyContact.emergencyContactPerson" placeholder="请输入你的紧急联系人"></mt-field>
-          <mt-field id='b' label="紧急联系电话：" v-model="emergencyContact.emergencyContactNumber" placeholder="请输入你的紧急联系电话"></mt-field>
-          <mt-field id='bSpecial' label="紧急联系地址：" v-model="emergencyContact.emergencyContactAddress" placeholder="请输入你的紧急联系地址"></mt-field>
+            <div id="b">
+              <mt-field label="毕业中学：" v-model="graduateSchool" placeholder="请输入你的毕业中学名称" @input="graduateSchoolCheck"></mt-field>
+              <dd v-if="!graduateSchoolValid">{{graduateSchoolMessage}}</dd>
+            </div>
+            <div id="b">
+              <mt-field label="移动电话：" v-model="mobileNumber" placeholder="请输入你的移动电话" @input="mobileNumberCheck"></mt-field>
+              <dd v-if="!mobileNumberValid">{{mobileNumberMessage}}</dd>
+            </div>
+            <div id="b">
+              <mt-field label="邮政编码：" v-model="postal" placeholder="请输入你的邮政编码" @input="postalCheck"></mt-field>
+              <dd v-if="!postalValid">{{postalMessage}}</dd>
+            </div>
+            <div id="b">
+             <mt-field label="通讯地址：" v-model="address" placeholder="请输入你的通讯地址" @input="addressCheck"></mt-field>
+              <dd v-if="!addressValid">{{addressMessage}}</dd>
+            </div>
+            <div id="b">
+              <mt-field label="紧急联系人：" v-model="emergencyContact.emergencyContactPerson" placeholder="请输入你的紧急联系人"  @input="emergencyContactPersonCheck"></mt-field>
+              <dd v-if="!emergencyContactPersonValid">{{emergencyContactPersonMessage}}</dd>
+            </div>
+            <div id="b">
+              <mt-field label="紧急联系电话：" v-model="emergencyContact.emergencyContactNumber" placeholder="请输入你的紧急联系电话" @input="emergencyContactNumberCheck"></mt-field>
+              <dd v-if="!emergencyContactNumberValid">{{emergencyContactNumberMessage}}</dd>
+            </div>
+            <div id="bSpecial">
+              <mt-field label="紧急联系地址：" v-model="emergencyContact.emergencyContactAddress" placeholder="请输入你的紧急联系地址" @input="emergencyContactAddressCheck"></mt-field>
+              <dd v-if="!emergencyContactAddressValid">{{emergencyContactAddressMessage}}</dd>
+            </div>
           </div>
           <p>以下信息可修改且自愿填写</p>
           <div id = 'voluntaryPart' style="height: 147px">
-          <mt-field id='b' label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名"></mt-field>
-          <mt-field id='b' label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”"></mt-field>
-          <mt-field id='bSpecial' label="籍贯：" v-model="nativePlace" placeholder="请输入你的籍贯"></mt-field>
+            <div id="b">
+              <mt-field label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名"></mt-field>
+            </div>
+            <div id="b">
+              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”" @input="graduateDateCheck"></mt-field>
+              <dd v-if="!graduateDateValid">{{graduateDateMessage}}</dd>
+            </div>
+            <div id="bSpecial">
+             <mt-field label="籍贯：" v-model="nativePlace" placeholder="请输入你的籍贯"></mt-field>
+            </div>
           </div>
-          <br>
           <div id="voluntaryButton">
             <button id="check2" v-bind:disabled="changeablePart" @click="change2">确认</button>
           </div>
@@ -58,7 +84,7 @@
     </div>
     <div id="confirmButton">
       <button id="feedback" @click="feedback">反馈</button>
-      <button id='check' @click="go">提交</button>
+      <button id='check' @click="go" :disabled="!unchangeablePart || !changeablePart" >提交</button>
     </div>
   </div>
 </template>
@@ -75,6 +101,7 @@ import MtCell from "mint-ui/packages/cell/src/cell";
 import { getInfo , setUserInfo} from "../../../utils/stuAPI";
 import MtField from "mint-ui/packages/field/src/field"
 import student from '../identitySelect/identitySelect'
+import {checkChinese, checkPhoneNumber, checkPostal, checkDate} from "../../../utils/checkList";
 
 export default {
   name: "informationVerify",
@@ -83,6 +110,23 @@ export default {
       selected: '1',
       unchangeablePart:false,
       changeablePart:false,
+
+      graduateSchoolValid: true,
+      graduateSchoolMessage: '',
+      mobileNumberValid: true,
+      mobileNumberMessage: '',
+      postalValid: true,
+      postalMessage: '',
+      addressValid: true,
+      addressMessage: '',
+      emergencyContactPersonValid: true,
+      emergencyContactPersonMessage: '',
+      emergencyContactNumberValid: true,
+      emergencyContactNumberMessage: '',
+      emergencyContactAddressValid: true,
+      emergencyContactAddressMessage: '',
+      graduateDateValid: true,
+      graduateDateMessage: '',
 
       examNum:'171250606',
       stuName:'魏进',
@@ -114,7 +158,7 @@ export default {
       this.examNum = response.examNum;
       this.stuName = response.stuName;
       this.foreignName = response.foreignName;
-      this.sex = response.sex===1 ? '男':'女';
+      this.sex = response.sex === 1 ? '男':'女';
       this.nation = response.nation;
       this.birthdate = response.birthdate;
       if (response.subject === 0){
@@ -144,6 +188,44 @@ export default {
         title:"提示",
         message:"你已完成前阶段任务，无法返回"
       })
+    },
+    graduateSchoolCheck () {
+      let result = checkChinese(this.graduateSchool)
+      this.graduateSchoolValid = result.res
+      this.graduateSchoolMessage = result.msg
+    },
+    mobileNumberCheck () {
+      let result = checkPhoneNumber(this.mobileNumber)
+      this.mobileNumberValid = result.res
+      this.mobileNumberMessage = result.msg
+    },
+    postalCheck () {
+      let result = checkPostal(this.postal)
+      this.postalValid = result.res
+      this.postalMessage = result.msg
+    },
+    addressCheck () {
+      this.addressValid = true
+      this.addressMessage = ''
+    },
+    emergencyContactPersonCheck () {
+      let result = checkChinese(this.emergencyContact.emergencyContactPerson)
+      this.emergencyContactPersonValid = result.res
+      this.emergencyContactPersonMessage = result.msg
+    },
+    emergencyContactNumberCheck () {
+      let result = checkPhoneNumber(this.emergencyContact.emergencyContactNumber)
+      this.emergencyContactNumberValid = result.res
+      this.emergencyContactNumberMessage = result.msg
+    },
+    emergencyContactAddressCheck () {
+      this.emergencyContactAddressValid = true
+      this.emergencyContactAddressMessage = ''
+    },
+    graduateDateCheck () {
+      let result = checkDate(this.graduateDate)
+      this.graduateDateValid = result.res
+      this.graduateDateMessage = result.msg
     },
     go:function () {
       this.$router.push('/stu/ESignature')
@@ -209,8 +291,33 @@ export default {
       console.log('不可修改基本信息已确认:'+this.unchangeablePart)
     },
     change2:function () {
-      this.changeablePart = true;
-      console.log('可修改基本信息已确认:'+this.changeablePart)
+      if (this.graduateSchool!==''&&this.mobileNumber!==''&&this.postal!==''&&this.address!==''
+        &&this.emergencyContact.emergencyContactPerson!==''&&this.emergencyContact.emergencyContactNumber!==''&&this.emergencyContact.emergencyContactAddress!==''
+        &&this.graduateSchoolValid&&this.mobileNumberValid&&this.postalValid &&this.emergencyContactPersonValid&&this.emergencyContactNumberValid) {
+        this.changeablePart = true;
+        console.log('可修改基本信息已确认:'+this.changeablePart)
+      } else if (this.graduateSchool === '' && this.graduateSchoolValid){
+        this.graduateSchoolValid = false
+        this.graduateSchoolMessage = '毕业中学不能为空！'
+      } else if (this.mobileNumber === '' && this.mobileNumberValid){
+        this.mobileNumberValid = false
+        this.mobileNumberMessage = '移动电话不能为空！'
+      } else if (this.postal === '' && this.postalValid){
+        this.postalValid = false
+        this.postalMessage = '邮政编码不能为空！'
+      } else if (this.address === ''){
+        this.addressValid = false
+        this.addressMessage = '通讯地址不能为空！'
+      } else if (this.emergencyContact.emergencyContactPerson === '' && this.emergencyContactPersonValid){
+        this.emergencyContactPersonValid = false
+        this.emergencyContactPersonMessage = '紧急联系人不能为空！'
+      } else if (this.emergencyContact.emergencyContactNumber === '' && this.emergencyContactNumberValid){
+        this.emergencyContactNumberValid = false
+        this.emergencyContactNumberMessage = '紧急联系电话不能为空！'
+      } else if (this.emergencyContact.emergencyContactAddress === ''){
+        this.emergencyContactAddressValid = false
+        this.emergencyContactAddressMessage = '紧急联系地址不能为空！'
+      }
     }
   }
 }
@@ -219,9 +326,6 @@ export default {
 <style scoped>
   #head{
     height: 0
-  }
-  #navbar {
-    height: 590px;
   }
   #a{
     text-align: left;
@@ -253,8 +357,13 @@ export default {
     color: #888;
     text-align: left;
   }
-  br{
-    max-height: 3px;
+  dd{
+    font-size: 12px;
+    padding-left: 110px;
+    margin:0 0 9px;
+    display: block;
+    color: #f44336;
+    text-align: left;
   }
   #unchangeablePart{
     border: 3px dotted #26a2ff;
@@ -264,15 +373,16 @@ export default {
   }
   #voluntaryPart{
     border: 3px dotted #26a2ff;
-    max-height: 126px;
   }
   #check1,#check2,#feedback{
     border: 1px solid #26a2ff;
     background: transparent;
     border-radius: 4px;
+    margin-top: 8px;
     padding: 5px 10px;
   }
   #confirmButton{
+    margin: 0 2px 0;
     text-align:right
   }
   #check{
@@ -281,5 +391,8 @@ export default {
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
+  }
+  #check:disabled{
+    opacity: 0.6;
   }
 </style>

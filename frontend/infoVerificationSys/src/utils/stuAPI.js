@@ -29,44 +29,44 @@ let http = axios.create({
 // 00 反馈
 // 留下联系信息 stuName String, contact String, remark String
 export const feedBack = params => {
-  return axios.post('/userBasicFunc/feedback', params, http).then(res => res.data)
+  return axios.post('/userBasicFunc/feedback', params, {headers: {identity: Cookies.get('id')}}).then(res => res.data)
 }
 
 // 01 身份选择
 // 检查通行证号是否存在
 export const userJuniorLogin = params => {
-  return axios.post('/login/userJuniorLogin', params, http).then(res => res.data)
+  return axios.post('/login/userJuniorLogin', params, {headers: {identity: Cookies.get('id')}}).then(res => res.data)
 }
 
 // 02 人脸识别
 // 上传人脸照片文件匹配 File photo, HttpServletRequest request
 export const recognize = params => {
-  return axios.post('/faceRecognition/recognize', params, http).then(res => res.data)
+  return axios.post('/faceRecognition/recognize', params, {headers: {identity: Cookies.get('id')}}).then(res => res.data)
 }
 
 // 03 OCR识别
 // 上传通行证正面 File identification, HttpServletRequest request
 export const doOCR = params => {
-  return axios.post('/OCR/doOCR', params, http).then(res => res.data)
+  return axios.post('/OCR/doOCR', params, {headers: {identity: Cookies.get('id')}}).then(res => res.data)
 }
 // 上传通行证反面 File identification, HttpServletRequest request
 export const doOCRNegative = params => {
-  return axios.post('/OCR/doOCRNegative', params, http).then(res => res.data)
+  return axios.post('/OCR/doOCRNegative', params, {headers: {identity: Cookies.get('id')}}).then(res => res.data)
 }
 
 // 04基本信息校验
 // 获取基本信息
 export const getInfo = () => {
   console.log(Cookies.get('id'))
-  return axios.get('/userBasicFunc/getInfo', http)
+  return axios.get('/userBasicFunc/getInfo', {headers: {identity: Cookies.get('id')}}).then(res => res.data)
 }
 // 提交验证的信息
 export const setUserInfo = params => {
-  return axios.post('/userBasicFunc/setInfo', params, http).then(res => res.data)
+  return axios.post('/userBasicFunc/setInfo', params, {headers: {identity: Cookies.get('id')}}).then(res => res.data)
 }
 
 // 05电子签名
 // 提交电子签名
 export const setSignature = params => {
-  return axios.post('/userBasicFunc/sign', params, http).then(res => res.data)
+  return axios.post('/userBasicFunc/sign', params, {headers: {identity: Cookies.get('id')}}).then(res => res.data)
 }

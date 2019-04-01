@@ -11,16 +11,13 @@
 
     <!-- 地区选择 mt-radio -->
     <div id="box" >
-      <mt-radio
-        title="请选择你来自的地区："
-        v-model="originPlace"
-        :options="options">
-      </mt-radio>
+      <mt-radio title="请选择你来自的地区：" v-model="originPlace" :options="options"></mt-radio>
     </div>
     <!-- 填写身份证号 mt-field -->
     <p>请输入你的身份证号：</p>
     <div id='identityInput'>
-      <mt-field label="身份证号：" placeholder="请输入你的身份证号" v-model="identityNum" ></mt-field>
+      <mt-field label="身份证号：" placeholder="请输入你的身份证号" v-model="identityNum" @input="identityNumCheck"></mt-field>
+      <dd v-if="!identityNumValid">{{identityNumMessage}}</dd>
     </div>
     <div id="checkButton">
       <button size="small" @click="go">确认</button>
@@ -38,15 +35,22 @@ import MtField from "mint-ui/packages/field/src/field";
 import { userJuniorLogin } from "../../../utils/stuAPI";
 import Cookies from 'js-cookie';
 import MtCell from "mint-ui/packages/cell/src/cell";
+import {checkIdentityNum} from "../../../utils/checkList";
 
 export default {
   name: 'Identity',
   components: {MtCell, MtField, Field,MessageBox,MtRadio, MtHeader, MtButton },
   data () {
     return {
-      originPlace:'',
-      identityNum:'',
+      originPlace: '',
+      identityNum: '',
+      identityNumValid: true,
+      identityNumMessage: '',
       options : [
+        {
+          label: '台湾',
+          value: '1'
+        },
         {
           label: '香港',
           value: '2'
@@ -54,15 +58,16 @@ export default {
         {
           label: '澳门',
           value: '3'
-        },
-        {
-          label: '台湾',
-          value: '1'
         }
       ]
     }
   },
   methods:{
+    identityNumCheck () {
+      let result = checkIdentityNum(this.identityNum)
+      this.identityNumValid = result.res
+      this.identityNumMessage = result.msg
+    },
     // 测试方法，直接进入下一环节
     go:function(){
       Cookies.set('id','171250639')
@@ -70,52 +75,55 @@ export default {
     },
     // 发送信息确认，弹框提示
     submit:function () {
-      console.log({
-        identityNum:this.identityNum,
-        originPlace:this.originPlace
-      });
-      userJuniorLogin({
-        identityNum:this.identityNum,
-        region:parseInt(this.originPlace)
-        }
-      ).then(response =>{
-        if(response.succeed === true){
-          console.log(response.msg);
-          Cookies.set('id',this.identityNum);
-          this.$router.push('/stu/faceVerify')
-        } else if(response.msg === '无照片信息'){
-          MessageBox.alert('', {
-            message: response.msg,
-            title: '提示',
-            confirmButtonText: '反馈'
-          }).then(action => {
-            if (action === 'confirm') {     //反馈的回调
-              this.$router.push('/feedback')
-            }
-          }).catch(err => {
-            if (err === 'cancel') {     //重试的回调
-              console.log("重试");
-            }
-          })
-        } else {
-          MessageBox.confirm('', {
-            message: response.msg,
-            title: '提示',
-            confirmButtonText: '反馈',
-            cancelButtonText: '重试'
-          }).then(action => {
-            if (action === 'confirm') {     //反馈的回调
-              this.$router.push('/feedback')
-            }
-          }).catch(err => {
-            if (err === 'cancel') {     //重试的回调
-              console.log("重试");
-            }
-          })
-        }
-      })
+      if (this.identityNum !== '' && this.identityNumValid && this.originPlace !== ''){
+        console.log({
+          identityNum:this.identityNum,
+          originPlace:parseInt(this.originPlace)
+        })
+        userJuniorLogin({
+          identityNum:this.identityNum,
+          originPlace:parseInt(this.originPlace)
+          }
+        ).then(response =>{
+          if(response.succeed === true){
+            Cookies.set('id',this.identityNum);
+            this.$router.push('/stu/faceVerify')
+          } else if(response.msg === '无照片信息'){
+            MessageBox.alert('', {
+              message: response.msg,
+              title: '提示',
+              confirmButtonText: '反馈'
+            }).then(action => {
+              if (action === 'confirm') {     //反馈的回调
+                this.$router.push('/feedback')
+              }
+            }).catch(err => {
+              if (err === 'cancel') {     //重试的回调
+                console.log("重试");
+              }
+            })
+          } else {
+            MessageBox.confirm('', {
+              message: response.msg,
+              title: '提示',
+              confirmButtonText: '反馈',
+              cancelButtonText: '重试'
+            }).then(action => {
+              if (action === 'confirm') {     //反馈的回调
+                this.$router.push('/feedback')
+              }
+            }).catch(err => {
+              if (err === 'cancel') {     //重试的回调
+                console.log("重试");
+              }
+            })
+          }
+        })
+      } else if (this.identityNum === '') {
+        this.identityNumValid = false
+        this.identityNumMessage = '请输入身份证号！'
+      }
     },
-
   }
 }
 </script>
@@ -127,6 +135,14 @@ export default {
     padding-top: 3px;
     display: block;
     color: #888;
+    text-align: left;
+  }
+  dd{
+    font-size: 12px;
+    padding-left: 110px;
+    margin:0 0 9px;
+    display: block;
+    color: #f44336;
     text-align: left;
   }
   #box{
