@@ -182,8 +182,8 @@ export default {
   }
   #choose{
     margin-left: 8px;
-    border: 1px solid #26a2ff;
-    background: #26a2ff;
+    border: 1px solid #3023ae;
+    background: #3023ae;
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
@@ -203,8 +203,8 @@ export default {
     margin: 3px;
   }
   #commit{
-    border: 1px solid #26a2ff;
-    background: #26a2ff;
+    border: 1px solid #3023ae;
+    background: #3023ae;
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;

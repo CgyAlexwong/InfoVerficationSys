@@ -7,13 +7,13 @@
         <mt-button icon="back" @click="warn">返回</mt-button>
       </router-link>
     </mt-header>
-    <p>请拍摄你的通行证正面：</p>
+    <p id="word">请拍摄你的通行证正面：</p>
     <div id="front" >
       <div>
         <mt-button @click="appear">点击拍照</mt-button>
       </div>
       <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
-      <p>预览：</p>
+      <p id="word">预览：</p>
       <div id="loadFront">
         <img :src="img1" alt="人脸照片" style="width: 80%">
       </div>
@@ -21,13 +21,13 @@
         <button id='commitFront' @click="changeBackState" v-bind:disabled="frontCommitState">提交</button>
       </div>
     </div>
-    <p>请拍摄你的通行证反面：</p>
+    <p id="word">请拍摄你的通行证反面：</p>
     <div id="back" >
       <div>
         <mt-button @click="appear" v-bind:disabled="backCommitAble">点击拍照</mt-button>
       </div>
       <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
-      <p>预览：</p>
+      <p id="word">预览：</p>
       <div id="loadBack">
         <img :src="img2" alt="人脸照片" style="width: 80%">
       </div>
@@ -82,9 +82,10 @@ export default {
 </script>
 
 <style scoped>
-  p{
+  #word {
     font-size: 12px;
     margin: 9px;
+    padding-top: 9px;
     display: block;
     color: #888;
     text-align: left;
@@ -94,8 +95,8 @@ export default {
     text-align: right;
   }
   #commitFront,#commitBack{
-    border: 1px solid #26a2ff;
-    background: #26a2ff;
+    border: 1px solid #3023ae;
+    background: #3023ae;
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;

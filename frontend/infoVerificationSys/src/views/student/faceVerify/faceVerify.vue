@@ -7,12 +7,12 @@
         <mt-button icon="back" @click="warn">返回</mt-button>
       </router-link>
     </mt-header>
-    <p>请拍摄你的正脸照：</p>
+    <p id="word">请拍摄你的正脸照：</p>
     <div id="camera">
       <mt-button @click="appear">点击拍照</mt-button>
     </div>
     <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
-    <p>预览：</p>
+    <p id="word">预览：</p>
     <div id="load">
       <img :src="img" alt="人脸照片" style="width: 80%">
     </div>
@@ -58,7 +58,7 @@ import {MessageBox} from 'mint-ui'
 </script>
 
 <style scoped>
-  p{
+  #word {
     font-size: 12px;
     margin: 9px;
     padding-top: 9px;
@@ -75,8 +75,8 @@ import {MessageBox} from 'mint-ui'
     text-align: right;
   }
   #commit{
-    border: 1px solid #26a2ff;
-    background: #26a2ff;
+    border: 1px solid #3023ae;
+    background: #3023ae;
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;

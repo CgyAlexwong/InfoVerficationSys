@@ -21,7 +21,7 @@
   flex: 1;
 }
 canvas{
-  border: 3px solid #26a2ff;
+  border: 3px solid #7645c1;
 }
 .btnBox{
   height: 60px;
@@ -30,14 +30,14 @@ canvas{
   line-height: 30px;
 }
 .btnBox button:first-of-type{
-  border: 1px solid #26a2ff;
+  border: 1px solid #3023ae;
   background: transparent;
   border-radius: 4px;
   padding: 5px 10px;
 }
 .btnBox button:last-of-type{
-  border: 1px solid #26a2ff;
-  background: #26a2ff;
+  border: 1px solid #3023ae;
+  background: #3023ae;
   color: #fff;
   border-radius: 4px;
   padding: 5px 10px;

@@ -14,7 +14,7 @@
       <mt-radio title="请选择你来自的地区：" v-model="originPlace" :options="options"></mt-radio>
     </div>
     <!-- 填写身份证号 mt-field -->
-    <p>请输入你的身份证号：</p>
+    <p  id="word">请输入你的身份证号：</p>
     <div id='identityInput'>
       <mt-field label="身份证号：" placeholder="请输入你的身份证号" v-model="identityNum" @input="identityNumCheck"></mt-field>
       <dd v-if="!identityNumValid">{{identityNumMessage}}</dd>
@@ -64,13 +64,13 @@ export default {
   },
   methods:{
     identityNumCheck () {
-      let result = checkIdentityNum(this.identityNum)
-      this.identityNumValid = result.res
+      let result = checkIdentityNum(this.identityNum);
+      this.identityNumValid = result.res;
       this.identityNumMessage = result.msg
     },
     // 测试方法，直接进入下一环节
     go:function(){
-      Cookies.set('id','171250639')
+      Cookies.set('id','171250639');
       this.$router.push('/stu/faceVerify')
     },
     // 发送信息确认，弹框提示
@@ -79,7 +79,7 @@ export default {
         console.log({
           identityNum:this.identityNum,
           originPlace:parseInt(this.originPlace)
-        })
+        });
         userJuniorLogin({
           identityNum:this.identityNum,
           originPlace:parseInt(this.originPlace)
@@ -120,7 +120,7 @@ export default {
           }
         })
       } else if (this.identityNum === '') {
-        this.identityNumValid = false
+        this.identityNumValid = false;
         this.identityNumMessage = '请输入身份证号！'
       }
     },
@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style scoped>
-  p{
+  #word {
     font-size: 12px;
     margin: 9px;
     padding-top: 3px;

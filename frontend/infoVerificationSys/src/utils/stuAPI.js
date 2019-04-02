@@ -8,6 +8,7 @@ axios.defaults.baseURL = process.env.NODE_ENV === 'production'
   ? 'http://101.132.35.81:3141'
   : 'http://localhost:3142'
 
+/*
 let http = axios.create({
   baseURL: 'http://localhost:3142/',
   withCredentials: true,
@@ -25,6 +26,7 @@ let http = axios.create({
     return newData
   }]
 })
+*/
 
 // 00 反馈
 // 留下联系信息 stuName String, contact String, remark String
