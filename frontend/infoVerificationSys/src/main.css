@@ -347,6 +347,7 @@
   padding: 5px 0;
 }
 .mint-field-core {
+  background-color: #ffffff;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -359,6 +360,9 @@
   line-height: 1.6;
   font-size: inherit;
   width: 100%;
+}
+.mint-field-core:disabled{
+  opacity: 0.8;
 }
 .mint-field-clear {
   opacity: .2;

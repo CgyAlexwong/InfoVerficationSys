@@ -35,45 +35,45 @@
           <p id="word">以下信息可修改但必须填写</p>
           <div id = 'changeablePart'>
             <div id="b">
-              <mt-field label="毕业中学：" v-model="graduateSchool" placeholder="请输入你的毕业中学名称" @input="graduateSchoolCheck"></mt-field>
+              <mt-field label="毕业中学：" v-model="graduateSchool" placeholder="请输入你的毕业中学名称" @input="graduateSchoolCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!graduateSchoolValid">{{graduateSchoolMessage}}</dd>
             </div>
             <div id="b">
-              <mt-field label="移动电话：" v-model="mobileNumber" placeholder="请输入你的移动电话" @input="mobileNumberCheck"></mt-field>
+              <mt-field label="移动电话：" v-model="mobileNumber" placeholder="请输入你的移动电话" @input="mobileNumberCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!mobileNumberValid">{{mobileNumberMessage}}</dd>
             </div>
             <div id="b">
-              <mt-field label="邮政编码：" v-model="postal" placeholder="请输入你的邮政编码" @input="postalCheck"></mt-field>
+              <mt-field label="邮政编码：" v-model="postal" placeholder="请输入你的邮政编码" @input="postalCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!postalValid">{{postalMessage}}</dd>
             </div>
             <div id="b">
-             <mt-field label="通讯地址：" v-model="address" placeholder="请输入你的通讯地址" @input="addressCheck"></mt-field>
+             <mt-field label="通讯地址：" v-model="address" placeholder="请输入你的通讯地址" @input="addressCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!addressValid">{{addressMessage}}</dd>
             </div>
             <div id="b">
-              <mt-field label="紧急联系人：" v-model="emergencyContact.emergencyContactPerson" placeholder="请输入你的紧急联系人"  @input="emergencyContactPersonCheck"></mt-field>
+              <mt-field label="紧急联系人：" v-model="emergencyContact.emergencyContactPerson" placeholder="请输入你的紧急联系人"  @input="emergencyContactPersonCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!emergencyContactPersonValid">{{emergencyContactPersonMessage}}</dd>
             </div>
             <div id="b">
-              <mt-field label="紧急联系电话：" v-model="emergencyContact.emergencyContactNumber" placeholder="请输入你的紧急联系电话" @input="emergencyContactNumberCheck"></mt-field>
+              <mt-field label="紧急联系电话：" v-model="emergencyContact.emergencyContactNumber" placeholder="请输入你的紧急联系电话" @input="emergencyContactNumberCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!emergencyContactNumberValid">{{emergencyContactNumberMessage}}</dd>
             </div>
             <div id="bSpecial">
-              <mt-field label="紧急联系地址：" v-model="emergencyContact.emergencyContactAddress" placeholder="请输入你的紧急联系地址" @input="emergencyContactAddressCheck"></mt-field>
+              <mt-field label="紧急联系地址：" v-model="emergencyContact.emergencyContactAddress" placeholder="请输入你的紧急联系地址" @input="emergencyContactAddressCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!emergencyContactAddressValid">{{emergencyContactAddressMessage}}</dd>
             </div>
           </div>
           <p id="word">以下信息可修改且自愿填写</p>
           <div id = 'voluntaryPart' style="height: 147px">
             <div id="b">
-              <mt-field label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名"></mt-field>
+              <mt-field label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名" :disabled="changeablePart"></mt-field>
             </div>
             <div id="b">
-              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”" @input="graduateDateCheck"></mt-field>
+              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”" @input="graduateDateCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!graduateDateValid">{{graduateDateMessage}}</dd>
             </div>
             <div id="bSpecial">
-             <mt-field label="籍贯：" v-model="nativePlace" placeholder="请输入你的籍贯"></mt-field>
+             <mt-field label="籍贯：" v-model="nativePlace" placeholder="请输入你的籍贯" :disabled="changeablePart"></mt-field>
             </div>
           </div>
           <div id="voluntaryButton">

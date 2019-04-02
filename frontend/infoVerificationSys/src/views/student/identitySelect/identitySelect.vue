@@ -1,14 +1,15 @@
 <!-- 第一部分 身份选择 -->
 
 <template>
-  <div id="identity">
+  <div id="identitySelect">
     <!-- 新的header -->
-    <mt-header fixed title="（1 / 5）身份选择">
-      <router-link to="/stu" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-    </mt-header>
-
+    <div id = 'head'>
+      <mt-header fixed title="（1 / 5）身份选择">
+        <router-link to="/stu" slot="left">
+          <mt-button icon="back">返回</mt-button>
+        </router-link>
+      </mt-header>
+    </div>
     <!-- 地区选择 mt-radio -->
     <div id="box" >
       <mt-radio title="请选择你来自的地区：" v-model="originPlace" :options="options"></mt-radio>

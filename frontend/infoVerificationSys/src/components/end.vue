@@ -29,7 +29,7 @@ export default {
   #end {
     margin: 10px;
     font-family: STKaiti, serif;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
   }
