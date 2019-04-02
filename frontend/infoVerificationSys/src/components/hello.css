@@ -2,8 +2,10 @@
   padding: 10px;
 }
 p {
-  font-size: x-large;
-  font-weight: normal;
+  margin: 10px;
+  font-family: STKaiti, serif;
+  font-size: 40px;
+  font-weight: bold;
   text-align: center;
 }
 ul {

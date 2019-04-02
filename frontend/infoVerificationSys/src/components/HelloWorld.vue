@@ -3,7 +3,7 @@
 <template>
   <div id="hello">
     <img id='helloPic' src="../assets/da8e974dc.jpg" alt="welcome" height="100" width="100"/>
-    <p>欢迎使用信息校验系统</p>
+    <p>信息校验系统<br>欢迎使用</p>
     <mt-button size = "normal" type = "default" @click="begin">
       <img src="../assets/logo.png" alt="begin" height="20" width="20"/>
       开始验证

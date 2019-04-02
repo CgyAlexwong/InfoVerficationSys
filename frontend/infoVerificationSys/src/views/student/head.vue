@@ -1,6 +1,6 @@
 <template>
   <div id = "header">
-    <mt-header fixed title="港澳台信息校验系统">
+    <mt-header fixed title="台港澳信息校验系统">
       <router-link to="/stu" slot="left">
         <mt-button icon="back">首页</mt-button>
       </router-link>

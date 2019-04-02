@@ -366,16 +366,16 @@ export default {
     text-align: left;
   }
   #unchangeablePart{
-    border: 3px dotted #26a2ff;
+    border: 3px dotted #7645c1;
   }
   #changeablePart{
-    border: 3px dotted #26a2ff;
+    border: 3px dotted #7645c1;
   }
   #voluntaryPart{
-    border: 3px dotted #26a2ff;
+    border: 3px dotted #7645c1;
   }
   #check1,#check2,#feedback{
-    border: 1px solid #26a2ff;
+    border: 1px solid #3023ae;
     background: transparent;
     border-radius: 4px;
     margin-top: 8px;
@@ -386,8 +386,8 @@ export default {
     text-align:right
   }
   #check{
-    border: 1px solid #26a2ff;
-    background: #26a2ff;
+    border: 1px solid #3023ae;
+    background: #3023ae;
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
