@@ -118,12 +118,6 @@ export default {
         this.getUserInfo(row.identityNum)
       })
     },
-    // //修改学生信息
-    // handleInfoEdit(row) {
-    //     //编辑
-    //     this.dialogFormVisible = true
-    //     this.stuInfoForm = (Object).assign({}, row)
-    // },
 
     handleDialogClose () {
       let _this = this

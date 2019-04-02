@@ -52,12 +52,12 @@ const router = new Router({
       }
     },
     {
-      path:'/admin',
+      path: '/admin',
       name: '学生反馈查看',
       component: Admin,
       iconClass: 'el-icon-menu',
-      children:[
-        {path:'/admin/checkFeedback',component:CheckFeedback,name:'学生反馈查看'}
+      children: [
+        {path: '/admin/checkFeedback', component: CheckFeedback, name: '学生反馈查看'}
       ]
     }
 

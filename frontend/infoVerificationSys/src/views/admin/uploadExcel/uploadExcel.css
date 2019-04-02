@@ -1,0 +1,28 @@
+.footer {
+    float: right;
+    padding:0 auto;
+    margin-top: 0;
+}
+.upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 400px;
+    overflow: hidden;
+}
+.el-upload__text {
+    font-size: 100px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+.el-upload__tip {
+    float:top;
+}
+.avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+}

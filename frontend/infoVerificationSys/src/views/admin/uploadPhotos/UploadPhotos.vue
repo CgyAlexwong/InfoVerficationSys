@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <el-card>
         <el-upload
                 action="https://jsonplaceholder.typicode.com/posts/"
                 list-type="picture-card"
@@ -21,7 +21,7 @@
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
-    </div>
+    </el-card>
 </template>
 
 <script src="./uploadPhotos.js"></script>

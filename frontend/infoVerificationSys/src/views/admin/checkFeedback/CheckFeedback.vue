@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-table :data='feedback' style="width: 100%; margin: 0 auto;" max-height="1000px" stripe
-                  highlight-current-row :default-sort="{prop: 'isHandle', order: 'descending'}">
+                  highlight-current-row :default-sort="{prop: 'isHandle', order: 'ascending'}">
             <el-table-column header-align="center" align="center" fixed label="姓名"
                              width="180px" prop="stuName">
 
