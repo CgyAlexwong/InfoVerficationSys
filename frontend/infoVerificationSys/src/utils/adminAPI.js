@@ -1,6 +1,12 @@
 // adminAPI 定义管理员部分接口
 import axios from 'axios'
 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+axios.defaults.baseURL = process.env.NODE_ENV === 'production'
+  ? 'http://101.132.35.81:3142'
+  : 'http://localhost:3142'
+
+
 // 登陆
 export const adminLogin = (params) => {
   return axios.post('/login/adminLogin', params)

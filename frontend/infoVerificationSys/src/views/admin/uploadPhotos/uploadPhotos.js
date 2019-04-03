@@ -14,6 +14,14 @@ export default {
     }
   },
   methods: {
+    beforeUploadPhotos(file){
+      let postfix=file.name.split(".")[1]
+      if (postfix==='jpg'||postfix==='JPG'||postfix==='jpeg'||postfix==='JPEG'||postfix==='png'||postfix==='PNG'){
+        return file
+      }else{
+        this.$message.error('上传文件只能是 jpg(jpeg)/png 格式')
+      }
+    },
     handleRemove (file, fileList) {
       console.log(file, fileList)
     },
