@@ -5,14 +5,15 @@
                 highlight-current-row
         >
             <el-table-column header-align="center" align="center" width="170px" ixed label="姓名"
-                             prop="name"></el-table-column>
+                             prop="stuName"></el-table-column>
             <el-table-column header-align="center" align="center" width="230px" label="身份证号码"
                              prop="identityNum"></el-table-column>
             <el-table-column  sortable header-align="center" align="center" :width="checkWidth" label="人脸识别校验" prop="faceCheck">
                 <template slot-scope="scope">
                     <el-button v-if="scope.row.faceCheck" type="primary" plain disabled>通过</el-button>
                     <el-tooltip class="top item" effect="dark" content="点击修改状态" placement="top">
-                        <el-button @click="changeFace(scope.row)"  v-if="!scope.row.faceCheck" type="danger" plain >未通过</el-button>
+                        <el-button @click="changeFace(scope.row)"  v-if="!scope.row.faceCheck" type="danger" plain >未通过</el-button
+                                >
                     </el-tooltip>
                 </template>
             </el-table-column>

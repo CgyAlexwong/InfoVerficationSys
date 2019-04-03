@@ -30,7 +30,7 @@ export const changeUserStatus = (params) => {
 }
 // 查看某个学生信息
 export const getUserInfo = (params) => {
-  return axios.post('/adminBasicFunc/getUserInfo',params)
+  return axios.get('/adminBasicFunc/getUserInfo',{headers:{identityNum:params}})
 }
 // 修改某个学生信息
 export const changeUserInfo = (params) => {
