@@ -266,8 +266,30 @@ export default {
     },
     //提交学生信息修改
     editInfoSubmit () {
-      let form = this.stuInfoForm
-      changeUserInfo(form)
+      changeUserInfo(
+          {
+              examNum: this.stuInfoForm.examNum,
+              stuName: this.stuInfoForm.stuName,
+              foreignName: this.stuInfoForm.foreignName,
+              sex: this.stuInfoForm.sex,
+              nation: this.stuInfoForm.nation,
+              birthdate: this.stuInfoForm.birthdate,
+              originPlace: this.stuInfoForm.originPlace,
+              subject: this.stuInfoForm.subject,
+              graduateDate: this.stuInfoForm.graduateDate,
+              email: this.stuInfoForm.email,
+              phoneNumber: this.stuInfoForm.phoneNumber,
+              mobileNumber: this.stuInfoForm.mobileNumber,
+              identityNum: this.stuInfoForm.identityNum,
+              mtpNumber: this.stuInfoForm.mtpNumber,
+              postal: this.stuInfoForm.postal,
+              nativePlace: this.stuInfoForm.nativePlace,
+              address: this.stuInfoForm.address,
+              graduateSchool: this.stuInfoForm.graduateSchool,
+              emergencyContactPerson: this.stuInfoForm.emergencyContact.emergencyContactPerson,
+              emergencyContactNumber: this.stuInfoForm.emergencyContact.emergencyContactNumber,
+              emergencyContactAddress: this.stuInfoForm.emergencyContact.emergencyContactAddress,
+        })
         .then(res => {
           if (res.data.succeed) {
             this.$message({
@@ -275,7 +297,7 @@ export default {
               type: 'success'
             })
             this.editFormVisible = false
-            this.getUserStatus()
+            this.getStatus()
           } else {
             this.$message({
               message: res.data.msg,
