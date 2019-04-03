@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-table :data='feedback' style="width: 100%; margin: 0 auto;" max-height="1000px" stripe
-                  highlight-current-row :default-sort="{prop: 'isHandle', order: 'ascending'}">
+                  highlight-current-row :default-sort="{prop: 'dealWith', order: 'ascending'}">
             <el-table-column header-align="center" align="center" fixed label="姓名"
                              width="180px" prop="stuName">
 
@@ -15,17 +15,17 @@
 
             </el-table-column>
             <el-table-column header-align="center" align="center" fixed label="处理状态"
-                             width="100px" prop="isHandle" sortable>
+                             width="100px" prop="dealWith" sortable>
                 <template slot-scope="scope">
-                    <el-button v-if="scope.row.isHandle" type="primary" plain disabled>已处理</el-button>
-                    <el-button v-if="!scope.row.isHandle" type="danger" plain disabled>未处理</el-button>
+                    <el-button v-if="scope.row.dealWith" type="primary" plain disabled>已处理</el-button>
+                    <el-button v-if="!scope.row.dealWith" type="danger" plain disabled>未处理</el-button>
                 </template>
 
             </el-table-column>
             <el-table-column align="right">
                 <template slot-scope="scope">
                     <el-button size="medium" round icon="el-icon-star-off" type="danger"
-                               @click="changeFeedback(scope.row)" :disabled="scope.row.isHandle===true">标记为已处理
+                               @click="changeFeedback(scope.row)" :disabled="scope.row.dealWith===true">标记为已处理
                     </el-button>
                 </template>
             </el-table-column>
