@@ -76,9 +76,9 @@ export default {
     }
   },
   mounted () {
-    // this.$nextTick(() => {
-    //   this.getStatus()
-    // })
+     this.$nextTick(() => {
+       this.getStatus()
+     })
   },
   computed: {
     filteredTableData () {
@@ -108,33 +108,8 @@ export default {
       this.dialogFormVisible = true
       getUserInfo(row.identityNum)
         .then(res=>{
-          let info=res.data;
-          this.stuInfoForm.examNum=info.examNum;
-          this.stuInfoForm.stuName=info.stuName;
-          this.stuInfoForm.foreignName=info.foreignName;
-          this.stuInfoForm.sex=info.sex;
-          this.stuInfoForm.nation=info.nation;
-          this.stuInfoForm.birthdate=info.birthdate;
-          this.stuInfoForm.originPlace=info.originPlace;
-          this.stuInfoForm.subject=info.subject;
-          this.stuInfoForm.graduateDate=info.graduateDate;
-          this.stuInfoForm.email=info.email;
-          this.stuInfoForm.phoneNumber=info.phoneNumber;
-          this.stuInfoForm.identityNum=info.identityNum;
-          this.stuInfoForm.mtpNumber=info.mtpNumber;
-          this.stuInfoForm.postal=info.postal;
-          this.stuInfoForm.nativePlace=info.nativePlace;
-          this.stuInfoForm.graduateSchool=info.graduateSchool;
-          this.stuInfoForm.emergencyContact.emergencyContactPerson=info.emergencyContact.emergencyContactPerson;
-          this.stuInfoForm.emergencyContact.emergencyContactNumber=info.emergencyContact.emergencyContactNumber;
-          this.stuInfoForm.emergencyContact.emergencyContactAddress=info.emergencyContact.emergencyContactAddress;
+          this.stuInfoForm=res.data
     })
-        .catch((err=>{
-          this.$message({
-            message: err.toString(),
-            type: 'error'
-          })
-        }))
 },
     handleDialogClose () {
       let _this = this

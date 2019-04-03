@@ -29,8 +29,8 @@ export const changeUserStatus = (params) => {
   return axios.post('/adminBasicFunc/changeUserStatus', params)
 }
 // 查看某个学生信息
-export const getUserInfo = () => {
-  return axios.get('/adminBasicFunc/getUserInfo')
+export const getUserInfo = (params) => {
+  return axios.post('/adminBasicFunc/getUserInfo',params)
 }
 // 修改某个学生信息
 export const changeUserInfo = (params) => {
