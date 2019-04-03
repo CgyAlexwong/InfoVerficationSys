@@ -115,7 +115,7 @@ export default {
       //编辑
       this.dialogFormVisible = true
       this.$nextTick(() => {
-        this.getUserInfo(row.identityNum)
+        getUserInfo(row.identityNum)
       })
     },
 
