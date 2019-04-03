@@ -10,6 +10,7 @@
     <p id="word">请拍摄你的正脸照：</p>
     <div id="camera">
       <mt-button @click="appear">点击拍照</mt-button>
+      <input type="file" accept="image/jpeg,image/jpg,image/png" capture="camera">
     </div>
     <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
     <p id="word">预览：</p>
@@ -52,7 +53,8 @@ import {MessageBox} from 'mint-ui'
             title:"提示",
             message:"你已完成前阶段任务，无法返回"
           })
-        }
+        },
+
       }
     }
 </script>

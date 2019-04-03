@@ -75,6 +75,9 @@ export function checkQQ (value) {
     } else if (res && value.length > 10) {
       res = false
       msg = '输入的数字多于10位！'
+    } else if (res && value.substr(0, 1) === '0') {
+      res = false
+      msg = '输入的QQ号不合法！'
     }
   }
   return {res: res, msg: msg}
@@ -103,10 +106,13 @@ export function checkIdentityNum (value) {
   if (value === '') {
     res = true
   } else {
-    let identityNumPattern = /^[A-Z157][0-9]{6}(\([A0-9]\))?([0-9]{3})?$/
+    let identityNumPattern = /^([A-Z157][0-9]{6}\([A0-9]\))|([A-Z][0-9]{9})$/
     res = identityNumPattern.test(value)
     if (!res) {
-      msg = '请输入正确格式的身份证号！'
+      msg = '请输入正确格式的身份证号！例如：<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp香港：A123456(1)<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp澳门：1234567(1)<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp台湾：A123456789'
     }
   }
   return {res: res, msg: msg}
@@ -122,13 +128,16 @@ export function checkPostal (value) {
     let postalPattern = /^[0-9]+$/
     res = postalPattern.test(value)
     if (!res) {
-      msg = '请输入6位数字邮编！'
-    } else if (res && value.length < 6) {
+      msg = '请输入数字邮编！'
+    } else if (res && value.length < 5) {
       res = false
       msg = '输入的数字少于6位！'
     } else if (res && value.length > 6) {
       res = false
       msg = '输入的数字多于6位！'
+    } else if (res && value.substr(0, 1) === '0') {
+      res = false
+      msg = '输入的邮编不合法！'
     }
   }
   return {res: res, msg: msg}
