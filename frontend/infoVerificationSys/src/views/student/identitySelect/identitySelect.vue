@@ -18,7 +18,7 @@
     <p  id="word">请输入你的身份证号：</p>
     <div id='identityInput'>
       <mt-field label="身份证号：" placeholder="请输入你的身份证号" v-model="identityNum" @input="identityNumCheck"></mt-field>
-      <dd v-if="!identityNumValid">{{identityNumMessage}}</dd>
+      <dd v-if="!identityNumValid"><div v-html="identityNumMessage"></div></dd>
     </div>
     <div id="checkButton">
       <button size="small" @click="go">确认</button>

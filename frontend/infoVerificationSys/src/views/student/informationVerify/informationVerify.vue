@@ -69,7 +69,7 @@
               <mt-field label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名" :disabled="changeablePart"></mt-field>
             </div>
             <div id="b">
-              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”" @input="graduateDateCheck" :disabled="changeablePart"></mt-field>
+              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”" @input="graduateDateCheck"  :disabled="changeablePart"></mt-field>
               <dd v-if="!graduateDateValid">{{graduateDateMessage}}</dd>
             </div>
             <div id="bSpecial">
@@ -243,11 +243,9 @@ export default {
           postal: this.postal,
           nativePlace:this.nativePlace,
           address: this.address,
-          UserEmergencyContact: {
-            emergencyContactPerson:this.emergencyContact.emergencyContactPerson,
-            emergencyContactNumber:this.emergencyContact.emergencyContactNumber,
-            emergencyContactAddress:this.emergencyContact.emergencyContactAddress
-          }
+          emergencyContactPerson:this.emergencyContact.emergencyContactPerson,
+          emergencyContactNumber:this.emergencyContact.emergencyContactNumber,
+          emergencyContactAddress:this.emergencyContact.emergencyContactAddress
         });
         setUserInfo({
           foreignName: this.foreignName,
@@ -257,11 +255,9 @@ export default {
           postal: this.postal,
           nativePlace:this.nativePlace,
           address: this.address,
-          UserEmergencyContact: {
-            emergencyContactPerson:this.emergencyContact.emergencyContactPerson,
-            emergencyContactNumber:this.emergencyContact.emergencyContactNumber,
-            emergencyContactAddress:this.emergencyContact.emergencyContactAddress
-          }
+          emergencyContactPerson:this.emergencyContact.emergencyContactPerson,
+          emergencyContactNumber:this.emergencyContact.emergencyContactNumber,
+          emergencyContactAddress:this.emergencyContact.emergencyContactAddress
         }).then(response =>{
           if (response.succeed === true){
             this.$router.push('/stu/ESignature')

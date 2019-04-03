@@ -2,10 +2,9 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-// import student from '../views/student/identitySelect/identitySelect.vue'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
-  ? 'http://101.132.35.81:3141'
+  ? 'http://101.132.35.81:3142'
   : 'http://localhost:3142'
 
 /*
@@ -59,7 +58,6 @@ export const doOCRNegative = params => {
 // 04基本信息校验
 // 获取基本信息
 export const getInfo = () => {
-  console.log(Cookies.get('id'))
   return axios.get('/userBasicFunc/getInfo', {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
 }
 // 提交验证的信息
