@@ -67,14 +67,6 @@ export default {
           emergencyContactNumber: '',
           emergencyContactAddress: '',
         },
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
       },
       formLabelWidth: '120px',
       checkWidth: '140px',
@@ -114,11 +106,36 @@ export default {
     handleInfoEdit (row) {
       //编辑
       this.dialogFormVisible = true
-      this.$nextTick(() => {
-        getUserInfo(row.identityNum)
-      })
-    },
-
+      getUserInfo(row.identityNum)
+        .then(res=>{
+          let info=res.data;
+          this.stuInfoForm.examNum=info.examNum;
+          this.stuInfoForm.stuName=info.stuName;
+          this.stuInfoForm.foreignName=info.foreignName;
+          this.stuInfoForm.sex=info.sex;
+          this.stuInfoForm.nation=info.nation;
+          this.stuInfoForm.birthdate=info.birthdate;
+          this.stuInfoForm.originPlace=info.originPlace;
+          this.stuInfoForm.subject=info.subject;
+          this.stuInfoForm.graduateDate=info.graduateDate;
+          this.stuInfoForm.email=info.email;
+          this.stuInfoForm.phoneNumber=info.phoneNumber;
+          this.stuInfoForm.identityNum=info.identityNum;
+          this.stuInfoForm.mtpNumber=info.mtpNumber;
+          this.stuInfoForm.postal=info.postal;
+          this.stuInfoForm.nativePlace=info.nativePlace;
+          this.stuInfoForm.graduateSchool=info.graduateSchool;
+          this.stuInfoForm.emergencyContact.emergencyContactPerson=info.emergencyContact.emergencyContactPerson;
+          this.stuInfoForm.emergencyContact.emergencyContactNumber=info.emergencyContact.emergencyContactNumber;
+          this.stuInfoForm.emergencyContact.emergencyContactAddress=info.emergencyContact.emergencyContactAddress;
+    })
+        .catch((err=>{
+          this.$message({
+            message: err.toString(),
+            type: 'error'
+          })
+        }))
+},
     handleDialogClose () {
       let _this = this
       _this.$confirm('确认关闭？')
@@ -246,13 +263,13 @@ export default {
         }
       })
     },
-    totalStatusEdit(row){
+    totalStatusEdit (row) {
       const stuId = row.identityNum
       for (let i = 0; i < this.tableData.length; i++) {
         if (this.tableData[i].identityNum === stuId) {
-          this.tableData[i].faceCheck=true
-          this.tableData[i].ocrCheck=true
-          this.tableData[i].infoCheck=true
+          this.tableData[i].faceCheck = true
+          this.tableData[i].ocrCheck = true
+          this.tableData[i].infoCheck = true
           this.tableData[i].signCheck = true
           break
         }
