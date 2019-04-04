@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
-  ? 'http://101.132.35.81:3142'
+  ? 'http://120.78.76.9:3142'
   : 'http://localhost:3142'
 
 /*
