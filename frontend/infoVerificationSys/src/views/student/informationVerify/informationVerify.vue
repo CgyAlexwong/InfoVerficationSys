@@ -84,7 +84,7 @@
     </div>
     <div id="confirmButton">
       <button id="feedback" @click="feedback">反馈</button>
-      <button id='check' @click="go" :disabled="!unchangeablePart || !changeablePart" >提交</button>
+      <button id='check' @click="submit" :disabled="!unchangeablePart || !changeablePart" >提交</button>
     </div>
   </div>
 </template>

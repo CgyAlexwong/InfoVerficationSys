@@ -27,7 +27,7 @@
     <dd v-if="!remarkValid">{{remarkMessage}}</dd>
   </div>
   <div id="commitBox">
-    <button id="commit" @click="go">提交</button>
+    <button id="commit" @click="submit">提交</button>
   </div>
 </div>
 </template>
@@ -135,6 +135,9 @@ export default {
           contact: this.pickerValue + this.contact,
           remark: this.remark
         }).then(res => {
+          if (res.succeed === true) {
+            this.$router.push('/')
+          }
           console.log(res)
         }).catch(err => {
           console.log(err)

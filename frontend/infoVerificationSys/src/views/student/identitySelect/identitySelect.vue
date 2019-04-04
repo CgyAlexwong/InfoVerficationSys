@@ -21,7 +21,7 @@
       <dd v-if="!identityNumValid"><div v-html="identityNumMessage"></div></dd>
     </div>
     <div id="checkButton">
-      <button size="small" @click="go">确认</button>
+      <button size="small" @click="submit">确认</button>
     </div>
   </div>
 </template>

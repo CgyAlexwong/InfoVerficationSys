@@ -131,13 +131,10 @@ export function checkPostal (value) {
       msg = '请输入数字邮编！'
     } else if (res && value.length < 5) {
       res = false
-      msg = '输入的数字少于6位！'
+      msg = '输入的数字少于5位！'
     } else if (res && value.length > 6) {
       res = false
       msg = '输入的数字多于6位！'
-    } else if (res && value.substr(0, 1) === '0') {
-      res = false
-      msg = '输入的邮编不合法！'
     }
   }
   return {res: res, msg: msg}

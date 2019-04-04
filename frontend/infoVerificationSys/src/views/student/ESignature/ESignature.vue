@@ -17,7 +17,7 @@
               @mouseup="mouseUp"></canvas>
       <div class="btnBox">
         <button @click="overwrite">重写</button>
-        <button id='check' @click="go" :disabled="!submitable">提交签名</button>
+        <button id='check' @click="submit" :disabled="!submitable">提交签名</button>
       </div>
     </div>
   </div>
