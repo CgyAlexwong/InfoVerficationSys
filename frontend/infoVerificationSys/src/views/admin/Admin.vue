@@ -24,7 +24,6 @@
         </el-header>
         <el-container>
             <el-aside width="50px" class="aside">
-                <!-- <div class="title-font">南京大学台港澳学生信息校验系统</div>-->
             </el-aside>
             <el-main class="main">
                 <router-view></router-view>
@@ -34,16 +33,6 @@
 </template>
 
 
-<script>
-    export default {
-        name: 'Admin',
-        methods: {
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath)
-            },
-
-        }
-    }
-</script>
+<script src="./admin.js"></script>
 
 <style scoped src="./admin.css"></style>
