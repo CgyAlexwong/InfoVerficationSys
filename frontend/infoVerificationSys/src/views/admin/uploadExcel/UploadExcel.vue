@@ -26,11 +26,7 @@
                             :auto-upload="false"
                             :before-upload="beforeUploadExcel"
                             drag action="http://localhost8080/#/admin/uploadExcel">
-                        <div class="el-upload-dragger">
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__tip" style="font-size:20px">将文件拖到此处，或<em>点击上传</em></div>
-                        </div>
-
+                        <i class="el-icon-upload"><div style="font-size: 5px">将文件拖到此处，或<em>点击上传</em></div></i>
                     </el-upload>
                     <div class="footer">
                         <el-button type="primary" @click="uploadStuExcel">确认上传</el-button>
