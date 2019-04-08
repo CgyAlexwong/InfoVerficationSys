@@ -9,7 +9,18 @@
                     <div class="promptMsg">
                         <ul>
                             <li>只能上传jpg/png文件</li>
-                            <li>照片大小不可超过500kb</li>
+                            <li>照片大小不可小于2M</li>
+                        </ul>
+                    </div>
+                </el-card>
+                <el-card style="margin-top:20px">
+                    <el-button slot="header"
+                               style="float: left; padding-top: 0" type="text">照片不合格学生列表
+                    </el-button>
+                    <div class="promptMsg">
+                        <ul>
+                            <li>以下学生照片无法被系统识别！</li>
+
                         </ul>
                     </div>
                 </el-card>
@@ -21,7 +32,10 @@
 
                     </el-button>
                     <el-upload
-                            action="admin/uploadPhotos"
+                            ref="uploadStuPhotos"
+                            :http-request="photos"
+                            :auto-upload="false"
+                            action="http://localhost8080/#/admin/uploadPhotos"
                             multiple
                             list-type="picture-card"
                             :before-upload="beforeUploadPhotos"
@@ -32,16 +46,9 @@
                     <el-dialog :visible.sync="dialogVisible">
                         <img width="100%" :src="dialogImageUrl" alt="">
                     </el-dialog>
-                    <el-upload
-                            class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :on-preview="handlePreview"
-                            :on-remove="handleRemove"
-                            :file-list="fileList"
-                            list-type="picture">
-                        <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-                    </el-upload>
+                    <div >
+                        <el-button type="primary" @click="uploadStuPhotos">确认上传</el-button>
+                    </div>
                 </el-card>
             </el-col>
         </el-row>

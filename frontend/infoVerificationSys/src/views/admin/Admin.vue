@@ -23,7 +23,7 @@
             </el-menu>
         </el-header>
         <el-container>
-            <el-aside width="50px" class="aside">
+            <el-aside width="70px" class="aside">
             </el-aside>
             <el-main class="main">
                 <router-view></router-view>
