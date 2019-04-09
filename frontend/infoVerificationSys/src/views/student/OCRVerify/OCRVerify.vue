@@ -19,7 +19,7 @@
         <img :src="img1" alt="人脸照片" style="width: 80%" id='photo1' @click="rotateFront">
       </div>
       <div id="commitFrontBox">
-        <button id='commitFront' @click="checkFront" v-bind:disabled="frontCommitState">提交</button>
+        <button id='commitFront' @click="go1" v-bind:disabled="frontCommitState">提交</button>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
         <img :src="img2" alt="人脸照片" style="width: 80%" id='photo2' @click="rotateBack">
       </div>
       <div id="commitBackBox">
-        <button id='commitBack' @click="checkBack" v-bind:disabled="backCommitAble">提交</button>
+        <button id='commitBack' @click="go2" v-bind:disabled="backCommitAble">提交</button>
       </div>
     </div>
   </div>
@@ -71,7 +71,13 @@ export default {
     appear:function () {
       this.sheetVisible = this.sheetVisible!== true;
     },
-    go:function () {
+    go1(){
+      this.frontCommitState = true;
+      this.backCommitAble = false;
+      let button = document.getElementById('backCamera');
+      button.style.opacity = 1
+    },
+    go2:function () {
       this.$router.push('/stu/informationVerify')
     },
     warn:function () {

@@ -20,7 +20,7 @@
       <img :src="img" alt="人脸照片" style="width: 80%" id='photo' @click="rotate">
     </div>
     <div id="commitBox">
-      <button id="commit" @click="go">提交</button>
+      <button id="commit" @click="submit">提交</button>
     </div>
   </div>
 </template>
