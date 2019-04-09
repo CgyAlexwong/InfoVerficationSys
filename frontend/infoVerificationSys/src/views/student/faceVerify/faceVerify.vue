@@ -7,7 +7,7 @@
         <mt-button icon="back" @click="warn">返回</mt-button>
       </router-link>
     </mt-header>
-    <p id="word">请拍摄你的正脸照：</p>
+    <p id="word1">请拍摄你的正脸照：</p>
     <div id="camera">
       <div class="a-upload">
         <input id='cam' type="file" accept="image/*" capture="camera" @change="preview">
@@ -15,12 +15,12 @@
       </div>
     </div>
     <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
-    <p id="word">预览：</p>
+    <p id="word2">预览：</p>
     <div id="load">
-      <img :src="img" alt="人脸照片" style="width: 80%" @click="rotate">
+      <img :src="img" alt="人脸照片" style="width: 80%" id='photo' @click="rotate">
     </div>
     <div id="commitBox">
-      <button id="commit" @click="submit">提交</button>
+      <button id="commit" @click="go">提交</button>
     </div>
   </div>
 </template>
@@ -87,22 +87,21 @@ export default {
           let file = document.getElementById('cam').files[0];
           let reader = new FileReader();
           reader.readAsDataURL(file);
-          console.log(reader)
-          let that = this
+          let that = this;
           reader.onloadend = function () {
             that.img = this.result;
           }
         },
         rotate(){
-          let pic = document.getElementById('load');
+          let pic = document.getElementById('photo');
           this.r += 90;
           pic.style.transform = 'rotate(' + this.r + 'deg)'
         },
         submit(){
           let photo = document.getElementById('cam').files[0];
-          recognize({
-            photo:photo
-          }).then(res => {
+          let formData = new FormData();
+          formData.append('file',photo);
+          recognize(formData).then(res => {
             if(res.succeed === true){
               this.$router.push('/stu/OCRVerify')
             }
@@ -129,7 +128,7 @@ export default {
 </script>
 
 <style scoped>
-  #word {
+  #word1,#word2 {
     font-size: 12px;
     margin: 9px;
     padding-top: 9px;
@@ -143,7 +142,7 @@ export default {
     background: #7645c1;
     box-shadow: 0 0 1px #b8bbbf;
     border-radius: 4px;
-    padding: 4px 12px;
+    padding: 2px 12px;
     overflow: hidden;
     color: #ffffff;
     text-decoration: none;
