@@ -41,18 +41,18 @@ export const userJuniorLogin = params => {
 
 // 02 人脸识别
 // 上传人脸照片文件匹配 File photo, HttpServletRequest request
-export const recognize = params => {
-  return axios.post('/faceRecognition/recognize', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+export const recognize = (params,times) => {
+  return axios.post('/faceRecognition/recognize', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
 }
 
 // 03 OCR识别
 // 上传通行证正面 File identification, HttpServletRequest request
-export const doOCR = params => {
-  return axios.post('/OCR/doOCR', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+export const doOCR = (params,times) => {
+  return axios.post('/OCR/doOCR', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
 }
 // 上传通行证反面 File identification, HttpServletRequest request
-export const doOCRNegative = params => {
-  return axios.post('/OCR/doOCRNegative', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+export const doOCRNegative = (params,times) => {
+  return axios.post('/OCR/doOCRNegative', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
 }
 
 // 04基本信息校验

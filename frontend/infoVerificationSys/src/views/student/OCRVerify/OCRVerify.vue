@@ -62,7 +62,9 @@ export default {
       img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
       img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
       r1: 0,
-      r2: 0
+      r2: 0,
+      rotateTimesFront: 0,
+      rotateTimesBack: 0
     }
   },
   methods:{
@@ -82,7 +84,7 @@ export default {
       let front = document.getElementById('cam1').files[0];
       let formData1 = new FormData();
       formData1.append('file',front);
-      doOCR(formData1).then(res =>{
+      doOCR(formData1,this.rotateTimesFront).then(res =>{
         if (res.succeed === true){
           this.frontCommitState = true;
           this.backCommitAble = false;
@@ -110,7 +112,7 @@ export default {
       let back = document.getElementById('cam2').files[0];
       let formData2 = new FormData();
       formData2.append('file',back);
-      doOCRNegative(formData2).then(res =>{
+      doOCRNegative(formData2,this.rotateTimesBack).then(res =>{
         if (res.succeed === true){
           this.$router.push('/stu/informationVerify')
         }else {
@@ -152,12 +154,14 @@ export default {
     rotateFront(){
       let pic = document.getElementById('photo1');
       this.r1 += 90;
-      pic.style.transform = 'rotate(' + this.r1 + 'deg)'
+      pic.style.transform = 'rotate(' + this.r1 + 'deg)';
+      this.rotateTimesFront += 1;
     },
     rotateBack(){
       let pic = document.getElementById('photo2');
       this.r2 += 90;
-      pic.style.transform = 'rotate(' + this.r2 + 'deg)'
+      pic.style.transform = 'rotate(' + this.r2 + 'deg)';
+      this.rotateTimesBack += 1;
     },
   }
 }

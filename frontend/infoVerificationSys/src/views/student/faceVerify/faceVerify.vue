@@ -42,7 +42,8 @@ export default {
           }],
           sheetVisible:false,
           img:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
-          r : 0
+          r : 0,
+          rotateTimes: 0
         }
       },
       methods:{
@@ -95,13 +96,14 @@ export default {
         rotate(){
           let pic = document.getElementById('photo');
           this.r += 90;
-          pic.style.transform = 'rotate(' + this.r + 'deg)'
+          pic.style.transform = 'rotate(' + this.r + 'deg)';
+          this.rotateTimes += 1
         },
         submit(){
           let photo = document.getElementById('cam').files[0];
           let formData = new FormData();
           formData.append('file',photo);
-          recognize(formData).then(res => {
+          recognize(formData,this.rotateTimes).then(res => {
             if(res.succeed === true){
               this.$router.push('/stu/OCRVerify')
             }
