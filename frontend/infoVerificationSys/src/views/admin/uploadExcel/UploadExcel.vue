@@ -23,6 +23,8 @@
                     </el-button>
                     <el-upload
                             ref="uploadStuExcel"
+                            :limit="1"
+                            :on-exceed="handleExceed"
                             :http-request="excel"
                             :auto-upload="false"
                             :before-upload="beforeUploadExcel"

@@ -9,6 +9,10 @@ export default {
   },
 
   methods: {
+    handleExceed(){
+      this.$message.error('一次只允许上传一个Excel文件！')
+
+    },
     beforeUploadExcel (file) {
       let postfix = file.name.split('.')[1]
       if (postfix === 'xls' || postfix === 'xlsx') {
@@ -31,6 +35,7 @@ export default {
           .then(res =>{
             if(res.data.succeed){
               this.$message.success('上傳成功')
+              this.$refs.uploadStuPhotos.clearFiles()
             }else{
               this.$message.error(res.data.msg)
             }
