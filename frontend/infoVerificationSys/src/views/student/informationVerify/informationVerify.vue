@@ -11,7 +11,7 @@
     </div>
     <div id="navbar">
       <mt-navbar v-model="selected">
-        <mt-tab-item id="1" @click="tab1">必须校验信息</mt-tab-item>
+        <mt-tab-item id="1" @click="tab1">必需校验信息</mt-tab-item>
         <mt-tab-item id="2" @click="tab2">可修改信息</mt-tab-item>
       </mt-navbar>
 
@@ -73,7 +73,7 @@
               <mt-field label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名" :disabled="changeablePart"></mt-field>
             </div>
             <div id="b">
-              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”" @input="graduateDateCheck"  :disabled="changeablePart"></mt-field>
+              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”" :disabled="changeablePart"></mt-field>
               <dd v-if="!graduateDateValid">{{graduateDateMessage}}</dd>
             </div>
             <div id="bSpecial">
@@ -234,11 +234,13 @@ export default {
       this.emergencyContactAddressValid = true;
       this.emergencyContactAddressMessage = ''
     },
+    /*
     graduateDateCheck () {
       let result = checkDate(this.graduateDate);
       this.graduateDateValid = result.res;
       this.graduateDateMessage = result.msg
     },
+    */
     go:function () {
       this.$router.push('/stu/ESignature')
     },
@@ -274,7 +276,16 @@ export default {
           emergencyContactAddress:this.emergencyContact.emergencyContactAddress
         }).then(response =>{
           if (response.succeed === true){
-            this.$router.push('/stu/ESignature')
+            MessageBox.alert('', {
+              message: '基本信息校验成功，点击进入电子签名！',
+              title: '成功',
+              confirmButtonText: '下一步'
+            }).then(action => {
+              if (action === 'confirm') {
+                this.$router.push('/stu/ESignature')
+              }
+            })
+
           }
         })
       }

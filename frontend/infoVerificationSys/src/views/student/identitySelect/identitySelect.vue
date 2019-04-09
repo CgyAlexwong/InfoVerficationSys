@@ -88,7 +88,15 @@ export default {
         ).then(response =>{
           if(response.succeed === true){
             Cookies.set('id',this.identityNum);
-            this.$router.push('/stu/faceVerify')
+            MessageBox.alert('', {
+              message: '成功匹配信息，点击进入人脸识别！',
+              title: '成功',
+              confirmButtonText: '下一步'
+            }).then(action => {
+              if (action === 'confirm') {
+                this.$router.push('/stu/faceVerify')
+              }
+            })
           } else if(response.msg === '无照片信息'){
             MessageBox.alert('', {
               message: response.msg,
@@ -97,10 +105,6 @@ export default {
             }).then(action => {
               if (action === 'confirm') {     //反馈的回调
                 this.$router.push('/feedback')
-              }
-            }).catch(err => {
-              if (err === 'cancel') {     //重试的回调
-                console.log("重试");
               }
             })
           } else {

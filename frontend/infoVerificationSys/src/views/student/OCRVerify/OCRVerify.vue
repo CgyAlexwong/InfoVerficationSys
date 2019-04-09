@@ -9,12 +9,15 @@
     </mt-header>
     <p id="word1">请拍摄你的通行证正面：</p>
     <div id="front" >
-      <div class="front-upload">
-        <input id='cam1' type="file" accept="image/*" capture="camera" @change="previewFront">
+      <div class="front-upload" id="frontCamera">
+        <input id='cam1' type="file" accept="image/*" capture="camera" @change="previewFront" v-bind:disabled="frontCommitState">
         点击拍照
       </div>
       <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
-      <p id="word2">预览：</p>
+      <p id="word2">预览：
+        <br>
+        &nbsp;&nbsp;（点击可旋转照片，提交时请确保通行证端正）
+      </p>
       <div id="loadFront">
         <img :src="img1" alt="人脸照片" style="width: 80%" id='photo1' @click="rotateFront">
       </div>
@@ -30,7 +33,10 @@
         点击拍照
       </div>
       <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
-      <p id="word4">预览：</p>
+      <p id="word4">预览：
+        <br>
+        &nbsp;&nbsp;（点击可旋转照片，提交时请确保通行证端正）
+      </p>
       <div id="loadBack">
         <img :src="img2" alt="人脸照片" style="width: 80%" id='photo2' @click="rotateBack">
       </div>
@@ -75,10 +81,20 @@ export default {
       this.frontCommitState = true;
       this.backCommitAble = false;
       let button = document.getElementById('backCamera');
-      button.style.opacity = 1
+      button.style.opacity = 1;
+      let button2 = document.getElementById('frontCamera');
+      button2.style.opacity = 0.6
     },
     go2:function () {
-      this.$router.push('/stu/informationVerify')
+      MessageBox.alert('', {
+        message: 'OCR信息校验成功，点击进入基本信息校验！',
+        title: '成功',
+        confirmButtonText: '下一步'
+      }).then(action => {
+        if (action === 'confirm') {
+          this.$router.push('/stu/informationVerify')
+        }
+      })
     },
     warn:function () {
       MessageBox.alert('',{
@@ -94,8 +110,10 @@ export default {
         if (res.succeed === true){
           this.frontCommitState = true;
           this.backCommitAble = false;
-          let button = document.getElementById('backCamera');
-          button.style.opacity = 1
+          let button1 = document.getElementById('backCamera');
+          button1.style.opacity = 1;
+          let button2 = document.getElementById('frontCamera');
+          button2.style.opacity = 0.6
         }else {
           MessageBox.confirm('', {
             message: res.msg,
@@ -120,7 +138,15 @@ export default {
       formData2.append('file',back);
       doOCRNegative(formData2,this.rotateTimesBack).then(res =>{
         if (res.succeed === true){
-          this.$router.push('/stu/informationVerify')
+          MessageBox.alert('', {
+            message: 'OCR信息校验成功，点击进入基本信息校验！',
+            title: '成功',
+            confirmButtonText: '下一步'
+          }).then(action => {
+            if (action === 'confirm') {
+              this.$router.push('/stu/informationVerify')
+            }
+          })
         }else {
           MessageBox.confirm('', {
             message: res.msg,
@@ -196,6 +222,7 @@ export default {
     text-decoration: none;
     text-indent: 0;
     line-height: 36px;
+    opacity: 1;
   }
   .front-upload input {
     position: absolute;
@@ -239,6 +266,9 @@ export default {
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
+  }
+  #commitFront:disabled{
+    opacity: 0.6;
   }
   #commitBack:disabled{
     opacity: 0.6;

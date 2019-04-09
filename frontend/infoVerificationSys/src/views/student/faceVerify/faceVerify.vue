@@ -15,7 +15,9 @@
       </div>
     </div>
     <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
-    <p id="word2">预览：</p>
+    <p id="word2">预览：
+    <br>
+      &nbsp;&nbsp;（点击可旋转照片，提交时请确保人脸端正）</p>
     <div id="load">
       <img :src="img" alt="人脸照片" style="width: 80%" id='photo' @click="rotate">
     </div>
@@ -106,7 +108,15 @@ export default {
           formData.append('file',photo);
           recognize(formData,this.rotateTimes).then(res => {
             if(res.succeed === true){
-              this.$router.push('/stu/OCRVerify')
+              MessageBox.alert('', {
+                message: '人脸识别验证成功，点击进入OCR信息校验！',
+                title: '成功',
+                confirmButtonText: '下一步'
+              }).then(action => {
+                if (action === 'confirm') {
+                  this.$router.push('/stu/OCRVerify')
+                }
+              })
             }
             else{
               MessageBox.confirm('', {
