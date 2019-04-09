@@ -36,6 +36,7 @@
 import MtButton from 'mint-ui/packages/button/src/button'
 import MtHeader from 'mint-ui/packages/header/src/header'
 import MtField from 'mint-ui/packages/field/src/field'
+import { MessageBox } from 'mint-ui'
 import {feedBack} from '../utils/stuAPI'
 import {checkChinese, checkPhoneNumber, checkEMail, checkQQ, checkWeChat} from '../utils/checkList'
 
@@ -136,7 +137,19 @@ export default {
           remark: this.remark
         }).then(res => {
           if (res.succeed === true) {
-            this.$router.push('/')
+            MessageBox.alert('', {
+              message: '反馈已提交，请耐心等待老师与你联系！',
+              title: '反馈成功',
+              confirmButtonText: '确认'
+            }).then(action => {
+              if (action === 'confirm') {
+                this.$router.push('/stu')
+              }
+            }).catch(err => {
+              if (err === 'cancel') {
+                console.log("重试");
+              }
+            })
           }
           console.log(res)
         }).catch(err => {

@@ -91,7 +91,8 @@ export default {
           let that = this;
           reader.onloadend = function () {
             that.img = this.result;
-          }
+          };
+          this.rotateTimes = 0
         },
         rotate(){
           let pic = document.getElementById('photo');

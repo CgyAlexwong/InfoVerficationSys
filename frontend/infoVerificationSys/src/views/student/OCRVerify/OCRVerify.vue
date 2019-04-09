@@ -140,7 +140,8 @@ export default {
       let that = this;
       reader.onloadend = function () {
         that.img1 = this.result;
-      }
+      };
+      this.rotateTimesFront = 0
     },
     previewBack(){
       let file = document.getElementById('cam2').files[0];
@@ -149,7 +150,8 @@ export default {
       let that = this;
       reader.onloadend = function () {
         that.img2 = this.result;
-      }
+      };
+      this.rotateTimesBack = 0
     },
     rotateFront(){
       let pic = document.getElementById('photo1');
