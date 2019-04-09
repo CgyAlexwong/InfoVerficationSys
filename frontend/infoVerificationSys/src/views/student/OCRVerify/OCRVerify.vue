@@ -22,7 +22,7 @@
         <img :src="img1" alt="人脸照片" style="width: 80%" id='photo1' @click="rotateFront">
       </div>
       <div id="commitFrontBox">
-        <button id='commitFront' @click="go1" v-bind:disabled="frontCommitState">提交</button>
+        <button id='commitFront' @click="checkFront" v-bind:disabled="frontCommitState">提交</button>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
         <img :src="img2" alt="人脸照片" style="width: 80%" id='photo2' @click="rotateBack">
       </div>
       <div id="commitBackBox">
-        <button id='commitBack' @click="go2" v-bind:disabled="backCommitAble">提交</button>
+        <button id='commitBack' @click="checkBack" v-bind:disabled="backCommitAble">提交</button>
       </div>
     </div>
   </div>
@@ -108,12 +108,20 @@ export default {
       formData1.append('file',front);
       doOCR(formData1,this.rotateTimesFront).then(res =>{
         if (res.succeed === true){
-          this.frontCommitState = true;
-          this.backCommitAble = false;
-          let button1 = document.getElementById('backCamera');
-          button1.style.opacity = 1;
-          let button2 = document.getElementById('frontCamera');
-          button2.style.opacity = 0.6
+          MessageBox.alert('', {
+            message: '通行证正面校验成功，点击继续校验通行证反面！',
+            title: '成功',
+            confirmButtonText: '继续'
+          }).then(action => {
+            if (action === 'confirm') {
+              this.frontCommitState = true;
+              this.backCommitAble = false;
+              let button1 = document.getElementById('backCamera');
+              button1.style.opacity = 1;
+              let button2 = document.getElementById('frontCamera');
+              button2.style.opacity = 0.6
+            }
+          })
         }else {
           MessageBox.confirm('', {
             message: res.msg,
@@ -223,6 +231,7 @@ export default {
     text-indent: 0;
     line-height: 36px;
     opacity: 1;
+    outline: none;
   }
   .front-upload input {
     position: absolute;
@@ -231,7 +240,8 @@ export default {
     top: 0;
     opacity: 0;
     filter: alpha(opacity=0);
-    cursor: pointer
+    cursor: pointer;
+    outline: none;
   }
   .back-upload {
     position: relative;
@@ -246,6 +256,7 @@ export default {
     text-indent: 0;
     line-height: 36px;
     opacity: 0.6;
+    outline: none;
   }
   .back-upload input {
     position: absolute;
@@ -254,7 +265,8 @@ export default {
     top: 0;
     opacity: 0;
     filter: alpha(opacity=0);
-    cursor: pointer
+    cursor: pointer;
+    outline: none;
   }
   #commitFrontBox,#commitBackBox{
     margin: 10px 5px 5px;
