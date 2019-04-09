@@ -16,7 +16,8 @@
                 </el-card>
             </el-col>
             <el-col :span="18">
-                <el-card>
+
+                <el-card ref="card">
                     <el-button slot="header"
                                style="float:left; padding-top:0 " type="text">请在此处上传Excel
                     </el-button>
@@ -26,12 +27,15 @@
                             :auto-upload="false"
                             :before-upload="beforeUploadExcel"
                             drag action="http://localhost8080/#/admin/uploadExcel">
-                        <i class="el-icon-upload"><div style="font-size: 5px">将文件拖到此处，或点击上传</div></i>
+                        <i class="el-icon-upload">
+                            <div style="font-size: 5px">将文件拖到此处，或点击上传</div>
+                        </i>
                     </el-upload>
-                    <div >
+                    <div>
                         <el-button type="primary" @click="uploadStuExcel">确认上传</el-button>
                     </div>
                 </el-card>
+
             </el-col>
         </el-row>
     </el-card>

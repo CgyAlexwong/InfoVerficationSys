@@ -21,7 +21,7 @@ export default {
           password:this.password
         }).then(res=>{
           if(res.data.succeed){
-
+            localStorage.setItem("Flag", "isLogin");
             this.$message.success('登陆成功')
             setTimeout(function () {
               this.$router.push('/admin/checkStudentStatus')

@@ -7,6 +7,7 @@ export default {
       stuExcelData: new FormData()
     }
   },
+
   methods: {
     beforeUploadExcel (file) {
       let postfix = file.name.split('.')[1]

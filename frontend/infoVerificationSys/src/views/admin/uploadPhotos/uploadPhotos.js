@@ -38,18 +38,7 @@ export default {
       getNoPhotoList()
         .then(res => {
           this.noUpload = res.data
-        })
-        .then(res => {
           this.failedUpload=res.data.filter(photo=>{return photo.msg!==''})
-          /*
-          let noPhotos=res.data
-          for (let photo of noPhotos){
-            if (noPhotos.msg!==""){
-              this.failedUpload.push(photo)
-            }
-          }
-          */
-
 
         })
         .catch(err => {
