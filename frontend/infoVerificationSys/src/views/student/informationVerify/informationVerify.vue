@@ -43,6 +43,10 @@
               <dd v-if="!mobileNumberValid">{{mobileNumberMessage}}</dd>
             </div>
             <div id="b">
+              <mt-field label="通行证号：" v-model="mtpNumber" placeholder="请输入你的通行证号" @input="mtpNumberCheck" :disabled="changeablePart"></mt-field>
+              <dd v-if="!mtpNumberValid">{{mtpNumberMessage}}</dd>
+            </div>
+            <div id="b">
               <mt-field label="邮政编码：" v-model="postal" placeholder="请输入你的邮政编码" @input="postalCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!postalValid">{{postalMessage}}</dd>
             </div>
@@ -115,6 +119,8 @@ export default {
       graduateSchoolMessage: '',
       mobileNumberValid: true,
       mobileNumberMessage: '',
+      mtpNumberValid: true,
+      mtpNumberMessage: '',
       postalValid: true,
       postalMessage: '',
       addressValid: true,
@@ -140,6 +146,7 @@ export default {
       email:'1455236662@qq.com',
       phoneNumber:'18907087985',
       mobileNumber:'18852002519',
+      mtpNumber: '',
       identityNum:'360121199908120038',
       postal:'330200',
       nativePlace:'',
@@ -173,6 +180,7 @@ export default {
       this.email = response.email;
       this.phoneNumber = response.phoneNumber;
       this.mobileNumber = response.mobileNumber;
+      this.mtpNumber = response.mtpNumber;
       this.identityNum = response.identityNum;
       this.postal = response.postal;
       this.nativePlace = response.nativePlace;
@@ -198,6 +206,10 @@ export default {
       let result = checkPhoneNumber(this.mobileNumber);
       this.mobileNumberValid = result.res;
       this.mobileNumberMessage = result.msg
+    },
+    mtpNumberCheck(){
+      this.mtpNumberValid = true;
+      this.mtpNumberMessage = ''
     },
     postalCheck () {
       let result = checkPostal(this.postal);
@@ -240,6 +252,7 @@ export default {
           graduateDate: this.graduateDate,
           graduateSchool: this.graduateSchool,
           mobileNumber: this.mobileNumber,
+          mtpNumber: this.mtpNumber,
           postal: this.postal,
           nativePlace:this.nativePlace,
           address: this.address,
@@ -252,6 +265,7 @@ export default {
           graduateDate: this.graduateDate,
           graduateSchool: this.graduateSchool,
           mobileNumber: this.mobileNumber,
+          mtpNumber: this.mtpNumber,
           postal: this.postal,
           nativePlace:this.nativePlace,
           address: this.address,
@@ -287,7 +301,7 @@ export default {
       console.log('不可修改基本信息已确认:'+this.unchangeablePart)
     },
     change2:function () {
-      if (this.graduateSchool!==''&&this.mobileNumber!==''&&this.postal!==''&&this.address!==''
+      if (this.graduateSchool!==''&&this.mobileNumber!==''&&this.mtpNumber!==''&&this.postal!==''&&this.address!==''
         &&this.emergencyContact.emergencyContactPerson!==''&&this.emergencyContact.emergencyContactNumber!==''&&this.emergencyContact.emergencyContactAddress!==''
         &&this.graduateSchoolValid&&this.mobileNumberValid&&this.postalValid &&this.emergencyContactPersonValid&&this.emergencyContactNumberValid) {
         this.changeablePart = true;
@@ -298,7 +312,10 @@ export default {
       } else if (this.mobileNumber === '' && this.mobileNumberValid){
         this.mobileNumberValid = false;
         this.mobileNumberMessage = '移动电话不能为空！'
-      } else if (this.postal === '' && this.postalValid){
+      } else if(this.mtpNumber === ''){
+        this.mtpNumberValid = false;
+        this.mtpNumberMessage = '通行证号不能为空！'
+      }else if (this.postal === '' && this.postalValid){
         this.postalValid = false;
         this.postalMessage = '邮政编码不能为空！'
       } else if (this.address === ''){
