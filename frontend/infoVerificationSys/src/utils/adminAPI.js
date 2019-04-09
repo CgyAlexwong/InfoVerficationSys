@@ -6,7 +6,6 @@ axios.defaults.baseURL = process.env.NODE_ENV === 'production'
   ? 'http://120.78.76.9:3142'
   : 'http://localhost:3142'
 
-
 // 登陆
 export const adminLogin = (params) => {
   return axios.post('/login/adminLogin', params)

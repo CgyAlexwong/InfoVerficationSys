@@ -2,7 +2,7 @@
     <el-card>
 
         <el-row :gutter="20">
-            <el-col :span="5">
+            <el-col :span="4">
                 <el-card>
                     <el-button slot="header"
                                style="float: left; padding:0" type="text">未上传照片学生列表
@@ -46,16 +46,16 @@
                 </el-card>
 
             </el-col>
-            <el-col :span="5">
+            <el-col :span="6">
                 <el-card>
                     <el-button slot="header"
                                style="float: left; padding-top: 0" type="text">照片不合格学生列表
                     </el-button>
-                    <div class="promptMsg">
-                        <ul>
-                            <li>以下学生照片无法被系统识别！</li>
-                        </ul>
-                    </div>
+                    <el-table :data="failedUpload" style="width: 100%" max-height="250" class="table">
+                        <el-table-column fixed prop="identityNum" label="身份证号" width="150"></el-table-column>
+                        <el-table-column fixed prop="msg" label="错误信息" width="150"></el-table-column>
+                    </el-table>
+
                 </el-card>
             </el-col>
 
