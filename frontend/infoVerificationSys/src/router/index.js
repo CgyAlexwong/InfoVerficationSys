@@ -20,6 +20,7 @@ const router = new Router({
       leaf: true,
       meta: {
         icon: '',
+        type: '',
         title: '南京大学台港澳学生信息校验系统'
       }
     },
@@ -33,6 +34,7 @@ const router = new Router({
         {path: '/admin/uploadPhotos', component: UploadPhotos, name: '上传学生照片'},
       ],
       meta: {
+        type: 'login',
         icon: '',
         title: '南京大学台港澳学生信息校验系统'
       }
@@ -47,6 +49,7 @@ const router = new Router({
         {path: '/admin/checkStudentInfo', component: CheckInfo, name: '学生基本资料查看'}
       ],
       meta: {
+        type: 'login',
         icon: '',
         title: '南京大学台港澳学生信息校验系统'
       }
@@ -58,22 +61,31 @@ const router = new Router({
       iconClass: 'el-icon-menu',
       children: [
         {path: '/admin/checkFeedback', component: CheckFeedback, name: '学生反馈查看'}
-      ]
+      ],
+      meta: {
+        type: 'login',
+        icon: '',
+        title: '南京大学台港澳学生信息校验系统'
+      }
     }
 
   ]
+})
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  const type = to.meta.type
+  if (type === 'login') {
+    if (window.localStorage.getItem('login')) {
+      next('/admin/checkStudentStatus')
+    } else {
+      next('/')
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
 
-/*
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
-})
-*/

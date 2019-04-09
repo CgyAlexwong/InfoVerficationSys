@@ -19,6 +19,11 @@ export const uploadExcel = (data, header) => {
 export const uploadPhoto = (data, header) => {
   return axios.post('/photo/upload', data, header)
 }
+
+//获取照片不合格学生列表
+export const getNoPhotoList = () => {
+  return axios.get('/photo/getNoPhotoList')
+}
 // 获取学生状态列表
 export const getUserStatus = () => {
   return axios.get('/adminBasicFunc/getUserStatus')

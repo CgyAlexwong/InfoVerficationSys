@@ -1,6 +1,13 @@
 .promptMsg {
     font-size: 12px;
-    text-align: left;
+    text-align: center;
     line-height: 30px;
+}
+.table {
+    font-size:10px;
+    text-align:center;
+    padding-top: 0;
+    margin-top: 0;
+    line-height:0;
 }
 

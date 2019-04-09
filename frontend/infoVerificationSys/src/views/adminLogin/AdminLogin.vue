@@ -24,10 +24,30 @@
                         <i class="el-icon-setting"></i>
                     </el-menu-item>
                 </el-menu>
-
             </el-aside>
             <el-main class="main">
-                <router-link to="/admin">跳转至管理员界面</router-link>
+                <div class="login">
+
+                    <el-row>
+                        <div class="login-text">
+                            管理员登陆
+                        </div>
+                    </el-row>
+
+                    <div>
+                        <el-input style="width:250px;;" size="large" placeholder="请输入管理员账号" v-model="username" ></el-input>
+                    </div>
+                    <div>
+                        <el-input style="width:250px;;" size="large" placeholder="请输入管理员密码" v-model="password" show-password></el-input>
+                    </div>
+                    <div>
+                        <button class="login-button" @click="login">登陆</button>
+                    </div>
+
+
+                </div>
+
+                <!--<router-link to="/admin">跳转至管理员界面</router-link>-->
             </el-main>
         </el-container>
     </el-container>

@@ -1,19 +1,38 @@
+import {adminLogin} from '../../utils/adminAPI'
+
 export default {
   name: 'AdminLogin',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      username: '',
+      password: ''
+
     }
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
+    login () {
+      if (this.username === '') {
+        this.$message.error('请输入管理员账号')
+      } else if (this.password === '') {
+        this.$message.error('请输入管理员密码')
+      }else{
+        adminLogin({
+          username:this.username,
+          password:this.password
+        }).then(res=>{
+          if(res.data.succeed){
+
+            this.$message.success('登陆成功')
+            setTimeout(function () {
+              this.$router.push('/admin/checkStudentStatus')
+            }.bind(this), 1000)
+          }else{
+            this.$message.error(res.data.msg)
+          }
+          }
+        )
+      }
+
     }
   }
 }
