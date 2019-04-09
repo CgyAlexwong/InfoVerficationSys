@@ -3,7 +3,7 @@
 
         <el-row :gutter="20">
             <el-col :span="6">
-                <el-card>
+                <el-card style="height: 400px">
                     <el-button slot="header"
                                style="float: left; padding-top: 0" type="text">上传学生信息提示
                     </el-button>
@@ -17,7 +17,7 @@
             </el-col>
             <el-col :span="18">
 
-                <el-card ref="card">
+                <el-card ref="card" style="height: 400px">
                     <el-button slot="header"
                                style="float:left; padding-top:0 " type="text">请在此处上传Excel
                     </el-button>

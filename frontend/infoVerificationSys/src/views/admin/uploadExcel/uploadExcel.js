@@ -35,7 +35,7 @@ export default {
           .then(res =>{
             if(res.data.succeed){
               this.$message.success('上傳成功')
-              this.$refs.uploadStuPhotos.clearFiles()
+              this.stuExcelData=new FormData()
             }else{
               this.$message.error(res.data.msg)
             }

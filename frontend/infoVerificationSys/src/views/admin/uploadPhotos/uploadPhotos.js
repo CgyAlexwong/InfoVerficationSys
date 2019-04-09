@@ -9,19 +9,14 @@ export default {
       stuPhotosData: new FormData(),
       noUpload: [
         {
-          identityNum: ''
+          identityNum: '11'
         }
       ],
       failedUpload: [
         {
           identityNum: 'A123456789',
           msg: '图片质量太低!'
-        },
-        {
-          identityNum: 'B123456789',
-          msg: '图片太过模糊!'
         }
-
       ]
 
     }
@@ -38,7 +33,9 @@ export default {
       getNoPhotoList()
         .then(res => {
           this.noUpload = res.data
-          this.failedUpload=res.data.filter(photo=>{return photo.msg!==''})
+          this.failedUpload = res.data.filter(photo => {
+            return photo.msg !== ''
+          })
 
         })
         .catch(err => {
@@ -76,6 +73,7 @@ export default {
           .then(res => {
             if (res.data.succeed) {
               this.$message.success('上傳成功')
+              this.stuPhotosData=new FormData()
               this.getList()
             } else {
               this.$message.error(res.data.msg)
