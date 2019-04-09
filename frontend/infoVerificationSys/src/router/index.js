@@ -39,7 +39,13 @@ const router = new Router({
           },
           component: UploadExcel, name: '上传学生信息'
         },
-        {path: '/admin/uploadPhotos', meta: 'login', component: UploadPhotos, name: '上传学生照片'},
+        {
+          path: '/admin/uploadPhotos',
+          meta: {
+            isLogin: 'login'
+          },
+          component: UploadPhotos, name: '上传学生照片'
+        },
       ],
       meta: {
         isLogin: true,

@@ -25,7 +25,7 @@ export default {
             this.$message.success('登陆成功')
             setTimeout(function () {
               this.$router.push('/admin/checkStudentStatus')
-            }.bind(this), 1000)
+            }.bind(this), 500)
           }else{
             this.$message.error(res.data.msg)
           }
