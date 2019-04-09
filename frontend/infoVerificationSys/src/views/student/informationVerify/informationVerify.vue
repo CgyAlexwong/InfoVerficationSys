@@ -173,7 +173,7 @@ export default {
       }else if (response.subject === 1) {
         this.subject = '理科'
       }else{
-        this.subject = ''
+        this.subject = '不分文理'
       }
       this.graduateDate = response.graduateDate;
       this.graduateSchool = response.graduateSchool;
