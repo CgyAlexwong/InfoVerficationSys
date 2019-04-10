@@ -10,7 +10,7 @@
     <p id="word1">请拍摄你的通行证正面：</p>
     <div id="front" >
       <div class="front-upload" id="frontCamera">
-        <input id='cam1' type="file" accept="image/*" capture="camera" @change="previewFront" v-bind:disabled="frontCommitState">
+        <input id='cam1' type="file" accept="image/*" capture="camera" @change="previewFront" v-bind:disabled="!frontCommitState">
         点击拍照
       </div>
       <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
@@ -22,14 +22,14 @@
         <img :src="img1" alt="人脸照片" style="width: 80%" id='photo1' @click="rotateFront">
       </div>
       <div id="commitFrontBox">
-        <button id='commitFront' @click="checkFront" v-bind:disabled="frontCommitState">提交</button>
+        <button id='commitFront' @click="checkFront" v-bind:disabled="!frontCommitState||!frontCommitAble">提交</button>
       </div>
     </div>
 
     <p id="word3">请拍摄你的通行证反面：</p>
     <div id="back" >
       <div class="back-upload" id="backCamera">
-        <input id='cam2' type="file" accept="image/*" capture="camera" @change="previewBack" v-bind:disabled="backCommitAble">
+        <input id='cam2' type="file" accept="image/*" capture="camera" @change="previewBack" v-bind:disabled="!backCommitState">
         点击拍照
       </div>
       <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
@@ -41,7 +41,7 @@
         <img :src="img2" alt="人脸照片" style="width: 80%" id='photo2' @click="rotateBack">
       </div>
       <div id="commitBackBox">
-        <button id='commitBack' @click="checkBack" v-bind:disabled="backCommitAble">提交</button>
+        <button id='commitBack' @click="checkBack" v-bind:disabled="!backCommitState||!backCommitAble">提交</button>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <script>/* eslint-disable */
 import MtButton from 'mint-ui/packages/button/src/button'
 import MtHeader from "mint-ui/packages/header/src/header"
-import {MessageBox} from 'mint-ui'
+import {MessageBox,Indicator} from 'mint-ui'
 import {doOCR,doOCRNegative} from "../../../utils/stuAPI";
 
 export default {
@@ -62,8 +62,10 @@ export default {
         name: '拍照',
         method : this.getCamera	// 调用methods中的函数
       }],
-      frontCommitState:false,
-      backCommitAble:true,
+      frontCommitState: true,
+      frontCommitAble: false,
+      backCommitState: false,
+      backCommitAble:false,
       sheetVisible:false,
       img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
       img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
@@ -73,13 +75,29 @@ export default {
       rotateTimesBack: 0
     }
   },
+  mounted:function(){
+    MessageBox.confirm('', {
+      message: '如果你使用的是本式台胞证，请点击反馈。如果不是，请点击忽略。',
+      title: '提示',
+      confirmButtonText: '反馈',
+      cancelButtonText: '忽略'
+    }).then(action => {
+      if (action === 'confirm') {     //反馈的回调
+        this.$router.push('/feedback')
+      }
+    }).catch(err => {
+      if (err === 'cancel') {     //忽略的回调
+        console.log("忽略");
+      }
+    })
+  },
   methods:{
     appear:function () {
       this.sheetVisible = this.sheetVisible!== true;
     },
     go1(){
       this.frontCommitState = true;
-      this.backCommitAble = false;
+      this.backCommitState = true;
       let button = document.getElementById('backCamera');
       button.style.opacity = 1;
       let button2 = document.getElementById('frontCamera');
@@ -106,7 +124,9 @@ export default {
       let front = document.getElementById('cam1').files[0];
       let formData1 = new FormData();
       formData1.append('file',front);
+      Indicator.open({text:'通行证正面校验中，请稍等……',spinnerType:'fading-circle'});
       doOCR(formData1,this.rotateTimesFront).then(res =>{
+        Indicator.close();
         if (res.succeed === true){
           MessageBox.alert('', {
             message: '通行证正面校验成功，点击继续校验通行证反面！',
@@ -114,8 +134,8 @@ export default {
             confirmButtonText: '继续'
           }).then(action => {
             if (action === 'confirm') {
-              this.frontCommitState = true;
-              this.backCommitAble = false;
+              this.frontCommitState = false;
+              this.backCommitState = true;
               let button1 = document.getElementById('backCamera');
               button1.style.opacity = 1;
               let button2 = document.getElementById('frontCamera');
@@ -144,8 +164,10 @@ export default {
       let back = document.getElementById('cam2').files[0];
       let formData2 = new FormData();
       formData2.append('file',back);
+      Indicator.open({text:'通行证反面校验中，请稍等……',spinnerType:'fading-circle'});
       doOCRNegative(formData2,this.rotateTimesBack).then(res =>{
         if (res.succeed === true){
+          Indicator.close();
           MessageBox.alert('', {
             message: 'OCR信息校验成功，点击进入基本信息校验！',
             title: '成功',
@@ -181,7 +203,8 @@ export default {
       reader.onloadend = function () {
         that.img1 = this.result;
       };
-      this.rotateTimesFront = 0
+      this.rotateTimesFront = 0;
+      this.frontCommitAble = true;
     },
     previewBack(){
       let file = document.getElementById('cam2').files[0];
@@ -191,7 +214,8 @@ export default {
       reader.onloadend = function () {
         that.img2 = this.result;
       };
-      this.rotateTimesBack = 0
+      this.rotateTimesBack = 0;
+      this.backCommitAble = true;
     },
     rotateFront(){
       let pic = document.getElementById('photo1');

@@ -22,7 +22,7 @@
       <img :src="img" alt="人脸照片" style="width: 80%" id='photo' @click="rotate">
     </div>
     <div id="commitBox">
-      <button id="commit" @click="submit">提交</button>
+      <button id="commit" @click="submit" :disabled="!submitable">提交</button>
     </div>
   </div>
 </template>
@@ -30,7 +30,7 @@
 <script>/* eslint-disable */
 import MtButton from "mint-ui/packages/button/src/button";
 import MtHeader from "mint-ui/packages/header/src/header";
-import {MessageBox} from 'mint-ui'
+import {MessageBox,Indicator} from 'mint-ui'
 import {recognize} from "../../../utils/stuAPI";
 
 export default {
@@ -45,7 +45,9 @@ export default {
           sheetVisible:false,
           img:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
           r : 0,
-          rotateTimes: 0
+          rotateTimes: 0,
+
+          submitable: false
         }
       },
       methods:{
@@ -94,7 +96,8 @@ export default {
           reader.onloadend = function () {
             that.img = this.result;
           };
-          this.rotateTimes = 0
+          this.rotateTimes = 0;
+          this.submitable = true
         },
         rotate(){
           let pic = document.getElementById('photo');
@@ -106,7 +109,9 @@ export default {
           let photo = document.getElementById('cam').files[0];
           let formData = new FormData();
           formData.append('file',photo);
+          Indicator.open({text:'人脸识别中，请稍等……',spinnerType:'fading-circle'});
           recognize(formData,this.rotateTimes).then(res => {
+            Indicator.close();
             if(res.succeed === true){
               MessageBox.alert('', {
                 message: '人脸识别验证成功，点击进入OCR信息校验！',
@@ -161,6 +166,7 @@ export default {
     text-decoration: none;
     text-indent: 0;
     line-height: 36px;
+    outline: none;
   }
   .a-upload input {
     position: absolute;
@@ -169,7 +175,8 @@ export default {
     top: 0;
     opacity: 0;
     filter: alpha(opacity=0);
-    cursor: pointer
+    cursor: pointer;
+    outline: none;
   }
   #camera{
     margin: 10px;
@@ -185,5 +192,8 @@ export default {
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
+  }
+  #commit:disabled{
+    opacity: 0.6;
   }
 </style>

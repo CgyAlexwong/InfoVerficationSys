@@ -36,7 +36,7 @@
 import MtButton from 'mint-ui/packages/button/src/button'
 import MtHeader from 'mint-ui/packages/header/src/header'
 import MtField from 'mint-ui/packages/field/src/field'
-import { MessageBox } from 'mint-ui'
+import { MessageBox ,Indicator} from 'mint-ui'
 import {feedBack} from '../utils/stuAPI'
 import {checkChinese, checkPhoneNumber, checkEMail, checkQQ, checkWeChat} from '../utils/checkList'
 
@@ -78,51 +78,51 @@ export default {
       this.sheetVisible = this.sheetVisible !== true
     },
     mobile () {
-      this.pickerValue = '移动电话：'
+      this.pickerValue = '移动电话：';
       this.contact = ''
     },
     email () {
-      this.pickerValue = 'e-mail：'
+      this.pickerValue = 'e-mail：';
       this.contact = ''
     },
     QQ () {
-      this.pickerValue = 'QQ：'
+      this.pickerValue = 'QQ：';
       this.contact = ''
     },
     WeChat () {
-      this.pickerValue = '微信号：'
+      this.pickerValue = '微信号：';
       this.contact = ''
     },
     nameCheck () {
-      let result = checkChinese(this.stuName)
-      this.nameValid = result.res
+      let result = checkChinese(this.stuName);
+      this.nameValid = result.res;
       this.nameMessage = result.msg
     },
     contactCheck () {
       if (this.pickerValue === '移动电话：') {
-        let result = checkPhoneNumber(this.contact)
-        this.contactValid = result.res
+        let result = checkPhoneNumber(this.contact);
+        this.contactValid = result.res;
         this.contactMessage = result.msg
       } else if (this.pickerValue === 'e-mail：') {
-        let result = checkEMail(this.contact)
-        this.contactValid = result.res
+        let result = checkEMail(this.contact);
+        this.contactValid = result.res;
         this.contactMessage = result.msg
       } else if (this.pickerValue === 'QQ：') {
-        let result = checkQQ(this.contact)
-        this.contactValid = result.res
+        let result = checkQQ(this.contact);
+        this.contactValid = result.res;
         this.contactMessage = result.msg
       } else if (this.pickerValue === '微信号：') {
-        let result = checkWeChat(this.contact)
-        this.contactValid = result.res
+        let result = checkWeChat(this.contact);
+        this.contactValid = result.res;
         this.contactMessage = result.msg
       }
     },
     remarkCheck () {
       if (this.remark.length > 50) {
-        this.remarkValid = false
+        this.remarkValid = false;
         this.remarkMessage = '字数超过50字！'
       } else {
-        this.remarkValid = true
+        this.remarkValid = true;
         this.remarkMessage = ''
       }
     },
@@ -131,11 +131,13 @@ export default {
     },
     submit () {
       if (this.stuName !== '' && this.contact !== '' && this.nameValid && this.contactValid) {
+        Indicator.open({text:'反馈提交中，请稍等……',spinnerType:'fading-circle'});
         feedBack({
           stuName: this.stuName,
           contact: this.pickerValue + this.contact,
           remark: this.remark
         }).then(res => {
+          Indicator.close();
           if (res.succeed === true) {
             MessageBox.alert('', {
               message: '反馈已提交，请耐心等待老师与你联系！',
@@ -156,10 +158,10 @@ export default {
           console.log(err)
         })
       } else if (this.stuName === '') {
-        this.nameValid = false
+        this.nameValid = false;
         this.nameMessage = '姓名不能为空！'
       } else if (this.contact === '') {
-        this.contactValid = false
+        this.contactValid = false;
         this.contactMessage = '联系方式不能为空！'
       }
     }

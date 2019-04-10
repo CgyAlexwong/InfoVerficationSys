@@ -26,7 +26,7 @@
 <script>/* eslint-disable */
 import MtHeader from 'mint-ui/packages/header/src/header'
 import MtButton from 'mint-ui/packages/button/src/button';
-import { MessageBox } from 'mint-ui'
+import { MessageBox ,Indicator} from 'mint-ui'
 import {setSignature} from '../../../utils/stuAPI';
 import Cookies from 'js-cookie';
 
@@ -194,14 +194,17 @@ export default {
     overwrite(){
       this.canvasTxt.clearRect(0, 0, this.$refs.canvasF.width, this.$refs.canvasF.height);
       this.points=[];
+      this.submitable = false
     },
     //保存
     submit() {
       let url = this.$refs.canvasF.toDataURL('image/png');
       console.log(url.length);
+      Indicator.open({text:'电子签名提交中，请稍等……',spinnerType:'fading-circle'});
       setSignature({
         signature: url
       }).then(res =>{
+        Indicator.close();
         if (res.succeed === true){
           Cookies.remove('id');
           this.$router.push('/end')

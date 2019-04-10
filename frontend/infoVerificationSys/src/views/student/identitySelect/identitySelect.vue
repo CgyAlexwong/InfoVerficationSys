@@ -30,7 +30,7 @@
 import MtButton from 'mint-ui/packages/button/src/button'
 import MtHeader from "mint-ui/packages/header/src/header"
 import MtRadio from "mint-ui/packages/radio/src/radio"
-import { MessageBox } from 'mint-ui';
+import { MessageBox , Indicator} from 'mint-ui';
 import { Field } from 'mint-ui';
 import MtField from "mint-ui/packages/field/src/field";
 import { userJuniorLogin } from "../../../utils/stuAPI";
@@ -81,11 +81,13 @@ export default {
           identityNum:this.identityNum,
           originPlace:parseInt(this.originPlace)
         });
+        Indicator.open({text:'匹配中，请稍等……',spinnerType:'fading-circle'});
         userJuniorLogin({
           identityNum:this.identityNum,
           originPlace:parseInt(this.originPlace)
           }
         ).then(response =>{
+          Indicator.close();
           if(response.succeed === true){
             Cookies.set('id',this.identityNum);
             MessageBox.alert('', {

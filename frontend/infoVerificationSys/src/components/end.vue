@@ -16,8 +16,10 @@
 </template>
 
 <script>
+import MtButton from "mint-ui/packages/button/src/button";
 export default {
-  name: 'end'
+  name: 'end',
+  components: {MtButton}
 }
 </script>
 

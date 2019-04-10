@@ -96,7 +96,7 @@
 <script>/* eslint-disable */
 import MtHeader from "mint-ui/packages/header/src/header"
 import MtButton from "mint-ui/packages/button/src/button"
-import { MessageBox } from 'mint-ui'
+import { MessageBox ,Indicator} from 'mint-ui'
 import MtNavbar from "mint-ui/packages/navbar/src/navbar"
 import MtTabItem from "mint-ui/packages/tab-item/src/tab-item"
 import MtTabContainer from "mint-ui/packages/tab-container/src/tab-container"
@@ -105,7 +105,7 @@ import MtCell from "mint-ui/packages/cell/src/cell";
 import { getInfo , setUserInfo} from "../../../utils/stuAPI";
 import MtField from "mint-ui/packages/field/src/field"
 import student from '../identitySelect/identitySelect'
-import {checkChinese, checkPhoneNumber, checkPostal, checkDate} from "../../../utils/checkList";
+import {checkChinese, checkPhoneNumber, checkPostal} from "../../../utils/checkList";
 
 export default {
   name: "informationVerify",
@@ -262,6 +262,7 @@ export default {
           emergencyContactNumber:this.emergencyContact.emergencyContactNumber,
           emergencyContactAddress:this.emergencyContact.emergencyContactAddress
         });
+        Indicator.open({text:'基本信息提交中，请稍等……',spinnerType:'fading-circle'});
         setUserInfo({
           foreignName: this.foreignName,
           graduateDate: this.graduateDate,
@@ -275,6 +276,7 @@ export default {
           emergencyContactNumber:this.emergencyContact.emergencyContactNumber,
           emergencyContactAddress:this.emergencyContact.emergencyContactAddress
         }).then(response =>{
+          Indicator.close();
           if (response.succeed === true){
             MessageBox.alert('', {
               message: '基本信息校验成功，点击进入电子签名！',
