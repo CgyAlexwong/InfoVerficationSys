@@ -55,7 +55,7 @@ export default {
   computed: {
     filteredTableData () {
       return this.tableData.filter(data => {
-        return !this.search || data.name.toLowerCase().includes(this.search.toLowerCase())
+        return !this.search || data.stuName.toLowerCase().includes(this.search.toLowerCase())
       })
     }
   },
