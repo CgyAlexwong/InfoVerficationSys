@@ -1,4 +1,5 @@
 import {getNoPhotoList, uploadPhoto} from '../../../utils/adminAPI'
+import * as lrz from 'lrz'
 
 export default {
   name: 'UploadPhotos',
@@ -50,10 +51,10 @@ export default {
       if (!fileType) {
         this.$message.error('上传文件只能是 jpg(jpeg)/png 格式')
       }
-      if (!fileSize) {
-        this.$message.error('上传图片大小不能大于2M')
-      }
-      return fileType && fileSize
+      // if (!fileSize) {
+      //   this.$message.error('上传图片大小不能大于2M')
+      // }
+      return fileType
     },
 
     handlePictureCardPreview (file) {
@@ -84,7 +85,19 @@ export default {
       }
     },
     photos (file) {
-      this.stuPhotosData.append('file', file.file)
+      const fileSize=file.file.size/1024/1024
+      console.log(fileSize)
+      if (fileSize>=0.3) {
+        lrz(file.file, {quality: 0.8})
+          .then(rst => {
+            console.log(rst.file.size / 1024 / 1024)
+            this.stuPhotosData.append('file', rst.file)
+          }).catch(err => {
+          this.$message.error(err.toString())
+        })
+      }else {
+        this.stuPhotosData.append('file', file.file)
+      }
     }
 
   }
