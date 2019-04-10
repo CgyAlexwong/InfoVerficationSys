@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <el-table
-                :data="filteredTableData" style="width: 100%; margin: 0 auto;" max-height="1000px" stripe
+                :data="filteredTableData" style="width: 100%; margin: 0 auto;"  stripe
                 highlight-current-row
         >
             <el-table-column header-align="center" align="center" width="170px" ixed label="姓名"
