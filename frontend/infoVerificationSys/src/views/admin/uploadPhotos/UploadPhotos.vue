@@ -39,7 +39,6 @@
 
                     <div class="promptMsg">
                         <p>只能上传jpg/png文件</p>
-                        <p>照片大小不可超过2M</p>
                     </div>
                     <div>
                         <el-button type="primary" @click="uploadStuPhotos" style="margin-top:30px">确认上传</el-button>
