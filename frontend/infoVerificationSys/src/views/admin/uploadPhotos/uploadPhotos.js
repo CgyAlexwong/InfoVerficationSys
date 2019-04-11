@@ -88,10 +88,17 @@ export default {
       const fileSize=file.file.size/1024/1024
       console.log(fileSize)
       if (fileSize>=0.3) {
-        lrz(file.file, {quality: 0.8})
+        const photoName=file.file.name
+        console.log(photoName)
+        lrz(file.file, {quality: 0.7,filedName:photoName})
           .then(rst => {
             console.log(rst.file.size / 1024 / 1024)
-            this.stuPhotosData.append('file', rst.file)
+            this.stuPhotosData.append('file', rst.file,photoName )
+            console.log(this.stuPhotosData.getAll('file').length)
+            const photos = this.stuPhotosData.getAll('file')
+            for (let index1 of photos){
+              console.log(index1.name)
+            }
           }).catch(err => {
           this.$message.error(err.toString())
         })
