@@ -37,8 +37,9 @@ import MtButton from 'mint-ui/packages/button/src/button'
 import MtHeader from 'mint-ui/packages/header/src/header'
 import MtField from 'mint-ui/packages/field/src/field'
 import { MessageBox ,Indicator} from 'mint-ui'
-import {feedBack} from '../utils/stuAPI'
-import {checkChinese, checkPhoneNumber, checkEMail, checkQQ, checkWeChat} from '../utils/checkList'
+import {feedBack,getInfo} from '../utils/stuAPI'
+import {checkChinese, checkPhoneNumber, checkEMail, checkQQ, checkWeChat} from '../utils/checkList';
+import Cookies from 'js-cookie'
 
 export default {
   name: 'end',
@@ -73,6 +74,15 @@ export default {
       }]
     }
   },
+  mounted:function(){
+    let user = Cookies.get('id');
+    if (user !== ''){
+      getInfo().then(response =>{
+        this.stuName = response.stuName;
+        this.contact = response.mobileNumber;
+      })
+    }
+  },
   methods: {
     openSheet () {
       this.sheetVisible = this.sheetVisible !== true
@@ -100,9 +110,8 @@ export default {
     },
     contactCheck () {
       if (this.pickerValue === '移动电话：') {
-        let result = checkPhoneNumber(this.contact);
-        this.contactValid = result.res;
-        this.contactMessage = result.msg
+        this.contactValid = true;
+        this.contactMessage = ''
       } else if (this.pickerValue === 'e-mail：') {
         let result = checkEMail(this.contact);
         this.contactValid = result.res;
@@ -145,6 +154,8 @@ export default {
               confirmButtonText: '确认'
             }).then(action => {
               if (action === 'confirm') {
+                Cookies.remove('id');
+                Cookies.remove('place');
                 this.$router.push('/stu')
               }
             }).catch(err => {

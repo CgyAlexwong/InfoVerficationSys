@@ -33,7 +33,7 @@ import MtRadio from "mint-ui/packages/radio/src/radio"
 import { MessageBox , Indicator} from 'mint-ui';
 import { Field } from 'mint-ui';
 import MtField from "mint-ui/packages/field/src/field";
-import { userJuniorLogin } from "../../../utils/stuAPI";
+import { userJuniorLogin ,getStatus } from "../../../utils/stuAPI";
 import Cookies from 'js-cookie';
 import MtCell from "mint-ui/packages/cell/src/cell";
 import {checkIdentityNum} from "../../../utils/checkList";
@@ -63,6 +63,9 @@ export default {
       ]
     }
   },
+  mounted:function(){
+    Cookies.set('id','');
+  },
   methods:{
     identityNumCheck () {
       let result = checkIdentityNum(this.identityNum);
@@ -90,13 +93,28 @@ export default {
           Indicator.close();
           if(response.succeed === true){
             Cookies.set('id',this.identityNum);
+            Cookies.set('place',this.originPlace)
             MessageBox.alert('', {
-              message: '成功匹配信息，点击进入人脸识别！',
+              message: '成功匹配信息，点击进入下一步！',
               title: '成功',
               confirmButtonText: '下一步'
             }).then(action => {
               if (action === 'confirm') {
-                this.$router.push('/stu/faceVerify')
+                getStatus().then( response =>{
+                  if (response.faceCheck === false){
+                    this.$router.push('/stu/faceVerify')
+                  } else if (response.faceCheck === true && response.ocrCheck === false){
+                    this.$router.push('/stu/OCRVerify')
+                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
+                    this.$router.push('/stu/informationVerify')
+                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
+                    this.$router.push('/stu/ESignature')
+                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
+                    this.$router.push('/end')
+                  } else {
+                    this.$router.push('/stu/faceVerify')
+                  }
+                })
               }
             })
           } else if(response.msg === '无照片信息'){

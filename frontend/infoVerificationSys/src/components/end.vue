@@ -17,9 +17,14 @@
 
 <script>
 import MtButton from "mint-ui/packages/button/src/button";
+import Cookies from 'js-cookie'
 export default {
   name: 'end',
-  components: {MtButton}
+  components: {MtButton},
+  mounted:function () {
+    Cookies.remove('id');
+    Cookies.remove('place');
+  }
 }
 </script>
 

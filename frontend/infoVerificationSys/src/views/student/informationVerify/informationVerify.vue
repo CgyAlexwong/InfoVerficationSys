@@ -17,7 +17,7 @@
 
       <mt-tab-container id='pageOne' v-model="selected">
         <mt-tab-container-item id="1">
-          <p id="word">以下信息不可修改，请仔细确认！<br>如无误请点击确认，如有误请点击底部反馈</p>
+          <p id="word">以下信息不可修改，请仔细确认！<br>如无误请点击下一步，如有误请点击底部反馈</p>
           <div id="unchangeablePart">
           <mt-cell id="a" title="考生号：" v-model="examNum"/>
           <mt-cell id="a" title="姓名：" v-model="stuName"/>
@@ -29,7 +29,7 @@
           <mt-cell id="a" title="联系电话：" v-model="phoneNumber"/>
           <mt-cell id="aSpecial" title="身份证：" v-model="identityNum"/>
           </div>
-          <button id = 'check1' v-bind:disabled="unchangeablePart" @click="change1">确认</button>
+          <button id = 'check1' v-bind:disabled="unchangeablePart" @click="change1">下一步</button>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
           <p id="word">以下信息可修改但必须填写</p>
@@ -47,11 +47,11 @@
               <dd v-if="!mtpNumberValid">{{mtpNumberMessage}}</dd>
             </div>
             <div id="b">
-              <mt-field label="邮政编码：" v-model="postal" placeholder="请输入你的邮政编码" @input="postalCheck" :disabled="changeablePart"></mt-field>
+              <mt-field label="邮政编码：" v-model="postal" placeholder="请输入所在地区的邮政编码" @input="postalCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!postalValid">{{postalMessage}}</dd>
             </div>
             <div id="b">
-             <mt-field label="通讯地址：" v-model="address" placeholder="请输入你的通讯地址" @input="addressCheck" :disabled="changeablePart"></mt-field>
+             <mt-field label="通讯地址：" v-model="address" placeholder="用于录取通知书递送" @input="addressCheck" :disabled="changeablePart"></mt-field>
               <dd v-if="!addressValid">{{addressMessage}}</dd>
             </div>
             <div id="b">
@@ -73,7 +73,7 @@
               <mt-field label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名" :disabled="changeablePart"></mt-field>
             </div>
             <div id="b">
-              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="毕业时间格式为“YYYY-MM-DD”" :disabled="changeablePart"></mt-field>
+              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="请输入毕业时间，如：2019" :disabled="changeablePart"></mt-field>
               <dd v-if="!graduateDateValid">{{graduateDateMessage}}</dd>
             </div>
             <div id="bSpecial">
@@ -81,7 +81,7 @@
             </div>
           </div>
           <div id="voluntaryButton">
-            <button id="check2" v-bind:disabled="changeablePart" @click="change2">确认</button>
+            <button id="check2" v-bind:disabled="changeablePart" @click="change2">确认填写完毕</button>
           </div>
         </mt-tab-container-item>
       </mt-tab-container>
@@ -102,10 +102,10 @@ import MtTabItem from "mint-ui/packages/tab-item/src/tab-item"
 import MtTabContainer from "mint-ui/packages/tab-container/src/tab-container"
 import MtTabContainerItem from "mint-ui/packages/tab-container-item/src/tab-container-item"
 import MtCell from "mint-ui/packages/cell/src/cell";
-import { getInfo , setUserInfo} from "../../../utils/stuAPI";
+import {getInfo, getStatus, setUserInfo} from "../../../utils/stuAPI";
 import MtField from "mint-ui/packages/field/src/field"
 import student from '../identitySelect/identitySelect'
-import {checkChinese, checkPhoneNumber, checkPostal} from "../../../utils/checkList";
+import {checkChinese} from "../../../utils/checkList";
 
 export default {
   name: "informationVerify",
@@ -134,27 +134,27 @@ export default {
       graduateDateValid: true,
       graduateDateMessage: '',
 
-      examNum:'171250606',
-      stuName:'魏进',
-      foreignName:'cat',
-      sex:'男',
-      nation:'汉',
-      birthdate:'1999-08-12',
-      subject:'理科',
-      graduateDate:'2017-07-01',
-      graduateSchool:'莲塘一中',
-      email:'1455236662@qq.com',
-      phoneNumber:'18907087985',
-      mobileNumber:'18852002519',
+      examNum:'',
+      stuName:'',
+      foreignName:'',
+      sex:'',
+      nation:'',
+      birthdate:'',
+      subject:'',
+      graduateDate:'',
+      graduateSchool:'',
+      email:'',
+      phoneNumber:'',
+      mobileNumber:'',
       mtpNumber: '',
-      identityNum:'360121199908120038',
-      postal:'330200',
+      identityNum:'',
+      postal:'',
       nativePlace:'',
-      address:'江西省南昌市南昌县莲塘玺园6栋一单元104室',
+      address:'',
       emergencyContact:{
-        emergencyContactPerson:'魏良华',
-        emergencyContactNumber:'13330065719',
-        emergencyContactAddress:'江西省南昌市南昌县莲塘玺园6栋一单元104室'
+        emergencyContactPerson:'',
+        emergencyContactNumber:'',
+        emergencyContactAddress:''
       }
     }
   },
@@ -203,18 +203,16 @@ export default {
       this.graduateSchoolMessage = result.msg
     },
     mobileNumberCheck () {
-      let result = checkPhoneNumber(this.mobileNumber);
-      this.mobileNumberValid = result.res;
-      this.mobileNumberMessage = result.msg
+      this.mobileNumberValid = true;
+      this.mobileNumberMessage = ''
     },
     mtpNumberCheck(){
       this.mtpNumberValid = true;
       this.mtpNumberMessage = ''
     },
     postalCheck () {
-      let result = checkPostal(this.postal);
-      this.postalValid = result.res;
-      this.postalMessage = result.msg
+      this.postalValid = true;
+      this.postalMessage = ''
     },
     addressCheck () {
       this.addressValid = true;
@@ -226,9 +224,8 @@ export default {
       this.emergencyContactPersonMessage = result.msg
     },
     emergencyContactNumberCheck () {
-      let result = checkPhoneNumber(this.emergencyContact.emergencyContactNumber);
-      this.emergencyContactNumberValid = result.res;
-      this.emergencyContactNumberMessage = result.msg
+      this.emergencyContactNumberValid = true;
+      this.emergencyContactNumberMessage = ''
     },
     emergencyContactAddressCheck () {
       this.emergencyContactAddressValid = true;
@@ -279,12 +276,26 @@ export default {
           Indicator.close();
           if (response.succeed === true){
             MessageBox.alert('', {
-              message: '基本信息校验成功，点击进入电子签名！',
+              message: '基本信息校验成功，点击进入下一步！',
               title: '成功',
               confirmButtonText: '下一步'
             }).then(action => {
               if (action === 'confirm') {
-                this.$router.push('/stu/ESignature')
+                getStatus().then( response =>{
+                  if (response.faceCheck === false){
+                    this.$router.push('/stu/faceVerify')
+                  } else if (response.faceCheck === true && response.ocrCheck === false){
+                    this.$router.push('/stu/OCRVerify')
+                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
+                    this.$router.push('/stu/informationVerify')
+                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
+                    this.$router.push('/stu/ESignature')
+                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
+                    this.$router.push('/end')
+                  } else {
+                    this.$router.push('/stu/identity')
+                  }
+                })
               }
             })
 
@@ -311,24 +322,25 @@ export default {
     },
     change1:function () {
       this.unchangeablePart = true;
+      this.selected = '2';
       console.log('不可修改基本信息已确认:'+this.unchangeablePart)
     },
     change2:function () {
       if (this.graduateSchool!==''&&this.mobileNumber!==''&&this.mtpNumber!==''&&this.postal!==''&&this.address!==''
         &&this.emergencyContact.emergencyContactPerson!==''&&this.emergencyContact.emergencyContactNumber!==''&&this.emergencyContact.emergencyContactAddress!==''
-        &&this.graduateSchoolValid&&this.mobileNumberValid&&this.postalValid &&this.emergencyContactPersonValid&&this.emergencyContactNumberValid) {
+        &&this.graduateSchoolValid&&this.emergencyContactPersonValid) {
         this.changeablePart = true;
         console.log('可修改基本信息已确认:'+this.changeablePart)
       } else if (this.graduateSchool === '' && this.graduateSchoolValid){
         this.graduateSchoolValid = false;
         this.graduateSchoolMessage = '毕业中学不能为空！'
-      } else if (this.mobileNumber === '' && this.mobileNumberValid){
+      } else if (this.mobileNumber === ''){
         this.mobileNumberValid = false;
         this.mobileNumberMessage = '移动电话不能为空！'
       } else if(this.mtpNumber === ''){
         this.mtpNumberValid = false;
         this.mtpNumberMessage = '通行证号不能为空！'
-      }else if (this.postal === '' && this.postalValid){
+      }else if (this.postal === ''){
         this.postalValid = false;
         this.postalMessage = '邮政编码不能为空！'
       } else if (this.address === ''){
@@ -337,7 +349,7 @@ export default {
       } else if (this.emergencyContact.emergencyContactPerson === '' && this.emergencyContactPersonValid){
         this.emergencyContactPersonValid = false;
         this.emergencyContactPersonMessage = '紧急联系人不能为空！'
-      } else if (this.emergencyContact.emergencyContactNumber === '' && this.emergencyContactNumberValid){
+      } else if (this.emergencyContact.emergencyContactNumber === ''){
         this.emergencyContactNumberValid = false;
         this.emergencyContactNumberMessage = '紧急联系电话不能为空！'
       } else if (this.emergencyContact.emergencyContactAddress === ''){

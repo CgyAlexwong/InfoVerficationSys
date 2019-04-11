@@ -5,10 +5,10 @@ export function checkChinese (value) {
   if (value === '') {
     res = true
   } else {
-    let cnPattern = /^[\u4E00-\u9FA5]+$/;
+    let cnPattern = /^[\u4E00-\u9FA5]+(([,，]+)?([\u4E00-\u9FA5]+)?)+$/;
     res = cnPattern.test(value);
     if (!res) {
-      msg = '请输入简体中文！'
+      msg = '请输入中文（可包含“，”）！'
     }
   }
   return {res: res, msg: msg}
@@ -21,22 +21,10 @@ export function checkPhoneNumber (value) {
   if (value === '') {
     res = true
   } else {
-    let phoneNumberPattern1 = /^[0-9]+$/;
+    let phoneNumberPattern1 = /(^(\+86)?([ ]+)?1[3-578][0-9]{9}$)|(^(\+886)?([ ]+)?[0-9]{9}$)/;
     res = phoneNumberPattern1.test(value);
     if (!res) {
-      msg = '请输入11位数字！'
-    } else if (res && value.length < 11) {
-      res = false;
-      msg = '输入的数字少于11位！'
-    } else if (res && value.length > 11) {
-      res = false;
-      msg = '输入的数字多于11位！'
-    } else {
-      let phoneNumberPattern2 = /^1[3-578]\d{9}$/;
-      res = phoneNumberPattern2.test(value);
-      if (!res) {
-        msg = '输入的手机号不合法！'
-      }
+      msg = '请输入正确格式的手机号！'
     }
   }
   return {res: res, msg: msg}

@@ -47,8 +47,8 @@ export const recognize = (params,times) => {
 
 // 03 OCR识别
 // 上传通行证正面 File identification, HttpServletRequest request
-export const doOCR = (params,times) => {
-  return axios.post('/OCR/doOCR', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
+export const doOCR = (params,type) => {
+  return axios.post('/OCR/doOCR', params, {headers: {identityNum: Cookies.get('id'),type:type}}).then(res => res.data)
 };
 // 上传通行证反面 File identification, HttpServletRequest request
 export const doOCRNegative = (params,times) => {
@@ -69,4 +69,9 @@ export const setUserInfo = params => {
 // 提交电子签名
 export const setSignature = params => {
   return axios.post('/userBasicFunc/sign', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+};
+
+// 获取学生状态信息
+export const getStatus = () => {
+  return axios.get('/userBasicFunc/getStatus', {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
 };

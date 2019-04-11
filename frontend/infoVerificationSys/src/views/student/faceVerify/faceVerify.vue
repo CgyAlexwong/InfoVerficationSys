@@ -7,7 +7,9 @@
         <mt-button icon="back" @click="warn">返回</mt-button>
       </router-link>
     </mt-header>
-    <p id="word1">请拍摄你的正脸照：</p>
+    <p id="word1">请拍摄你的正脸照：
+      <br>
+      &nbsp;&nbsp;（请使用竖屏拍照）</p>
     <div id="camera">
       <div class="a-upload">
         <input id='cam' type="file" accept="image/*" capture="camera" @change="preview">
@@ -31,118 +33,139 @@
 import MtButton from "mint-ui/packages/button/src/button";
 import MtHeader from "mint-ui/packages/header/src/header";
 import {MessageBox,Indicator} from 'mint-ui'
-import {recognize} from "../../../utils/stuAPI";
+import {recognize,getStatus} from "../../../utils/stuAPI";
+import lrz from 'lrz';
 
 export default {
-      name: "faceVerify",
-      components: {MtHeader, MtButton},
-      data(){
-        return{
-          actions:[{
-            name: '拍照',
-            method : this.getCamera	// 调用methods中的函数
-          }],
-          sheetVisible:false,
-          img:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
-          r : 0,
-          rotateTimes: 0,
+  name: "faceVerify",
+  components: {MtHeader, MtButton},
+  data(){
+    return{
+      actions:[{
+        name: '拍照',
+        method : this.getCamera	// 调用methods中的函数
+      }],
+      sheetVisible:false,
+      img:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
+      r : 0,
+      rotateTimes: 0,
 
-          submitable: false
-        }
-      },
-      methods:{
-        appear:function () {
-          this.sheetVisible = this.sheetVisible!== true;
-          console.log(this.sheetVisible.closeOnClickModal);
-        },
-        go:function () {
-          this.$router.push('/stu/OCRVerify')
-        },
-        warn:function () {
-          MessageBox.alert('',{
-            title:"提示",
-            message:"你已完成前阶段任务，无法返回"
-          })
-        },
-        getCamera(){
-          const  video  =  document.getElementById('video');
-          const videoConstraints = {
-            facingMode: 'environment'
-          };
-          const constraints = {
-            video: videoConstraints,
-            audio: false
-          };
-          navigator.mediaDevices.getUserMedia(constraints)
-            .then(stream => {
-              video.srcObject = stream;
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        },
-        /* show(){
-          let a = document.getElementById('cam').files[0];
-          console.log('name:'+a.name)
-          console.log('size:'+a.size)
-          console.log('type:'+a.type)
-          console.log('file:'+a)
-        }, */
-        preview(){
-          let file = document.getElementById('cam').files[0];
-          let reader = new FileReader();
-          reader.readAsDataURL(file);
-          let that = this;
-          reader.onloadend = function () {
-            that.img = this.result;
-          };
-          this.rotateTimes = 0;
-          this.submitable = true
-        },
-        rotate(){
-          let pic = document.getElementById('photo');
-          this.r += 90;
-          pic.style.transform = 'rotate(' + this.r + 'deg)';
-          this.rotateTimes += 1
-        },
-        submit(){
-          let photo = document.getElementById('cam').files[0];
-          let formData = new FormData();
-          formData.append('file',photo);
-          Indicator.open({text:'人脸识别中，请稍等……',spinnerType:'fading-circle'});
-          recognize(formData,this.rotateTimes).then(res => {
-            Indicator.close();
-            if(res.succeed === true){
-              MessageBox.alert('', {
-                message: '人脸识别验证成功，点击进入OCR信息校验！',
-                title: '成功',
-                confirmButtonText: '下一步'
-              }).then(action => {
-                if (action === 'confirm') {
-                  this.$router.push('/stu/OCRVerify')
-                }
-              })
-            }
-            else{
-              MessageBox.confirm('', {
-                message: res.msg,
-                title: '提示',
-                confirmButtonText: '反馈',
-                cancelButtonText: '重试'
-              }).then(action => {
-                if (action === 'confirm') {     //反馈的回调
-                  this.$router.push('/feedback')
-                }
-              }).catch(err => {
-                if (err === 'cancel') {     //重试的回调
-                  console.log("重试");
-                }
-              })
-            }
-          })
-        }
-      }
+      formData : new FormData(),
+      submitable: false
     }
+  },
+  methods:{
+    appear:function () {
+      this.sheetVisible = this.sheetVisible!== true;
+      console.log(this.sheetVisible.closeOnClickModal);
+    },
+    go:function () {
+      console.log(this.formData.get('file'))
+    },
+    warn:function () {
+      MessageBox.alert('',{
+        title:"提示",
+        message:"你已完成前阶段任务，无法返回"
+      })
+    },
+    getCamera(){
+      const  video  =  document.getElementById('video');
+      const videoConstraints = {
+        facingMode: 'environment'
+      };
+      const constraints = {
+        video: videoConstraints,
+        audio: false
+      };
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then(stream => {
+          video.srcObject = stream;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    compress(){
+      let file = document.getElementById('cam').files[0];
+      lrz(file,{
+        quality:0.7
+      }).then(rst =>{
+        let newFile = rst.file;
+        newFile.name = file.name;
+        this.formData.delete('file');
+        this.formData.append('file',newFile,file.name);
+        Indicator.close();
+      })
+      Indicator.close();
+    },
+    preview(){
+      Indicator.open({text:'图片加载中，请稍等……',spinnerType:'fading-circle'});
+      let file = document.getElementById('cam').files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      let that = this;
+      reader.onloadend = function () {
+        that.img = this.result;
+      };
+      this.submitable = true;
+      this.compress();
+      Indicator.close();
+    },
+    rotate(){
+      let pic = document.getElementById('photo');
+      this.r += 90;
+      pic.style.transform = 'rotate(' + this.r + 'deg)';
+      this.rotateTimes += 1
+    },
+    submit(){
+      Indicator.open({text:'人脸识别中，请稍等……',spinnerType:'fading-circle'});
+      recognize(this.formData,this.rotateTimes+3).then(res => {
+        Indicator.close();
+        if(res.succeed === true) {
+          MessageBox.alert('', {
+            message: '人脸识别验证成功，点击进入下一步！',
+            title: '成功',
+            confirmButtonText: '下一步'
+          }).then(action => {
+            if (action === 'confirm') {
+              getStatus().then( response =>{
+                if (response.faceCheck === false){
+                  this.$router.push('/stu/faceVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === false){
+                  this.$router.push('/stu/OCRVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
+                  this.$router.push('/stu/informationVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
+                  this.$router.push('/stu/ESignature')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
+                  this.$router.push('/end')
+                } else {
+                  this.$router.push('/stu/identity')
+                }
+              })
+            }
+          })
+        }
+        else{
+          MessageBox.confirm('', {
+            message: res.msg,
+            title: '提示',
+            confirmButtonText: '反馈',
+            cancelButtonText: '重试'
+          }).then(action => {
+            if (action === 'confirm') {     //反馈的回调
+              this.$router.push('/feedback')
+            }
+          }).catch(err => {
+            if (err === 'cancel') {     //重试的回调
+              console.log("重试");
+            }
+          })
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

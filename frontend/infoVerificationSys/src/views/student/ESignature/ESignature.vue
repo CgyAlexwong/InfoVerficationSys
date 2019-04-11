@@ -206,7 +206,6 @@ export default {
       }).then(res =>{
         Indicator.close();
         if (res.succeed === true){
-          Cookies.remove('id');
           this.$router.push('/end')
         }
       }).catch(err =>{

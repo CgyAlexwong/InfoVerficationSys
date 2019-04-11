@@ -7,10 +7,15 @@
         <mt-button icon="back" @click="warn">返回</mt-button>
       </router-link>
     </mt-header>
+
+    <div id="box" v-if="typeChoose">
+      <mt-radio title="请选择你的通行证新旧类型：" v-model="type" :options="options"></mt-radio>
+    </div>
+
     <p id="word1">请拍摄你的通行证正面：</p>
     <div id="front" >
       <div class="front-upload" id="frontCamera">
-        <input id='cam1' type="file" accept="image/*" capture="camera" @change="previewFront" v-bind:disabled="!frontCommitState">
+        <input id='cam1' type="file" accept="image/*" capture="camera" @change="previewFront">
         点击拍照
       </div>
       <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
@@ -22,17 +27,17 @@
         <img :src="img1" alt="人脸照片" style="width: 80%" id='photo1' @click="rotateFront">
       </div>
       <div id="commitFrontBox">
-        <button id='commitFront' @click="checkFront" v-bind:disabled="!frontCommitState||!frontCommitAble">提交</button>
+        <button id='commitFront' @click="checkFront" v-bind:disabled="!frontCommitAble">提交</button>
       </div>
     </div>
 
-    <p id="word3">请拍摄你的通行证反面：</p>
+    <!--<p id="word3">请拍摄你的通行证反面：</p>
     <div id="back" >
       <div class="back-upload" id="backCamera">
         <input id='cam2' type="file" accept="image/*" capture="camera" @change="previewBack" v-bind:disabled="!backCommitState">
         点击拍照
       </div>
-      <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
+      <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
       <p id="word4">预览：
         <br>
         &nbsp;&nbsp;（点击可旋转照片，提交时请确保通行证端正）
@@ -43,7 +48,7 @@
       <div id="commitBackBox">
         <button id='commitBack' @click="checkBack" v-bind:disabled="!backCommitState||!backCommitAble">提交</button>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -51,17 +56,32 @@
 import MtButton from 'mint-ui/packages/button/src/button'
 import MtHeader from "mint-ui/packages/header/src/header"
 import {MessageBox,Indicator} from 'mint-ui'
-import {doOCR,doOCRNegative} from "../../../utils/stuAPI";
+import {doOCR, doOCRNegative, getStatus} from "../../../utils/stuAPI";
+import lrz from 'lrz';
+import Cookies from 'js-cookie'
+import MtRadio from "mint-ui/packages/radio/src/radio";
 
 export default {
   name: 'OCRVerify',
-  components: { MtButton },
+  components: {MtRadio, MtButton },
   data () {
     return {
-      actions:[{
-        name: '拍照',
-        method : this.getCamera	// 调用methods中的函数
-      }],
+      //actions:[{
+        //name: '拍照',
+        //method : this.getCamera	// 调用methods中的函数
+      //}],
+      typeChoose:false,
+      options : [
+        {
+          label: '新版',
+          value: 'new'
+        },
+        {
+          label: '旧版',
+          value: 'old'
+        }
+      ],
+      type:'new',
       frontCommitState: true,
       frontCommitAble: false,
       backCommitState: false,
@@ -69,6 +89,8 @@ export default {
       sheetVisible:false,
       img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
       img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
+      formData1 : new FormData(),
+      formData2 : new FormData(),
       r1: 0,
       r2: 0,
       rotateTimesFront: 0,
@@ -76,20 +98,22 @@ export default {
     }
   },
   mounted:function(){
-    MessageBox.confirm('', {
-      message: '如果你使用的是本式台胞证，请点击反馈。如果不是，请点击忽略。',
-      title: '提示',
-      confirmButtonText: '反馈',
-      cancelButtonText: '忽略'
-    }).then(action => {
-      if (action === 'confirm') {     //反馈的回调
-        this.$router.push('/feedback')
-      }
-    }).catch(err => {
-      if (err === 'cancel') {     //忽略的回调
-        console.log("忽略");
-      }
-    })
+    let place = Cookies.get('place')
+    this.typeChoose = place === '1';
+    //MessageBox.confirm('', {
+      //message: '如果你使用的是本式台胞证，请点击反馈。如果不是，请点击忽略。',
+      //title: '提示',
+      //confirmButtonText: '反馈',
+      //cancelButtonText: '忽略'
+    //}).then(action => {
+      //if (action === 'confirm') {     //反馈的回调
+        //this.$router.push('/feedback')
+      //}
+    //}).catch(err => {
+      //if (err === 'cancel') {     //忽略的回调
+        //console.log("忽略");
+     //}
+    //})
   },
   methods:{
     appear:function () {
@@ -121,25 +145,47 @@ export default {
       })
     },
     checkFront () {
-      let front = document.getElementById('cam1').files[0];
-      let formData1 = new FormData();
-      formData1.append('file',front);
+      console.log(this.type);
       Indicator.open({text:'通行证正面校验中，请稍等……',spinnerType:'fading-circle'});
-      doOCR(formData1,this.rotateTimesFront).then(res =>{
+      doOCR(this.formData1,this.type).then(res =>{
         Indicator.close();
+        //if (res.succeed === true){
+          //MessageBox.alert('', {
+            //message: '通行证正面校验成功，点击继续校验通行证反面！',
+            //title: '成功',
+            //confirmButtonText: '继续'
+          //}).then(action => {
+            //if (action === 'confirm') {
+              //this.frontCommitState = false;
+              //this.backCommitState = true;
+              //let button1 = document.getElementById('backCamera');
+              //button1.style.opacity = 1;
+              //let button2 = document.getElementById('frontCamera');
+              //button2.style.opacity = 0.6
+            //}
+          //})
         if (res.succeed === true){
           MessageBox.alert('', {
-            message: '通行证正面校验成功，点击继续校验通行证反面！',
+            message: 'OCR信息校验成功，点击进入基本信息校验！',
             title: '成功',
-            confirmButtonText: '继续'
+            confirmButtonText: '下一步'
           }).then(action => {
             if (action === 'confirm') {
-              this.frontCommitState = false;
-              this.backCommitState = true;
-              let button1 = document.getElementById('backCamera');
-              button1.style.opacity = 1;
-              let button2 = document.getElementById('frontCamera');
-              button2.style.opacity = 0.6
+              getStatus().then( response =>{
+                if (response.faceCheck === false){
+                  this.$router.push('/stu/faceVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === false){
+                  this.$router.push('/stu/OCRVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
+                  this.$router.push('/stu/informationVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
+                  this.$router.push('/stu/ESignature')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
+                  this.$router.push('/end')
+                } else {
+                  this.$router.push('/stu/identity')
+                }
+              })
             }
           })
         }else {
@@ -161,20 +207,31 @@ export default {
       })
     },
     checkBack () {
-      let back = document.getElementById('cam2').files[0];
-      let formData2 = new FormData();
-      formData2.append('file',back);
       Indicator.open({text:'通行证反面校验中，请稍等……',spinnerType:'fading-circle'});
-      doOCRNegative(formData2,this.rotateTimesBack).then(res =>{
+      doOCRNegative(this.formData2,this.rotateTimesBack).then(res =>{
         if (res.succeed === true){
           Indicator.close();
           MessageBox.alert('', {
-            message: 'OCR信息校验成功，点击进入基本信息校验！',
+            message: 'OCR信息校验成功，点击进入下一步！',
             title: '成功',
             confirmButtonText: '下一步'
           }).then(action => {
             if (action === 'confirm') {
-              this.$router.push('/stu/informationVerify')
+              getStatus().then( response =>{
+                if (response.faceCheck === false){
+                  this.$router.push('/stu/faceVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === false){
+                  this.$router.push('/stu/OCRVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
+                  this.$router.push('/stu/informationVerify')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
+                  this.$router.push('/stu/ESignature')
+                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
+                  this.$router.push('/end')
+                } else {
+                  this.$router.push('/stu/identity')
+                }
+              })
             }
           })
         }else {
@@ -195,7 +252,38 @@ export default {
         }
       })
     },
+    compressFront(){
+      let file = document.getElementById('cam1').files[0];
+        lrz(file,{
+          quality:0.7
+        }).then(rst =>{
+          let newFile = rst.file;
+          newFile.name = file.name;
+          this.formData1.delete('file');
+          this.formData1.append('file',newFile,file.name);
+          Indicator.close();
+        })
+    },
+    compressBack(){
+      let file = document.getElementById('cam2').files[0];
+      if (file.size<300000){
+        this.formData2.delete('file');
+        this.formData2.append('file',file);
+        Indicator.close();
+      }else{
+        lrz(file,{
+          quality:0.7
+        }).then(rst =>{
+          let newFile = rst.file;
+          newFile.name = file.name;
+          this.formData2.delete('file');
+          this.formData2.append('file',newFile,file.name);
+          Indicator.close();
+        })
+      }
+    },
     previewFront(){
+      Indicator.open({text:'图片加载中，请稍等……',spinnerType:'fading-circle'});
       let file = document.getElementById('cam1').files[0];
       let reader = new FileReader();
       reader.readAsDataURL(file);
@@ -205,8 +293,10 @@ export default {
       };
       this.rotateTimesFront = 0;
       this.frontCommitAble = true;
+      this.compressFront();
     },
     previewBack(){
+      Indicator.open({text:'图片加载中，请稍等……',spinnerType:'fading-circle'});
       let file = document.getElementById('cam2').files[0];
       let reader = new FileReader();
       reader.readAsDataURL(file);
@@ -216,6 +306,7 @@ export default {
       };
       this.rotateTimesBack = 0;
       this.backCommitAble = true;
+      this.compressBack();
     },
     rotateFront(){
       let pic = document.getElementById('photo1');
@@ -234,6 +325,11 @@ export default {
 </script>
 
 <style scoped>
+  #box{
+    border: 1px dashed #ffffff;
+    border-top-width: 5px;
+    border-bottom-color: #888888;
+  }
   #word1,#word2,#word3,#word4{
     font-size: 12px;
     margin: 9px;
