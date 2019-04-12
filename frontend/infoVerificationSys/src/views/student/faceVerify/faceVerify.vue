@@ -119,7 +119,7 @@ export default {
     },
     submit(){
       Indicator.open({text:'人脸识别中，请稍等……',spinnerType:'fading-circle'});
-      recognize(this.formData,this.rotateTimes+3).then(res => {
+      recognize(this.formData,0).then(res => {
         Indicator.close();
         if(res.succeed === true) {
           MessageBox.alert('', {
@@ -218,5 +218,8 @@ export default {
   }
   #commit:disabled{
     opacity: 0.6;
+  }
+  #load{
+    margin: 50px 0 50px;
   }
 </style>
