@@ -3,8 +3,8 @@ import axios from 'axios'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
-  ? 'http://120.78.76.9:3142'
-  : 'http://localhost:3142'
+  ? 'http://localhost:3142'
+  : 'http://120.78.76.9:3142'
 
 // 登陆
 export const adminLogin = (params) => {
@@ -29,13 +29,29 @@ export const getUserStatus = () => {
 }
 
 // 修改某个学生审核状态
-export const changeUserStatus = (params) => {
-  return axios.post('/adminBasicFunc/changeUserStatus', params)
-}
+// export const changeUserStatus = (params) => {
+//   return axios.post('/adminBasicFunc/changeUserStatus', params)
+// }
 // 查看某个学生信息
 export const getUserInfo = (params) => {
-  return axios.get('/adminBasicFunc/getUserInfo',{headers:{identityNum:params}})
+  return axios.get('/adminBasicFunc/getUserInfo', {headers: {identityNum: params}})
 }
+
+// 获取存疑
+export const handleFeedback = (identityNum) => {
+  return axios.get('/adminBasicFunc/handleFeedback',
+    {
+      params: {
+        identityNum: identityNum
+      }
+    })
+}
+
+// 提交存疑修改
+export const changeQuestionableInfo = (params) =>{
+  return axios.post('/adminBasicFunc/changeQuestionableInfo',params)
+}
+
 // 修改某个学生信息
 export const changeUserInfo = (params) => {
   return axios.post('/adminBasicFunc/changeUserInfo', params)
@@ -45,7 +61,8 @@ export const changeUserInfo = (params) => {
 export const getFeedback = () => {
   return axios.get('/adminBasicFunc/check')
 }
+
 //修改学生反馈
 export const changeIsHandle = (params) => {
-  return axios.post('/adminBasicFunc/changeIsHandle',params)
+  return axios.post('/adminBasicFunc/changeIsHandle', params)
 }
