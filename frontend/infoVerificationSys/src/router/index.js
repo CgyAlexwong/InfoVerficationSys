@@ -37,16 +37,17 @@ export default [
     name:'FaceVerify',
     component: FaceVerify,
     meta:{
-      num:2,
+      num:5,
       title:'人脸识别校验'
-    }
+    },
+    redirect: '/stu'
   },
   {
     path: '/stu/OCRVerify',
     name: 'OCRVerify',
     component: OCRVerify,
     meta:{
-      num:3,
+      num:1,
       title:'OCR信息校验'
     }
   },
@@ -55,7 +56,7 @@ export default [
     name:'InformationVerify',
     component: InformationVerify,
     meta:{
-      num:4,
+      num:2,
       title:'基本信息校验'
     }
   },
@@ -66,23 +67,25 @@ export default [
     meta:{
       num:5,
       title:'电子签名加密'
-    }
+    },
+    redirect:'/stu'
   },
   {
     path:'/feedback',
     name:'feedback',
     component: Feedback,
     meta:{
-      num:6,
+      num:5,
       title:'信息反馈'
-    }
+    },
+    redirect:'/stu'
   },
   {
     path:'/end',
     name:'end',
     component: End,
     meta:{
-      num:7,
+      num:3,
       title:'完成啦！'
     }
   }

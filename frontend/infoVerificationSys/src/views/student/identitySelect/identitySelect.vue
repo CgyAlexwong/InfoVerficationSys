@@ -4,7 +4,7 @@
   <div id="identitySelect">
     <!-- 新的header -->
     <div id = 'head'>
-      <mt-header fixed title="（1 / 5）身份选择">
+      <mt-header fixed title="（1 / 3）身份选择">
         <router-link to="/stu" slot="left">
           <mt-button icon="back">返回</mt-button>
         </router-link>
@@ -101,18 +101,14 @@ export default {
             }).then(action => {
               if (action === 'confirm') {
                 getStatus().then( response =>{
-                  if (response.faceCheck === false){
-                    this.$router.push('/stu/faceVerify')
-                  } else if (response.faceCheck === true && response.ocrCheck === false){
+                  if (response.ocrCheck === false){
                     this.$router.push('/stu/OCRVerify')
-                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
+                  } else if (response.ocrCheck === true && response.infoCheck === false){
                     this.$router.push('/stu/informationVerify')
-                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
-                    this.$router.push('/stu/ESignature')
-                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
+                  } else if (response.ocrCheck === true && response.infoCheck === true){
                     this.$router.push('/end')
                   } else {
-                    this.$router.push('/stu/faceVerify')
+                    this.$router.push('/stu/OCRVerify')
                   }
                 })
               }

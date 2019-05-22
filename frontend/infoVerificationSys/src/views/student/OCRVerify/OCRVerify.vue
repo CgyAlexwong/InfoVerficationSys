@@ -2,9 +2,9 @@
 
 <template>
   <div id="OCRVerify">
-    <mt-header fixed title="（3 / 5）OCR信息校验">
-      <router-link to="/stu/identity" slot="left">
-        <mt-button icon="back" @click="warn">返回</mt-button>
+    <mt-header fixed title="（1 / 3）OCR身份识别">
+      <router-link to="/stu" slot="left">
+        <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
 
@@ -20,8 +20,8 @@
       </div>
       <!--<mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>-->
       <p id="word2">预览：
-        <br>
-        &nbsp;&nbsp;（点击可旋转照片，提交时请确保通行证端正）
+        <!--<br>-->
+        <!--&nbsp;&nbsp;（点击可旋转照片，提交时请确保通行证端正）-->
       </p>
       <div id="loadFront">
         <img :src="img1" alt="人脸照片" style="width: 80%" id='photo1' @click="rotateFront">
@@ -99,7 +99,7 @@ export default {
   },
   mounted:function(){
     let place = Cookies.get('place')
-    this.typeChoose = place === '1';
+    this.typeChoose = true;
     //MessageBox.confirm('', {
       //message: '如果你使用的是本式台胞证，请点击反馈。如果不是，请点击忽略。',
       //title: '提示',
@@ -138,12 +138,12 @@ export default {
         }
       })
     },
-    warn:function () {
-      MessageBox.alert('',{
-        title:"提示",
-        message:"你已完成前阶段任务，无法返回"
-      })
-    },
+    // warn:function () {
+    //   MessageBox.alert('',{
+    //     title:"提示",
+    //     message:"你已完成前阶段任务，无法返回"
+    //   })
+    // },
     checkFront () {
       console.log(this.type);
       Indicator.open({text:'通行证正面校验中，请稍等……',spinnerType:'fading-circle'});
@@ -166,24 +166,20 @@ export default {
           //})
         if (res.succeed === true){
           MessageBox.alert('', {
-            message: 'OCR信息校验成功，点击进入基本信息校验！',
+            message: '成功匹配信息，点击进入下一步！',
             title: '成功',
             confirmButtonText: '下一步'
           }).then(action => {
             if (action === 'confirm') {
               getStatus().then( response =>{
-                if (response.faceCheck === false){
-                  this.$router.push('/stu/faceVerify')
-                } else if (response.faceCheck === true && response.ocrCheck === false){
+                if (response.ocrCheck === false){
                   this.$router.push('/stu/OCRVerify')
-                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
+                } else if (response.ocrCheck === true && response.infoCheck === false){
                   this.$router.push('/stu/informationVerify')
-                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
-                  this.$router.push('/stu/ESignature')
-                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
+                } else if (response.ocrCheck === true && response.infoCheck === true){
                   this.$router.push('/end')
                 } else {
-                  this.$router.push('/stu/identity')
+                  this.$router.push('/stu/OCRVerify')
                 }
               })
             }
@@ -206,52 +202,52 @@ export default {
         }
       })
     },
-    checkBack () {
-      Indicator.open({text:'通行证反面校验中，请稍等……',spinnerType:'fading-circle'});
-      doOCRNegative(this.formData2,this.rotateTimesBack).then(res =>{
-        if (res.succeed === true){
-          Indicator.close();
-          MessageBox.alert('', {
-            message: 'OCR信息校验成功，点击进入下一步！',
-            title: '成功',
-            confirmButtonText: '下一步'
-          }).then(action => {
-            if (action === 'confirm') {
-              getStatus().then( response =>{
-                if (response.faceCheck === false){
-                  this.$router.push('/stu/faceVerify')
-                } else if (response.faceCheck === true && response.ocrCheck === false){
-                  this.$router.push('/stu/OCRVerify')
-                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
-                  this.$router.push('/stu/informationVerify')
-                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
-                  this.$router.push('/stu/ESignature')
-                } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
-                  this.$router.push('/end')
-                } else {
-                  this.$router.push('/stu/identity')
-                }
-              })
-            }
-          })
-        }else {
-          MessageBox.confirm('', {
-            message: res.msg,
-            title: '提示',
-            confirmButtonText: '反馈',
-            cancelButtonText: '重试'
-          }).then(action => {
-            if (action === 'confirm') {     //反馈的回调
-              this.$router.push('/feedback')
-            }
-          }).catch(err => {
-            if (err === 'cancel') {     //重试的回调
-              console.log("重试");
-            }
-          })
-        }
-      })
-    },
+    // checkBack () {
+    //   Indicator.open({text:'通行证反面校验中，请稍等……',spinnerType:'fading-circle'});
+    //   doOCRNegative(this.formData2,this.rotateTimesBack).then(res =>{
+    //     if (res.succeed === true){
+    //       Indicator.close();
+    //       MessageBox.alert('', {
+    //         message: 'OCR信息校验成功，点击进入下一步！',
+    //         title: '成功',
+    //         confirmButtonText: '下一步'
+    //       }).then(action => {
+    //         if (action === 'confirm') {
+    //           getStatus().then( response =>{
+    //             if (response.faceCheck === false){
+    //               this.$router.push('/stu/faceVerify')
+    //             } else if (response.faceCheck === true && response.ocrCheck === false){
+    //               this.$router.push('/stu/OCRVerify')
+    //             } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
+    //               this.$router.push('/stu/informationVerify')
+    //             } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
+    //               this.$router.push('/stu/ESignature')
+    //             } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
+    //               this.$router.push('/end')
+    //             } else {
+    //               this.$router.push('/stu/identity')
+    //             }
+    //           })
+    //         }
+    //       })
+    //     }else {
+    //       MessageBox.confirm('', {
+    //         message: res.msg,
+    //         title: '提示',
+    //         confirmButtonText: '反馈',
+    //         cancelButtonText: '重试'
+    //       }).then(action => {
+    //         if (action === 'confirm') {     //反馈的回调
+    //           this.$router.push('/feedback')
+    //         }
+    //       }).catch(err => {
+    //         if (err === 'cancel') {     //重试的回调
+    //           console.log("重试");
+    //         }
+    //       })
+    //     }
+    //   })
+    // },
     compressFront(){
       let file = document.getElementById('cam1').files[0];
         lrz(file,{
@@ -264,24 +260,24 @@ export default {
           Indicator.close();
         })
     },
-    compressBack(){
-      let file = document.getElementById('cam2').files[0];
-      if (file.size<300000){
-        this.formData2.delete('file');
-        this.formData2.append('file',file);
-        Indicator.close();
-      }else{
-        lrz(file,{
-          quality:0.7
-        }).then(rst =>{
-          let newFile = rst.file;
-          newFile.name = file.name;
-          this.formData2.delete('file');
-          this.formData2.append('file',newFile,file.name);
-          Indicator.close();
-        })
-      }
-    },
+    // compressBack(){
+    //   let file = document.getElementById('cam2').files[0];
+    //   if (file.size<300000){
+    //     this.formData2.delete('file');
+    //     this.formData2.append('file',file);
+    //     Indicator.close();
+    //   }else{
+    //     lrz(file,{
+    //       quality:0.7
+    //     }).then(rst =>{
+    //       let newFile = rst.file;
+    //       newFile.name = file.name;
+    //       this.formData2.delete('file');
+    //       this.formData2.append('file',newFile,file.name);
+    //       Indicator.close();
+    //     })
+    //   }
+    // },
     previewFront(){
       Indicator.open({text:'图片加载中，请稍等……',spinnerType:'fading-circle'});
       let file = document.getElementById('cam1').files[0];
@@ -295,31 +291,31 @@ export default {
       this.frontCommitAble = true;
       this.compressFront();
     },
-    previewBack(){
-      Indicator.open({text:'图片加载中，请稍等……',spinnerType:'fading-circle'});
-      let file = document.getElementById('cam2').files[0];
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      let that = this;
-      reader.onloadend = function () {
-        that.img2 = this.result;
-      };
-      this.rotateTimesBack = 0;
-      this.backCommitAble = true;
-      this.compressBack();
-    },
+    // previewBack(){
+    //   Indicator.open({text:'图片加载中，请稍等……',spinnerType:'fading-circle'});
+    //   let file = document.getElementById('cam2').files[0];
+    //   let reader = new FileReader();
+    //   reader.readAsDataURL(file);
+    //   let that = this;
+    //   reader.onloadend = function () {
+    //     that.img2 = this.result;
+    //   };
+    //   this.rotateTimesBack = 0;
+    //   this.backCommitAble = true;
+    //   this.compressBack();
+    // },
     rotateFront(){
       let pic = document.getElementById('photo1');
       this.r1 += 90;
       pic.style.transform = 'rotate(' + this.r1 + 'deg)';
       this.rotateTimesFront += 1;
     },
-    rotateBack(){
-      let pic = document.getElementById('photo2');
-      this.r2 += 90;
-      pic.style.transform = 'rotate(' + this.r2 + 'deg)';
-      this.rotateTimesBack += 1;
-    },
+    // rotateBack(){
+    //   let pic = document.getElementById('photo2');
+    //   this.r2 += 90;
+    //   pic.style.transform = 'rotate(' + this.r2 + 'deg)';
+    //   this.rotateTimesBack += 1;
+    // },
   }
 }
 </script>
@@ -404,5 +400,8 @@ export default {
   }
   #commitBack:disabled{
     opacity: 0.6;
+  }
+  #photo1{
+    transform: rotate(90deg);
   }
 </style>

@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90eea965-19e7-4d9d-b314-33b6f30a0d86" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/stuIdentitySelect/stuIdentitySelect.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/stuIdentitySelect/stuIdentitySelect.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/HelloWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/router/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,28 +22,69 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/package.json">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3011">
+              <caret line="310" column="33" lean-forward="true" selection-start-line="310" selection-start-column="33" selection-end-line="310" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/config/index.js">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+            <state relative-caret-position="95">
+              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/adminAPI.js">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="47">
+              <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+              <folding>
+                <element signature="e#19#44#0" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1938">
+              <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
+              <folding>
+                <element signature="e#878#935#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/dist/static/img/da8e974dc.25daf29.jpg">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -65,9 +109,23 @@
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/identitySelect/identitySelect.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/adminLogin/AdminLogin.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/stuIdentitySelect/stuIdentitySelect.js" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/faceVerify/faceVerify.vue" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/router/index.js" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/router/router.js" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/HelloWorld.vue" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js" />
       </list>
     </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1378" />
@@ -104,6 +162,37 @@
               <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -112,7 +201,98 @@
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+              <item name="ESignature" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+              <item name="faceVerify" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+              <item name="identitySelect" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+              <item name="informationVerify" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="InfoVerficationSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="InfoVerficationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="infoVerificationSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+              <item name="OCRVerify" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -128,6 +308,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="D:\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -141,6 +322,23 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/frontend/infoVerificationSys/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -152,30 +350,39 @@
       <option name="presentableId" value="Default" />
       <updated>1552836725173</updated>
       <workItem from="1552836728760" duration="5958000" />
+      <workItem from="1557312573143" duration="307000" />
+      <workItem from="1557892119076" duration="679000" />
+      <workItem from="1557930771257" duration="112000" />
+      <workItem from="1557930946654" duration="1931000" />
+      <workItem from="1557971044019" duration="7525000" />
+      <workItem from="1557995448734" duration="4304000" />
+      <workItem from="1558350827586" duration="2415000" />
+      <workItem from="1558523365675" duration="4031000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5958000" />
+    <option name="totallyTimeSpent" value="27262000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24925596" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24851191" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" weight="0.3295082" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3295082" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34918034" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3295082" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -191,30 +398,9 @@
     <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/App.vue">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#140#161#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/identitySelect/identitySelect.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/identitySelect/identitySelect.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/stuIdentitySelect/identitySelect.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/identitySelect/identitySelect.js" />
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/identitySelect/identitySelect.vue" />
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/stuIdentitySelect/identitySelect.js" />
     <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/adminLogin/AdminLogin.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -225,25 +411,7 @@
     <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/adminLogin/adminLogin.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/stuIdentitySelect/stuIdentitySelect.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/package.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/stuIdentitySelect/stuIdentitySelect.js" />
     <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/adminAPI.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -251,12 +419,121 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js">
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/faceVerify/faceVerify.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+        <state relative-caret-position="437">
+          <caret line="130" column="14" lean-forward="true" selection-start-line="130" selection-start-column="14" selection-end-line="130" selection-end-column="14" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/ESignature/ESignature.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3648" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/assets/da8e974dc.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/components/HelloWorld.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1515" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1463">
+          <caret line="80" column="15" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
+          <folding>
+            <element signature="e#21#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/config/index.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/node_modules/axios/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/router/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3011">
+          <caret line="310" column="33" lean-forward="true" selection-start-line="310" selection-start-column="33" selection-end-line="310" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+          <folding>
+            <element signature="e#19#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1938">
+          <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
+          <folding>
+            <element signature="e#878#935#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/dist/static/img/da8e974dc.25daf29.jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>

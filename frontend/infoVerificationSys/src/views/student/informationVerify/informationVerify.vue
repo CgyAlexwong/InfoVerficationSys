@@ -3,20 +3,19 @@
 <template>
   <div id="informationVerify">
     <div id = 'head'>
-      <mt-header fixed title="（4 / 5）基本信息校验">
-        <router-link to="/stu/identity" slot="left">
+      <mt-header fixed title="（2 / 3）基本信息校验">
+        <router-link to="/stu/OCRVerify" slot="left">
           <mt-button icon="back" @click="warn">返回</mt-button>
         </router-link>
       </mt-header>
     </div>
     <div id="navbar">
-      <mt-navbar v-model="selected">
-        <mt-tab-item id="1" @click="tab1">必需校验信息</mt-tab-item>
-        <mt-tab-item id="2" @click="tab2">可修改信息</mt-tab-item>
-      </mt-navbar>
+      <!--<mt-navbar v-model="selected">-->
+        <!--<mt-tab-item id="1" @click="tab1">必需校验信息</mt-tab-item>-->
+        <!--<mt-tab-item id="2" @click="tab2">可修改信息</mt-tab-item>-->
+      <!--</mt-navbar>-->
 
-      <mt-tab-container id='pageOne' v-model="selected">
-        <mt-tab-container-item id="1">
+
           <p id="word">以下信息不可修改，请仔细确认！<br>如无误请点击下一步，如有误请点击底部反馈</p>
           <div id="unchangeablePart">
           <mt-cell id="a" title="考生号：" v-model="examNum"/>
@@ -30,8 +29,7 @@
           <mt-cell id="aSpecial" title="身份证：" v-model="identityNum"/>
           </div>
           <button id = 'check1' v-bind:disabled="unchangeablePart" @click="change1">下一步</button>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="2">
+
           <p id="word">以下信息可修改但必须填写</p>
           <div id = 'changeablePart'>
             <div id="b">
@@ -83,8 +81,7 @@
           <div id="voluntaryButton">
             <button id="check2" v-bind:disabled="changeablePart" @click="change2">确认填写完毕</button>
           </div>
-        </mt-tab-container-item>
-      </mt-tab-container>
+
     </div>
     <div id="confirmButton">
       <button id="feedback" @click="feedback">反馈</button>
@@ -275,30 +272,17 @@ export default {
         }).then(response =>{
           Indicator.close();
           if (response.succeed === true){
-            MessageBox.alert('', {
-              message: '基本信息校验成功，点击进入下一步！',
-              title: '成功',
-              confirmButtonText: '下一步'
-            }).then(action => {
-              if (action === 'confirm') {
-                getStatus().then( response =>{
-                  if (response.faceCheck === false){
-                    this.$router.push('/stu/faceVerify')
-                  } else if (response.faceCheck === true && response.ocrCheck === false){
-                    this.$router.push('/stu/OCRVerify')
-                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === false){
-                    this.$router.push('/stu/informationVerify')
-                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === false){
-                    this.$router.push('/stu/ESignature')
-                  } else if (response.faceCheck === true && response.ocrCheck === true && response.infoCheck === true && response.signCheck === true){
-                    this.$router.push('/end')
-                  } else {
-                    this.$router.push('/stu/identity')
-                  }
-                })
+            getStatus().then( response =>{
+              if (response.ocrCheck === false){
+                this.$router.push('/stu/OCRVerify')
+              } else if (response.ocrCheck === true && response.infoCheck === false){
+                this.$router.push('/stu/informationVerify')
+              } else if (response.ocrCheck === true && response.infoCheck === true){
+                this.$router.push('/end')
+              } else {
+                this.$router.push('/stu/OCRVerify')
               }
             })
-
           }
         })
       }

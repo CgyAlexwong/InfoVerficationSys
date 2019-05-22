@@ -29,9 +29,9 @@ let http = axios.create({
 
 // 00 反馈
 // 留下联系信息 stuName String, contact String, remark String
-export const feedBack = params => {
-  return axios.post('/userBasicFunc/feedback', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
-};
+// export const feedBack = params => {
+//   return axios.post('/userBasicFunc/feedback', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+// };
 
 // 01 身份选择
 // 检查通行证号是否存在
@@ -41,35 +41,40 @@ export const userJuniorLogin = params => {
 
 // 02 人脸识别
 // 上传人脸照片文件匹配 File photo, HttpServletRequest request
-export const recognize = (params,times) => {
-  return axios.post('/faceRecognition/recognize', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
-};
+// export const recognize = (params,times) => {
+//   return axios.post('/faceRecognition/recognize', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
+// };
 
 // 03 OCR识别
 // 上传通行证正面 File identification, HttpServletRequest request
-export const doOCR = (params,type) => {
-  return axios.post('/OCR/doOCR', params, {headers: {identityNum: Cookies.get('id'),type:type}}).then(res => res.data)
+export const userOCRLogin = (params,type) => {
+  return axios.post('/login/userOCRLogin', params, {headers: {identityNum: Cookies.get('id'),type:type}}).then(res => res.data)
 };
 // 上传通行证反面 File identification, HttpServletRequest request
-export const doOCRNegative = (params,times) => {
-  return axios.post('/OCR/doOCRNegative', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
-};
+// export const doOCRNegative = (params,times) => {
+//   return axios.post('/OCR/doOCRNegative', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
+// };
 
 // 04基本信息校验
 // 获取基本信息
 export const getInfo = () => {
   return axios.get('/userBasicFunc/getInfo', {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
 };
-// 提交验证的信息
-export const setUserInfo = params => {
-  return axios.post('/userBasicFunc/setInfo', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+// 提交验证的基本信息
+export const setBasicInfo = params => {
+  return axios.post('/userBasicFunc/setBasicInfo', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+};
+
+// 提交验证的其他信息
+export const setOtherInfo = params => {
+  return axios.post('/userBasicFunc/setOtherInfo', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
 };
 
 // 05电子签名
 // 提交电子签名
-export const setSignature = params => {
-  return axios.post('/userBasicFunc/sign', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
-};
+// export const setSignature = params => {
+//   return axios.post('/userBasicFunc/sign', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+// };
 
 // 获取学生状态信息
 export const getStatus = () => {
