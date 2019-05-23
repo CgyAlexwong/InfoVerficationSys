@@ -18,8 +18,8 @@
       <p id="word">请仔细确认以下信息！<br>如无误请点击提交，如有误请点击底部修改</p>
       <div style="display: flex">
         <p id="word">当前状态：
-        <img src="../../../assets/错.png" alt="" style="width: 15px;height: 15px">
-        不可修改</p>
+        <img :src="img" alt="" style="width: 15px;height: 15px">
+        {{msg}}</p>
       </div>
       <div id="unchangeablePart">
         <div id="b">
@@ -85,6 +85,8 @@ export default {
     return {
       // selected: '1',
       // unchangeablePart:false,
+      img:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/错.png?raw=true',
+      msg:'不可修改',
       changeable:false,
       changeableButton:true,
       commitAble:true,
@@ -307,6 +309,8 @@ export default {
     //   this.selected = '2'
     // },
     change:function(){
+      this.img = 'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/对.png?raw=true';
+      this.msg = '可修改';
       this.changeableButton = false;
       this.changeable = true;
     },
