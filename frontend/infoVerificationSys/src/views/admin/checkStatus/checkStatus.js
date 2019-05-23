@@ -124,7 +124,6 @@ export default {
       this.queryFormVisible = true
       this.currentIdentityNum = row.identityNum
 
-
       // this.ocrPhoto = 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Biometric_Two-way_Permit_%28Front%29.jpg'
       // this.queryInfo = [
       //   {
@@ -141,7 +140,7 @@ export default {
       //   }
       // ]
 
-       handleFeedback(row.identityNum)
+      handleFeedback(row.identityNum)
         .then(res => {
           console.log(res)
           this.ocrPhoto = res.data.ocrPhoto
@@ -159,37 +158,48 @@ export default {
 
     //提交存疑基本信息
     editQuerySubmit () {
-      this.queryFormVisible = false
-      let selectInfo = []
+      let flag = true
       this.queryInfo.forEach(info => {
-        let tmpInfo = {}
-        tmpInfo.prop = info.prop
-        tmpInfo.info = info.selectedInfo
-        selectInfo.push(tmpInfo)
-      })
-      console.log(this.currentIdentityNum)
-      console.log(selectInfo)
-
-      changeQuestionableInfo(
-        {
-          identityNum: this.currentIdentityNum,
-          selectInfos: selectInfo
+        if (info.selectedInfo === '') {
+          flag = false
         }
-      )
-        .then(res => {
-          if (res.data.succeed) {
-            this.$message({
-              message: '修改成功',
-              type: 'success'
-            })
-            this.queryFormVisible = false
-          } else {
-            this.$message({
-              message: res.data.msg,
-              type: 'error'
-            })
-          }
+      })
+      if (!flag) {
+        this.$message.error('存疑信息未全部处理！')
+      } else {
+        this.queryFormVisible = false
+        let selectInfo = []
+        this.queryInfo.forEach(info => {
+          let tmpInfo = {}
+          tmpInfo.prop = info.prop
+          tmpInfo.info = info.selectedInfo
+          selectInfo.push(tmpInfo)
         })
+        console.log(this.currentIdentityNum)
+        console.log(selectInfo)
+
+        changeQuestionableInfo(
+          {
+            identityNum: this.currentIdentityNum,
+            selectInfos: selectInfo
+          }
+        )
+          .then(res => {
+            if (res.data.succeed) {
+              this.$message({
+                message: '修改成功',
+                type: 'success'
+              })
+              this.getStatus()
+              this.queryFormVisible = false
+            } else {
+              this.$message({
+                message: res.data.msg,
+                type: 'error'
+              })
+            }
+          })
+      }
     },
 
     //修改学生状态 index为身份证号码
