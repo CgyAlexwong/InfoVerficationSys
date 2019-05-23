@@ -3,8 +3,8 @@ import axios from 'axios'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
-  ? 'http://localhost:3142'
-  : 'http://120.78.76.9:3142'
+  ? 'http://47.103.9.254:3142'
+  : 'http://localhost:3142'
 
 // 登陆
 export const adminLogin = (params) => {

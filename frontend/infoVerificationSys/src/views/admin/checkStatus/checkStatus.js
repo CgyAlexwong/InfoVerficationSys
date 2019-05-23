@@ -173,7 +173,7 @@ export default {
       changeQuestionableInfo(
         {
           identityNum: this.currentIdentityNum,
-          selectInfo: selectInfo
+          selectInfos: selectInfo
         }
       )
         .then(res => {
