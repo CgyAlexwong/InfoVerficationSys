@@ -331,7 +331,7 @@ export default {
     border-bottom-color: #888888;
   }
   #word1,#word2{
-    font-size: 16px;
+    font-size: 14px;
     margin: 4px 9px 9px;
     padding: 4px 0 4px;
     display: block;
@@ -339,7 +339,7 @@ export default {
     text-align: left;
   }
   #word3{
-    font-size: 16px;
+    font-size: 14px;
     margin: 9px 9px 2px;
     padding: 8px 0 0;
     display: block;

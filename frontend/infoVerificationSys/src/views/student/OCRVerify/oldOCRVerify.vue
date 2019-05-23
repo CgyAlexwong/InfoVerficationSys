@@ -328,7 +328,7 @@ export default {
     border-bottom-color: #888888;
   }
   #word1,#word2,#word3,#word4{
-    font-size: 16px;
+    font-size: 14px;
     margin: 9px;
     padding: 8px 0 4px;
     display: block;

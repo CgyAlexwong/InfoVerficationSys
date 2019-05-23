@@ -50,7 +50,7 @@ export default [
     component: OCRVerify,
     meta:{
       num:1,
-      title:'OCR信息校验'
+      title:'OCR身份识别'
     }
   },
   {

@@ -16,6 +16,11 @@
       <!--</mt-navbar>-->
 
       <p id="word">请仔细确认以下信息！<br>如无误请点击提交，如有误请点击底部修改</p>
+      <div style="display: flex">
+        <p id="word">当前状态：
+        <img src="../../../assets/错.png" alt="" style="width: 15px;height: 15px">
+        不可修改</p>
+      </div>
       <div id="unchangeablePart">
         <div id="b">
           <mt-field label="考生号：" v-model="examNum" placeholder="若无考生号则无须填写" @input="examNumCheck" :disabled="!changeable"></mt-field>
