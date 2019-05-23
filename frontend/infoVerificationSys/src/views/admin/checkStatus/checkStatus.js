@@ -6,6 +6,7 @@ import {
   changeUserInfo
 } from '../../../utils/adminAPI'
 
+
 export default {
   name: 'CheckStatus',
   data () {
@@ -56,7 +57,7 @@ export default {
           emergencyContactAddress: '',
         },
       },
-      ocrPhoto: '',
+      ocrPhoto: 'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
       currentIdentityNum: '',
       queryInfo: [
         {
@@ -143,7 +144,7 @@ export default {
       handleFeedback(row.identityNum)
         .then(res => {
           console.log(res)
-          this.ocrPhoto = res.data.ocrPhoto
+          this.ocrPhoto ="res.data.ocrPhoto"
           this.queryInfo = res.data.queryInfo
         })
         .catch(err => {

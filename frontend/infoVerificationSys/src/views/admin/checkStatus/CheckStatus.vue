@@ -74,7 +74,7 @@
                 </el-form-item>
             </el-form>
 
-            <img :src="ocrPhoto">
+            <img  :src="ocrPhoto" style='height: 600px'alt="无法显示图片">
             <div slot="footer" class="dialog-footer">
                 <el-button @click="queryFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="editQuerySubmit">提交修改</el-button>
