@@ -85,12 +85,12 @@ export default {
       if (this.mtpNum !== '' && this.mtpNumValid && this.originPlace !== ''){
         console.log({
           mtpNum:this.mtpNum,
-          region:parseInt(this.originPlace)
+          originPlace:parseInt(this.originPlace)
         });
         Indicator.open({text:'匹配中，请稍等……',spinnerType:'fading-circle'});
         userJuniorLogin({
           mtpNum:this.mtpNum,
-          region:parseInt(this.originPlace)
+          originPlace:parseInt(this.originPlace)
           }
         ).then(response =>{
           Indicator.close();
@@ -105,9 +105,9 @@ export default {
                 getStatus().then( response =>{
                   if (response.basicInfoCheck === 0){
                     this.$router.push('/stu/basicInfoVerify')
-                  } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 0){
+                  } else if (response.basicInfoCheck >= 1 && response.otherInfoCheck === 0){
                     this.$router.push('/stu/otherInfoVerify')
-                  } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 1){
+                  } else if (response.basicInfoCheck >= 1 && response.otherInfoCheck === 1){
                     this.$router.push('/end')
                   } else {
                     this.$router.push('/stu/OCRVerify')

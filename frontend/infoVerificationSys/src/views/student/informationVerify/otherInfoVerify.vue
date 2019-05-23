@@ -283,9 +283,9 @@ export default {
             getStatus().then( response =>{
               if (response.basicInfoCheck === 0){
                 this.$router.push('/stu/basicInfoVerify')
-              } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 0){
+              } else if (response.basicInfoCheck >= 1 && response.otherInfoCheck === 0){
                 this.$router.push('/stu/otherInfoVerify')
-              } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 1){
+              } else if (response.basicInfoCheck >= 1 && response.otherInfoCheck === 1){
                 this.$router.push('/end')
               } else {
                 this.$router.push('/stu/OCRVerify')

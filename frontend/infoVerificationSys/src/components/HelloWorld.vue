@@ -13,7 +13,7 @@
       <img id='helloPic' src="../assets/da8e974dc.jpg" alt="welcome" height="100" width="100"/>
       <p id="welcome">信息校验系统<br>欢迎使用</p>
         <div style="display: flex;justify-content: center" @click="begin">
-          <img src = "../assets/da8e974dc.jpg" style="width: 10%;height: 10%">
+          <img src = "../assets/form_logo.png" style="width: 10%;height: 10%">
           <div style="display: flex;justify-content:center;align-items:Center;padding: 10px"><span>开始校验</span></div>
         </div>
 

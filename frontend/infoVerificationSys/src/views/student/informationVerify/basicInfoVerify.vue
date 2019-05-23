@@ -18,9 +18,11 @@
       <p id="word">请仔细确认以下信息！<br>如无误请点击提交，如有误请点击底部修改</p>
       <div style="display: flex">
         <p id="word">当前状态：
-        <img :src="img" alt="" style="width: 15px;height: 15px">
+          <img src="../../../assets/错.png" alt="" style="width: 15px;height: 15px" v-if="a">
+          <img src="../../../assets/对.png" alt="" style="width: 15px;height: 15px" v-if="!a">
         {{msg}}</p>
       </div>
+
       <div id="unchangeablePart">
         <div id="b">
           <mt-field label="考生号：" v-model="examNum" placeholder="若无考生号则无须填写" @input="examNumCheck" :disabled="!changeable"></mt-field>
@@ -52,10 +54,6 @@
           <mt-field label="联系电话：" v-model="phoneNumber" placeholder="请输入你的联系电话" @input="phoneNumberCheck" :disabled="!changeable"></mt-field>
           <dd v-if="!phoneNumberValid">{{phoneNumberMessage}}</dd>
         </div>
-        <div id="b">
-          <mt-field label="身份证：" v-model="identityNum" placeholder="请输入你的身份证" @input="identityNumCheck" :disabled="!changeable"></mt-field>
-          <dd v-if="!identityNumValid"><div v-html="identityNumMessage"></div></dd>
-        </div>
       </div>
     </div>
     <div id="confirmButton">
@@ -85,7 +83,8 @@ export default {
     return {
       // selected: '1',
       // unchangeablePart:false,
-      img:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/错.png?raw=true',
+      a:true,
+      // img:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/错.png?raw=true',
       msg:'不可修改',
       changeable:false,
       changeableButton:true,
@@ -99,7 +98,6 @@ export default {
       subject:'',
       email:'',
       phoneNumber:'',
-      identityNum:'',
 
       stuNameValid:true,
       stuNameMessage:'',
@@ -113,8 +111,6 @@ export default {
       emailMessage:'',
       phoneNumberValid:true,
       phoneNumberMessage:'',
-      identityNumValid:true,
-      identityNumMessage:'',
     }
   },
   components: {MtField, MtCell, MtTabContainerItem, MtTabContainer, MtTabItem, MtNavbar, MtButton, MtHeader},
@@ -135,7 +131,6 @@ export default {
       }
       this.email = response.email;
       this.phoneNumber = response.phoneNumber;
-      this.identityNum = response.identityNum;
     });
 
     if(sessionStorage.getItem('examNum') !== null && sessionStorage.getItem('examNum')!==''){
@@ -161,9 +156,6 @@ export default {
     }
     if(sessionStorage.getItem('phoneNumber') !== null && sessionStorage.getItem('phoneNumber')!==''){
       this.phoneNumber = sessionStorage.getItem('phoneNumber');
-    }
-    if(sessionStorage.getItem('identityNum') !== null && sessionStorage.getItem('identityNum')!==''){
-      this.identityNum = sessionStorage.getItem('identityNum');
     }
   },
   methods:{
@@ -232,8 +224,8 @@ export default {
       this.$router.push('/feedback')
     },
     submit:function(){
-      if(this.stuName!==''&&this.sex!==''&&this.birthdate!==''&&this.subject!==''&&this.email!==''&&this.phoneNumber!==''&&this.identityNum!==''
-        &&this.stuNameValid&&this.emailValid&&this.identityNumValid){
+      if(this.stuName!==''&&this.sex!==''&&this.birthdate!==''&&this.subject!==''&&this.email!==''&&this.phoneNumber!==''
+        &&this.stuNameValid&&this.emailValid){
         let sex = this.sex==='男'? 1 : 0;
         let subject = 0;
         if(this.subject === '文科'){
@@ -252,8 +244,7 @@ export default {
           birthdate:this.birthdate,
           subject:subject,
           email:this.email,
-          phoneNumber:this.phoneNumber,
-          identityNum:this.identityNum
+          phoneNumber:this.phoneNumber
         }).then(response =>{
           Indicator.close();
           if (response.succeed === true){
@@ -267,9 +258,9 @@ export default {
                 getStatus().then( response =>{
                   if (response.basicInfoCheck === 0){
                     this.$router.push('/stu/basicInfoVerify')
-                  } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 0){
+                  } else if (response.basicInfoCheck >= 1 && response.otherInfoCheck === 0){
                     this.$router.push('/stu/otherInfoVerify')
-                  } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 1){
+                  } else if (response.basicInfoCheck >= 1 && response.otherInfoCheck === 1){
                     this.$router.push('/end')
                   } else {
                     this.$router.push('/stu/OCRVerify')
@@ -309,7 +300,8 @@ export default {
     //   this.selected = '2'
     // },
     change:function(){
-      this.img = 'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/对.png?raw=true';
+      this.a = false;
+      // this.img = 'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/对.png?raw=true';
       this.msg = '可修改';
       this.changeableButton = false;
       this.changeable = true;

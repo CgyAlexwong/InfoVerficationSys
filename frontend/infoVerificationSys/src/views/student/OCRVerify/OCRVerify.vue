@@ -90,7 +90,7 @@ export default {
       backCommitState: false,
       backCommitAble:false,
       sheetVisible:false,
-      img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/default.jpg?raw=true',
+      img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
       // img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/default.jpg?raw=true',
       formData1 : new FormData(),
       // formData2 : new FormData(),
@@ -148,7 +148,7 @@ export default {
     //   })
     // },
     checkFront () {
-      console.log(this.type);
+      console.log(this.formData1);
       Indicator.open({text:'通行证正面校验中，请稍等……',spinnerType:'fading-circle'});
       userOCRLogin(this.formData1,this.type).then(res =>{
         Indicator.close();
@@ -178,9 +178,9 @@ export default {
               getStatus().then( response =>{
                 if (response.basicInfoCheck === 0){
                   this.$router.push('/stu/basicInfoVerify')
-                } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 0){
+                } else if (response.basicInfoCheck >= 1 && response.otherInfoCheck === 0){
                   this.$router.push('/stu/otherInfoVerify')
-                } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 1){
+                } else if (response.basicInfoCheck >= 1 && response.otherInfoCheck === 1){
                   this.$router.push('/end')
                 } else {
                   this.$router.push('/stu/OCRVerify')
@@ -254,15 +254,25 @@ export default {
     // },
     compressFront(){
       let file = document.getElementById('cam1').files[0];
+      if(file.size < 500000){
+        this.formData1.delete('file');
+        this.formData1.append('file',file,file.name);
+        setTimeout(() => Indicator.close(), 0);
+      }else {
         lrz(file,{
           quality:0.7
         }).then(rst =>{
+          console.log(file)
           let newFile = rst.file;
           newFile.name = file.name;
           this.formData1.delete('file');
           this.formData1.append('file',newFile,file.name);
           Indicator.close();
+        }).error(err=>{
+          console.log(err);
+          Indicator.close();
         })
+      }
     },
     // compressBack(){
     //   let file = document.getElementById('cam2').files[0];
@@ -414,7 +424,7 @@ export default {
   #commitBack:disabled{
     opacity: 0.6;
   }
-  #photo1{
-    transform: rotate(90deg);
-  }
+  /*#photo1{*/
+    /*transform: rotate(90deg);*/
+  /*}*/
 </style>
