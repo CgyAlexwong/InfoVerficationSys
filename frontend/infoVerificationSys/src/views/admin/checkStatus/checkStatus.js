@@ -160,7 +160,7 @@ export default {
     editQuerySubmit () {
       let flag = true
       this.queryInfo.forEach(info => {
-        if (info.selectedInfo === '') {
+        if (info.selectedInfo === '' || info.selectedInfo===undefined) {
           flag = false
         }
       })

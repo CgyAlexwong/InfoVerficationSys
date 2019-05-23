@@ -40,9 +40,15 @@
 .top {
     text-align: center;
 }
+
 .item {
     margin: 4px;
 }
+
+/deep/ .el-dialog {
+    width: 80% !important;
+}
+
 /deep/ .el-dialog__body {
     padding: 50px 40px !important;
 }
