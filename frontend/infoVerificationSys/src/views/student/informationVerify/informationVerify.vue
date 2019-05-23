@@ -3,7 +3,7 @@
 <template>
   <div id="informationVerify">
     <div id = 'head'>
-      <mt-header fixed title="（2 / 3）基本信息校验">
+      <mt-header fixed title="（2 / 4）基本信息校验">
         <router-link to="/stu/OCRVerify" slot="left">
           <mt-button icon="back" @click="warn">返回</mt-button>
         </router-link>
@@ -99,7 +99,7 @@ import MtTabItem from "mint-ui/packages/tab-item/src/tab-item"
 import MtTabContainer from "mint-ui/packages/tab-container/src/tab-container"
 import MtTabContainerItem from "mint-ui/packages/tab-container-item/src/tab-container-item"
 import MtCell from "mint-ui/packages/cell/src/cell";
-import {getInfo, getStatus, setUserInfo} from "../../../utils/stuAPI";
+import {getInfo, getStatus, setBasicInfo} from "../../../utils/stuAPI";
 import MtField from "mint-ui/packages/field/src/field"
 import student from '../identitySelect/identitySelect'
 import {checkChinese} from "../../../utils/checkList";

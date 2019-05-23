@@ -4,7 +4,7 @@
   <div id="identitySelect">
     <!-- 新的header -->
     <div id = 'head'>
-      <mt-header fixed title="（1 / 3）身份选择">
+      <mt-header fixed title="（1 / 4）身份选择">
         <router-link to="/stu" slot="left">
           <mt-button icon="back">返回</mt-button>
         </router-link>

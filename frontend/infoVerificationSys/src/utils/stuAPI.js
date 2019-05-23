@@ -29,9 +29,9 @@ let http = axios.create({
 
 // 00 反馈
 // 留下联系信息 stuName String, contact String, remark String
-// export const feedBack = params => {
-//   return axios.post('/userBasicFunc/feedback', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
-// };
+export const feedBack = params => {
+  return axios.post('/userBasicFunc/feedback', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+};
 
 // 01 身份选择
 // 检查通行证号是否存在
@@ -41,9 +41,9 @@ export const userJuniorLogin = params => {
 
 // 02 人脸识别
 // 上传人脸照片文件匹配 File photo, HttpServletRequest request
-// export const recognize = (params,times) => {
-//   return axios.post('/faceRecognition/recognize', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
-// };
+export const recognize = (params,times) => {
+  return axios.post('/faceRecognition/recognize', params, {headers: {identityNum: Cookies.get('id'),times:times}}).then(res => res.data)
+};
 
 // 03 OCR识别
 // 上传通行证正面 File identification, HttpServletRequest request
@@ -72,9 +72,9 @@ export const setOtherInfo = params => {
 
 // 05电子签名
 // 提交电子签名
-// export const setSignature = params => {
-//   return axios.post('/userBasicFunc/sign', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
-// };
+export const setSignature = params => {
+  return axios.post('/userBasicFunc/sign', params, {headers: {identityNum: Cookies.get('id')}}).then(res => res.data)
+};
 
 // 获取学生状态信息
 export const getStatus = () => {

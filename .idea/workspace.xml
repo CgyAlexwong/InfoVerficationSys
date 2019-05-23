@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90eea965-19e7-4d9d-b314-33b6f30a0d86" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/assets/da8e974dc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/assets/da8e974dc.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+            <state relative-caret-position="-74">
+              <caret line="101" column="40" selection-start-line="101" selection-start-column="40" selection-end-line="101" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -27,8 +32,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3011">
-              <caret line="310" column="33" lean-forward="true" selection-start-line="310" selection-start-column="33" selection-end-line="310" selection-end-column="33" />
+            <state relative-caret-position="114">
+              <caret line="149" column="19" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="19" />
+              <folding>
+                <element signature="e#1851#1908#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -41,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
+            <state relative-caret-position="76">
               <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -53,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+            <state relative-caret-position="105">
+              <caret line="76" column="2" lean-forward="true" selection-start-line="76" selection-start-column="2" selection-end-line="76" selection-end-column="2" />
               <folding>
                 <element signature="e#19#44#0" expanded="true" />
               </folding>
@@ -65,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1938">
-              <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
+            <state relative-caret-position="114">
+              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
               <folding>
                 <element signature="e#878#935#0" expanded="true" />
               </folding>
@@ -75,13 +83,30 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/dist/static/img/da8e974dc.25daf29.jpg">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/assets/da8e974dc.jpg">
-          <provider selected="true" editor-type-id="images" />
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/faceVerify/faceVerify.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/components/feedback.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -106,15 +131,15 @@
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/identitySelect/identitySelect.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/adminLogin/AdminLogin.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/stuIdentitySelect/stuIdentitySelect.js" />
-        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/faceVerify/faceVerify.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/router/index.js" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/router/router.js" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/HelloWorld.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue" />
-        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/components/HelloWorld.vue" />
-        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue" />
-        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/faceVerify/faceVerify.vue" />
         <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue" />
+        <option value="$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue" />
       </list>
     </option>
   </component>
@@ -136,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,7 +297,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -330,22 +355,24 @@
       <workItem from="1557971044019" duration="7525000" />
       <workItem from="1557995448734" duration="4304000" />
       <workItem from="1558350827586" duration="2415000" />
-      <workItem from="1558523365675" duration="4567000" />
+      <workItem from="1558523365675" duration="6656000" />
+      <workItem from="1558578899829" duration="314000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27798000" />
+    <option name="totallyTimeSpent" value="30201000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24851191" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.34918034" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34918034" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -391,13 +418,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/faceVerify/faceVerify.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="130" column="14" lean-forward="true" selection-start-line="130" selection-start-column="14" selection-end-line="130" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/ESignature/ESignature.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3648" />
@@ -430,9 +450,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/config/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/node_modules/axios/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -450,16 +467,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/assets/da8e974dc.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/dist/static/img/da8e974dc.25daf29.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/config/index.js">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state relative-caret-position="76">
           <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -467,45 +486,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3011">
-          <caret line="310" column="33" lean-forward="true" selection-start-line="310" selection-start-column="33" selection-end-line="310" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
-          <folding>
-            <element signature="e#19#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/identitySelect/identitySelect.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
+        <state relative-caret-position="114">
+          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
           <folding>
             <element signature="e#878#935#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/dist/static/img/da8e974dc.25daf29.jpg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/components/end.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/assets/da8e974dc.jpg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/components/feedback.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/faceVerify/faceVerify.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/utils/stuAPI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="76" column="2" lean-forward="true" selection-start-line="76" selection-start-column="2" selection-end-line="76" selection-end-column="2" />
+          <folding>
+            <element signature="e#19#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/OCRVerify/OCRVerify.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="149" column="19" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="19" />
+          <folding>
+            <element signature="e#1851#1908#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/infoVerificationSys/src/views/student/informationVerify/informationVerify.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-74">
+          <caret line="101" column="40" selection-start-line="101" selection-start-column="40" selection-end-line="101" selection-end-column="40" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

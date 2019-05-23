@@ -2,7 +2,7 @@
 
 <template>
   <div id="OCRVerify">
-    <mt-header fixed title="（1 / 3）OCR身份识别">
+    <mt-header fixed title="（1 / 4）OCR身份识别">
       <router-link to="/stu" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
@@ -56,7 +56,7 @@
 import MtButton from 'mint-ui/packages/button/src/button'
 import MtHeader from "mint-ui/packages/header/src/header"
 import {MessageBox,Indicator} from 'mint-ui'
-import {doOCR, doOCRNegative, getStatus} from "../../../utils/stuAPI";
+import {userOCRLogin, getStatus} from "../../../utils/stuAPI";
 import lrz from 'lrz';
 import Cookies from 'js-cookie'
 import MtRadio from "mint-ui/packages/radio/src/radio";
@@ -87,8 +87,8 @@ export default {
       backCommitState: false,
       backCommitAble:false,
       sheetVisible:false,
-      img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
-      img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true',
+      img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/default.jpg?raw=true',
+      img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/default.jpg?raw=true',
       formData1 : new FormData(),
       formData2 : new FormData(),
       r1: 0,
@@ -147,7 +147,7 @@ export default {
     checkFront () {
       console.log(this.type);
       Indicator.open({text:'通行证正面校验中，请稍等……',spinnerType:'fading-circle'});
-      doOCR(this.formData1,this.type).then(res =>{
+      userOCRLogin(this.formData1,this.type).then(res =>{
         Indicator.close();
         //if (res.succeed === true){
           //MessageBox.alert('', {
