@@ -43,3 +43,21 @@
 .item {
     margin: 4px;
 }
+/deep/ .el-dialog__body {
+    padding: 50px 40px !important;
+}
+
+/deep/ .el-form-item__content {
+    line-height: 60px;
+    position: relative !important;
+
+}
+
+/deep/ .el-radio__label {
+    font-size: 20px;
+    padding-left: 10px !important;
+}
+
+/deep/ .el-form-item__label {
+    font-size: 20px !important;
+}

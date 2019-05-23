@@ -14,7 +14,7 @@
                     <el-button v-if="scope.row.basicInfoCheck===1" type="primary" plain disabled>已完成</el-button>
                     <el-button v-if="scope.row.basicInfoCheck===0" type="danger" plain disabled>未完成</el-button>
                     <el-tooltip class="top item" effect="dark" content="点击查看存疑信息" placement="top">
-                        <el-button @click="changeBasicInfoCheck(scope.row)" v-if="scope.row.basicInfoCheck===2"
+                        <el-button @click="handleQueryEdit(scope.row)" v-if="scope.row.basicInfoCheck===2"
                                    type="warning" plain>存疑
                         </el-button>
                     </el-tooltip>
@@ -57,8 +57,24 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-dialog title="学生基本信息存疑" :visible.sync="queryFormVisible" :before-close="handleDialogClose">
-            xixixi
+
+
+        <el-dialog title="学生存疑信息" :visible.sync="queryFormVisible" :before-close="handleDialogClose">
+            <el-form>
+                <el-form-item v-for="(info,index) in queryInfo" :key="index" :label="info.prop">
+                    <template>
+                        <el-radio v-model="info.selectedInfo" :label="info.databaseInfo">{{info.databaseInfo}}
+                        </el-radio>
+                        <el-radio v-model="info.selectedInfo" :label="info.studentInfo">{{info.studentInfo}}</el-radio>
+                        <el-radio  label="其他">
+                            其他 <el-input v-model="info.selectedInfo" style="margin-left: 10px;width: 100px" clearable></el-input>
+                        </el-radio>
+
+                    </template>
+                </el-form-item>
+            </el-form>
+
+            <img :src="ocrPhoto">
             <div slot="footer" class="dialog-footer">
                 <el-button @click="queryFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="editQuerySubmit">提交修改</el-button>
@@ -152,5 +168,7 @@
     </div>
 </template>
 
-<script src="./checkStatus.js"></script>
+<script src="./checkStatus.js">
+
+</script>
 <style scoped src="./checkStatus.css"></style>

@@ -7,11 +7,9 @@ import {
 } from '../../../utils/adminAPI'
 
 export default {
-
   name: 'CheckStatus',
   data () {
     return {
-
       tableData: [
         {
           identityNum: '1234567890',
@@ -58,11 +56,14 @@ export default {
           emergencyContactAddress: '',
         },
       },
-      queryForm: [
+      ocrPhoto: '',
+      currentIdentityNum: '',
+      queryInfo: [
         {
           databaseInfo: '',
           studentInfo: '',
           prop: '',
+          selectedInfo: ''
         }
       ],
 
@@ -79,6 +80,7 @@ export default {
   //     this.getStatus()
   //   })
   // },
+
   computed: {
     filteredTableData () {
       return this.tableData.filter(data => {
@@ -101,16 +103,7 @@ export default {
           })
         })
     },
-    //修改学生信息
-    handleInfoEdit (row) {
-      //编辑
-      this.dialogFormVisible = true
-      console.log(row.identityNum)
-      getUserInfo(row.identityNum)
-        .then(res => {
-          this.stuInfoForm = res.data
-        })
-    },
+
     handleDialogClose () {
       let _this = this
       _this.$confirm('确认关闭？')
@@ -126,14 +119,33 @@ export default {
         })
     },
 
-    //修改存疑基本信息
-    changeBasicInfoCheck (row) {
+    //修改存疑信息
+    handleQueryEdit (row) {
       this.queryFormVisible = true
-      //todo()
-      // handleFeedback(row.identityNum)
+      this.currentIdentityNum = row.identityNum
+
+      //todo() 删除测试数据
+      this.ocrPhoto = 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Biometric_Two-way_Permit_%28Front%29.jpg'
+      this.queryInfo = [
+        {
+          prop: '性别',
+          selectedInfo: '',
+          databaseInfo: '女',
+          studentInfo: '男'
+        },
+        {
+          prop: '学校',
+          selectedInfo: '',
+          databaseInfo: '南开大学',
+          studentInfo: '南京大学'
+        }
+      ]
+      // todo()
+      //  handleFeedback(row.identityNum)
       //   .then(res => {
       //     console.log(res)
-      //     this.queryForm = res.data
+      //     this.ocrPhoto = res.data.ocrPhoto
+      //     this.queryInfo = res.data.queryInfo
       //   })
       //   .catch(err => {
       //       this.$message({
@@ -148,25 +160,36 @@ export default {
     //提交存疑基本信息
     editQuerySubmit () {
       this.queryFormVisible = false
-      changeQuestionableInfo(
-        {
-          // identityNum:
-        }
-      )
-        .then(res => {
-          if (res.data.succeed) {
-            this.$message({
-              message: '修改成功',
-              type: 'success'
-            })
-            this.queryFormVisible = false
-          } else {
-            this.$message({
-              message: res.data.msg,
-              type: 'error'
-            })
-          }
-        })
+      let selectInfo = []
+      this.queryInfo.forEach(info => {
+        let tmpInfo = {}
+        tmpInfo.prop = info.prop
+        tmpInfo.info = info.selectedInfo
+        selectInfo.push(tmpInfo)
+      })
+      console.log(this.currentIdentityNum)
+      console.log(selectInfo)
+        //todo()
+        // changeQuestionableInfo(
+        //   {
+        //     identityNum: this.currentIdentityNum,
+        //     selectInfo: selectInfo
+        //   }
+        // )
+        //   .then(res => {
+        //     if (res.data.succeed) {
+        //       this.$message({
+        //         message: '修改成功',
+        //         type: 'success'
+        //       })
+        //       this.queryFormVisible = false
+        //     } else {
+        //       this.$message({
+        //         message: res.data.msg,
+        //         type: 'error'
+        //       })
+        //     }
+        //   })
     },
 
     //修改学生状态 index为身份证号码
@@ -339,6 +362,17 @@ export default {
     //     })
     //
     // },
+
+    //修改学生信息
+    handleInfoEdit (row) {
+      //编辑
+      this.dialogFormVisible = true
+      console.log(row.identityNum)
+      getUserInfo(row.identityNum)
+        .then(res => {
+          this.stuInfoForm = res.data
+        })
+    },
 
     //提交学生信息修改
     editInfoSubmit () {
