@@ -3,9 +3,9 @@
 <template>
   <div id="informationVerify">
     <div id = 'head'>
-      <mt-header fixed title="（2 / 4）基本信息校验">
-        <router-link to="/stu/OCRVerify" slot="left">
-          <mt-button icon="back" @click="warn">返回</mt-button>
+      <mt-header fixed title="（3 / 4）其他信息校验">
+        <router-link to="/stu/basicInfoVerify" slot="left">
+          <mt-button icon="back">返回</mt-button>
         </router-link>
       </mt-header>
     </div>
@@ -14,78 +14,58 @@
         <!--<mt-tab-item id="1" @click="tab1">必需校验信息</mt-tab-item>-->
         <!--<mt-tab-item id="2" @click="tab2">可修改信息</mt-tab-item>-->
       <!--</mt-navbar>-->
+      <p id="word">以下信息若为空则必须填写</p>
+      <div id = 'changeablePart'>
+        <div id="b">
+          <mt-field label="毕业中学：" v-model="graduateSchool" placeholder="请输入你的毕业中学名称" @input="graduateSchoolCheck" :disabled="changeablePart"></mt-field>
+          <dd v-if="!graduateSchoolValid">{{graduateSchoolMessage}}</dd>
+        </div>
+        <div id="b">
+          <mt-field label="移动电话：" v-model="mobileNumber" placeholder="请输入你的移动电话" @input="mobileNumberCheck" :disabled="changeablePart"></mt-field>
+          <dd v-if="!mobileNumberValid">{{mobileNumberMessage}}</dd>
+        </div>
+        <div id="b">
+          <mt-field label="通行证号：" v-model="mtpNumber" placeholder="请输入你的通行证号" @input="mtpNumberCheck" :disabled="changeablePart"></mt-field>
+          <dd v-if="!mtpNumberValid"><div v-html="mtpNumberMessage"></div></dd>
+        </div>
+        <div id="b">
+          <mt-field label="邮政编码：" v-model="postal" placeholder="请输入所在地区的邮政编码" @input="postalCheck" :disabled="changeablePart"></mt-field>
+          <dd v-if="!postalValid">{{postalMessage}}</dd>
+        </div>
+        <div id="b">
+          <mt-field label="通讯地址：" v-model="address" placeholder="用于录取通知书递送" @input="addressCheck" :disabled="changeablePart"></mt-field>
+          <dd v-if="!addressValid">{{addressMessage}}</dd>
+        </div>
+        <div id="b">
+          <mt-field label="紧急联系人：" v-model="emergencyContact.emergencyContactPerson" placeholder="请输入你的紧急联系人"  @input="emergencyContactPersonCheck" :disabled="changeablePart"></mt-field>
+          <dd v-if="!emergencyContactPersonValid">{{emergencyContactPersonMessage}}</dd>
+        </div>
+        <div id="b">
+          <mt-field label="紧急联系电话：" v-model="emergencyContact.emergencyContactNumber" placeholder="请输入你的紧急联系电话" @input="emergencyContactNumberCheck" :disabled="changeablePart"></mt-field>
+          <dd v-if="!emergencyContactNumberValid">{{emergencyContactNumberMessage}}</dd>
+        </div>
+        <div id="bSpecial">
+          <mt-field label="紧急联系地址：" v-model="emergencyContact.emergencyContactAddress" placeholder="请输入你的紧急联系地址" @input="emergencyContactAddressCheck" :disabled="changeablePart"></mt-field>
+          <dd v-if="!emergencyContactAddressValid">{{emergencyContactAddressMessage}}</dd>
+        </div>
+      </div>
 
-
-          <p id="word">以下信息不可修改，请仔细确认！<br>如无误请点击下一步，如有误请点击底部反馈</p>
-          <div id="unchangeablePart">
-          <mt-cell id="a" title="考生号：" v-model="examNum"/>
-          <mt-cell id="a" title="姓名：" v-model="stuName"/>
-          <mt-cell id="a" title="性别：" v-model="sex"/>
-          <mt-cell id="a" title="民族：" v-model="nation"/>
-          <mt-cell id="a" title="出生日期：" v-model="birthdate"/>
-          <mt-cell id="a" title="报考科类：" v-model="subject"/>
-          <mt-cell id="a" title="电子邮件：" v-model="email"/>
-          <mt-cell id="a" title="联系电话：" v-model="phoneNumber"/>
-          <mt-cell id="aSpecial" title="身份证：" v-model="identityNum"/>
-          </div>
-          <button id = 'check1' v-bind:disabled="unchangeablePart" @click="change1">下一步</button>
-
-          <p id="word">以下信息可修改但必须填写</p>
-          <div id = 'changeablePart'>
-            <div id="b">
-              <mt-field label="毕业中学：" v-model="graduateSchool" placeholder="请输入你的毕业中学名称" @input="graduateSchoolCheck" :disabled="changeablePart"></mt-field>
-              <dd v-if="!graduateSchoolValid">{{graduateSchoolMessage}}</dd>
-            </div>
-            <div id="b">
-              <mt-field label="移动电话：" v-model="mobileNumber" placeholder="请输入你的移动电话" @input="mobileNumberCheck" :disabled="changeablePart"></mt-field>
-              <dd v-if="!mobileNumberValid">{{mobileNumberMessage}}</dd>
-            </div>
-            <div id="b">
-              <mt-field label="通行证号：" v-model="mtpNumber" placeholder="请输入你的通行证号" @input="mtpNumberCheck" :disabled="changeablePart"></mt-field>
-              <dd v-if="!mtpNumberValid">{{mtpNumberMessage}}</dd>
-            </div>
-            <div id="b">
-              <mt-field label="邮政编码：" v-model="postal" placeholder="请输入所在地区的邮政编码" @input="postalCheck" :disabled="changeablePart"></mt-field>
-              <dd v-if="!postalValid">{{postalMessage}}</dd>
-            </div>
-            <div id="b">
-             <mt-field label="通讯地址：" v-model="address" placeholder="用于录取通知书递送" @input="addressCheck" :disabled="changeablePart"></mt-field>
-              <dd v-if="!addressValid">{{addressMessage}}</dd>
-            </div>
-            <div id="b">
-              <mt-field label="紧急联系人：" v-model="emergencyContact.emergencyContactPerson" placeholder="请输入你的紧急联系人"  @input="emergencyContactPersonCheck" :disabled="changeablePart"></mt-field>
-              <dd v-if="!emergencyContactPersonValid">{{emergencyContactPersonMessage}}</dd>
-            </div>
-            <div id="b">
-              <mt-field label="紧急联系电话：" v-model="emergencyContact.emergencyContactNumber" placeholder="请输入你的紧急联系电话" @input="emergencyContactNumberCheck" :disabled="changeablePart"></mt-field>
-              <dd v-if="!emergencyContactNumberValid">{{emergencyContactNumberMessage}}</dd>
-            </div>
-            <div id="bSpecial">
-              <mt-field label="紧急联系地址：" v-model="emergencyContact.emergencyContactAddress" placeholder="请输入你的紧急联系地址" @input="emergencyContactAddressCheck" :disabled="changeablePart"></mt-field>
-              <dd v-if="!emergencyContactAddressValid">{{emergencyContactAddressMessage}}</dd>
-            </div>
-          </div>
-          <p id="word">以下信息可修改且自愿填写</p>
-          <div id = 'voluntaryPart' style="height: 147px">
-            <div id="b">
-              <mt-field label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名" :disabled="changeablePart"></mt-field>
-            </div>
-            <div id="b">
-              <mt-field label="毕业时间：" v-model="graduateDate" placeholder="请输入毕业时间，如：2019" :disabled="changeablePart"></mt-field>
-              <dd v-if="!graduateDateValid">{{graduateDateMessage}}</dd>
-            </div>
-            <div id="bSpecial">
-             <mt-field label="籍贯：" v-model="nativePlace" placeholder="请输入你的籍贯" :disabled="changeablePart"></mt-field>
-            </div>
-          </div>
-          <div id="voluntaryButton">
-            <button id="check2" v-bind:disabled="changeablePart" @click="change2">确认填写完毕</button>
-          </div>
-
+      <p id="word">以下信息自愿填写</p>
+      <div id = 'voluntaryPart' style="height: 147px">
+        <div id="b">
+          <mt-field label="外文姓名：" v-model="foreignName" placeholder="请输入你的外文姓名" :disabled="changeablePart" @input="foreignNameCheck"></mt-field>
+        </div>
+        <div id="b">
+          <mt-field label="毕业年份：" v-model="graduateDate" placeholder="请输入毕业年份，如：2019" :disabled="changeablePart" @input="graduateDateCheck"></mt-field>
+        </div>
+        <div id="bSpecial">
+          <mt-field label="籍贯：" v-model="nativePlace" placeholder="请输入你的籍贯" :disabled="changeablePart" @input="nativePlaceCheck"></mt-field>
+        </div>
+      </div>
     </div>
     <div id="confirmButton">
-      <button id="feedback" @click="feedback">反馈</button>
-      <button id='check' @click="submit" :disabled="!unchangeablePart || !changeablePart" >提交</button>
+      <!--<button id="feedback" @click="feedback">反馈</button>-->
+      <button id='check' @click="submit">提交</button>
     </div>
   </div>
 </template>
@@ -99,17 +79,16 @@ import MtTabItem from "mint-ui/packages/tab-item/src/tab-item"
 import MtTabContainer from "mint-ui/packages/tab-container/src/tab-container"
 import MtTabContainerItem from "mint-ui/packages/tab-container-item/src/tab-container-item"
 import MtCell from "mint-ui/packages/cell/src/cell";
-import {getInfo, getStatus, setBasicInfo} from "../../../utils/stuAPI";
+import {getInfo, getStatus, setOtherInfo} from "../../../utils/stuAPI";
 import MtField from "mint-ui/packages/field/src/field"
-import student from '../identitySelect/identitySelect'
-import {checkChinese} from "../../../utils/checkList";
+import {checkChinese,checkMtpNum} from "../../../utils/checkList";
 
 export default {
   name: "informationVerify",
   data(){
     return {
-      selected: '1',
-      unchangeablePart:false,
+      // selected: '1',
+      // unchangeablePart:false,
       changeablePart:false,
 
       graduateSchoolValid: true,
@@ -128,23 +107,12 @@ export default {
       emergencyContactNumberMessage: '',
       emergencyContactAddressValid: true,
       emergencyContactAddressMessage: '',
-      graduateDateValid: true,
-      graduateDateMessage: '',
 
-      examNum:'',
-      stuName:'',
       foreignName:'',
-      sex:'',
-      nation:'',
-      birthdate:'',
-      subject:'',
       graduateDate:'',
       graduateSchool:'',
-      email:'',
-      phoneNumber:'',
       mobileNumber:'',
       mtpNumber: '',
-      identityNum:'',
       postal:'',
       nativePlace:'',
       address:'',
@@ -159,74 +127,111 @@ export default {
   mounted:function(){
     getInfo(
     ).then(response => {
-      this.examNum = response.examNum;
-      this.stuName = response.stuName;
       this.foreignName = response.foreignName;
-      this.sex = response.sex === 1 ? '男':'女';
-      this.nation = response.nation;
-      this.birthdate = response.birthdate;
-      if (response.subject === 0){
-        this.subject = '文科'
-      }else if (response.subject === 1) {
-        this.subject = '理科'
-      }else{
-        this.subject = '不分文理'
-      }
       this.graduateDate = response.graduateDate;
       this.graduateSchool = response.graduateSchool;
-      this.email = response.email;
-      this.phoneNumber = response.phoneNumber;
       this.mobileNumber = response.mobileNumber;
       this.mtpNumber = response.mtpNumber;
-      this.identityNum = response.identityNum;
       this.postal = response.postal;
       this.nativePlace = response.nativePlace;
       this.address = response.address;
       this.emergencyContact.emergencyContactPerson = response.emergencyContact.emergencyContactPerson;
       this.emergencyContact.emergencyContactNumber = response.emergencyContact.emergencyContactNumber;
       this.emergencyContact.emergencyContactAddress = response.emergencyContact.emergencyContactAddress
-    })
+    });
+
+    if(sessionStorage.getItem('foreignName') !== null && sessionStorage.getItem('foreignName')!==''){
+      this.foreignName = sessionStorage.getItem('foreignName');
+    }
+    if(sessionStorage.getItem('graduateDate') !== null && sessionStorage.getItem('graduateDate')!==''){
+      this.graduateDate = sessionStorage.getItem('graduateDate');
+    }
+    if(sessionStorage.getItem('graduateSchool') !== null && sessionStorage.getItem('graduateSchool')!==''){
+      this.graduateSchool = sessionStorage.getItem('graduateSchool');
+    }
+    if(sessionStorage.getItem('mobileNumber') !== null && sessionStorage.getItem('mobileNumber')!==''){
+      this.mobileNumber = sessionStorage.getItem('mobileNumber');
+    }
+    if(sessionStorage.getItem('mtpNumber') !== null && sessionStorage.getItem('mtpNumber')!==''){
+      this.mtpNumber = sessionStorage.getItem('mtpNumber');
+    }
+    if(sessionStorage.getItem('postal') !== null && sessionStorage.getItem('postal')!==''){
+      this.postal = sessionStorage.getItem('postal');
+    }
+    if(sessionStorage.getItem('nativePlace') !== null && sessionStorage.getItem('nativePlace')!==''){
+      this.nativePlace = sessionStorage.getItem('nativePlace');
+    }
+    if(sessionStorage.getItem('address') !== null && sessionStorage.getItem('address')!==''){
+      this.address = sessionStorage.getItem('address');
+    }
+    if(sessionStorage.getItem('emergencyContactPerson') !== null && sessionStorage.getItem('emergencyContactPerson')!==''){
+      this.emergencyContact.emergencyContactPerson = sessionStorage.getItem('emergencyContactPerson');
+    }
+    if(sessionStorage.getItem('emergencyContactNumber') !== null && sessionStorage.getItem('emergencyContactNumber')!==''){
+      this.emergencyContact.emergencyContactNumber = sessionStorage.getItem('emergencyContactNumber');
+    }
+    if(sessionStorage.getItem('emergencyContactAddress') !== null && sessionStorage.getItem('emergencyContactAddress')!==''){
+      this.emergencyContact.emergencyContactAddress = sessionStorage.getItem('emergencyContactAddress');
+    }
   },
   methods:{
-    warn:function () {
-      MessageBox.alert('',{
-        title:"提示",
-        message:"你已完成前阶段任务，无法返回"
-      })
-    },
+    // warn:function () {
+    //   MessageBox.alert('',{
+    //     title:"提示",
+    //     message:"你已完成前阶段任务，无法返回"
+    //   })
+    // },
     graduateSchoolCheck () {
+      sessionStorage.setItem('graduateSchool',this.graduateSchool);
       let result = checkChinese(this.graduateSchool);
       this.graduateSchoolValid = result.res;
       this.graduateSchoolMessage = result.msg
     },
     mobileNumberCheck () {
+      sessionStorage.setItem('mobileNumber',this.mobileNumber);
       this.mobileNumberValid = true;
       this.mobileNumberMessage = ''
     },
     mtpNumberCheck(){
-      this.mtpNumberValid = true;
-      this.mtpNumberMessage = ''
+      sessionStorage.setItem('mtpNumber',this.mtpNumber);
+      let result = checkMtpNum(this.mtpNumber);
+      this.mtpNumberValid = result.res;
+      this.mtpNumberMessage = result.msg
     },
     postalCheck () {
+      sessionStorage.setItem('postal',this.postal);
       this.postalValid = true;
       this.postalMessage = ''
     },
     addressCheck () {
+      sessionStorage.setItem('address',this.address);
       this.addressValid = true;
       this.addressMessage = ''
     },
     emergencyContactPersonCheck () {
+      sessionStorage.setItem('emergencyContactPerson',this.emergencyContact.emergencyContactPerson);
       let result = checkChinese(this.emergencyContact.emergencyContactPerson);
       this.emergencyContactPersonValid = result.res;
       this.emergencyContactPersonMessage = result.msg
     },
     emergencyContactNumberCheck () {
+      sessionStorage.setItem('emergencyContactNumber',this.emergencyContact.emergencyContactNumber);
       this.emergencyContactNumberValid = true;
       this.emergencyContactNumberMessage = ''
     },
     emergencyContactAddressCheck () {
+      sessionStorage.setItem('emergencyContactAddress',this.emergencyContact.emergencyContactAddress);
       this.emergencyContactAddressValid = true;
       this.emergencyContactAddressMessage = ''
+    },
+    foreignNameCheck(){
+      sessionStorage.setItem('foreignName',this.foreignName)
+    },
+    graduateDateCheck(){
+      sessionStorage.setItem('graduateDate',this.graduateDate)
+    },
+    nativePlaceCheck(){
+      sessionStorage.setItem('nativePlace',this.nativePlace)
     },
     /*
     graduateDateCheck () {
@@ -242,7 +247,9 @@ export default {
       this.$router.push('/feedback')
     },
     submit:function(){
-      if (this.unchangeablePart && this.changeablePart){
+      if (this.graduateSchool!==''&&this.mobileNumber!==''&&this.mtpNumber!==''&&this.postal!==''&&this.address!==''
+        &&this.emergencyContact.emergencyContactPerson!==''&&this.emergencyContact.emergencyContactNumber!==''&&this.emergencyContact.emergencyContactAddress!==''
+        &&this.graduateSchoolValid&&this.emergencyContactPersonValid){
         console.log({
           foreignName: this.foreignName,
           graduateDate: this.graduateDate,
@@ -257,7 +264,7 @@ export default {
           emergencyContactAddress:this.emergencyContact.emergencyContactAddress
         });
         Indicator.open({text:'基本信息提交中，请稍等……',spinnerType:'fading-circle'});
-        setUserInfo({
+        setOtherInfo({
           foreignName: this.foreignName,
           graduateDate: this.graduateDate,
           graduateSchool: this.graduateSchool,
@@ -272,12 +279,13 @@ export default {
         }).then(response =>{
           Indicator.close();
           if (response.succeed === true){
+            sessionStorage.clear();
             getStatus().then( response =>{
-              if (response.ocrCheck === false){
-                this.$router.push('/stu/OCRVerify')
-              } else if (response.ocrCheck === true && response.infoCheck === false){
-                this.$router.push('/stu/informationVerify')
-              } else if (response.ocrCheck === true && response.infoCheck === true){
+              if (response.basicInfoCheck === 0){
+                this.$router.push('/stu/basicInfoVerify')
+              } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 0){
+                this.$router.push('/stu/otherInfoVerify')
+              } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 1){
                 this.$router.push('/end')
               } else {
                 this.$router.push('/stu/OCRVerify')
@@ -285,17 +293,30 @@ export default {
             })
           }
         })
-      }
-      else{
-        if(!this.unchangeablePart && !this.changeablePart){
-          console.log('还未确认信息')
-        }
-        else if(!this.unchangeablePart){
-          console.log('还未确认必须校验信息')
-        }
-        else{
-          console.log('还未确认可修改信息')
-        }
+      }else if (this.graduateSchool === ''){
+        this.graduateSchoolValid = false;
+        this.graduateSchoolMessage = '毕业中学不能为空！'
+      } else if (this.mobileNumber === ''){
+        this.mobileNumberValid = false;
+        this.mobileNumberMessage = '移动电话不能为空！'
+      } else if(this.mtpNumber === ''){
+        this.mtpNumberValid = false;
+        this.mtpNumberMessage = '通行证号不能为空！'
+      }else if (this.postal === ''){
+        this.postalValid = false;
+        this.postalMessage = '邮政编码不能为空！'
+      } else if (this.address === ''){
+        this.addressValid = false;
+        this.addressMessage = '通讯地址不能为空！'
+      } else if (this.emergencyContact.emergencyContactPerson === ''){
+        this.emergencyContactPersonValid = false;
+        this.emergencyContactPersonMessage = '紧急联系人不能为空！'
+      } else if (this.emergencyContact.emergencyContactNumber === ''){
+        this.emergencyContactNumberValid = false;
+        this.emergencyContactNumberMessage = '紧急联系电话不能为空！'
+      } else if (this.emergencyContact.emergencyContactAddress === ''){
+        this.emergencyContactAddressValid = false;
+        this.emergencyContactAddressMessage = '紧急联系地址不能为空！'
       }
     },
     tab1:function () {
@@ -373,7 +394,7 @@ export default {
     min-height: 41px;
   }
   #word{
-    font-size: 12px;
+    font-size: 14px;
     margin: 9px;
     padding-top: 2px;
     display: block;
@@ -414,6 +435,8 @@ export default {
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
+    margin-top: 8px;
+    margin-bottom: 100px;
   }
   #check:disabled{
     opacity: 0.6;

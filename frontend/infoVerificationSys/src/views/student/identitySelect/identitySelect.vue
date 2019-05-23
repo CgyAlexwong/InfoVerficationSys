@@ -14,11 +14,11 @@
     <div id="box" >
       <mt-radio title="请选择你来自的地区：" v-model="originPlace" :options="options"></mt-radio>
     </div>
-    <!-- 填写身份证号 mt-field -->
-    <p  id="word">请输入你的身份证号：</p>
-    <div id='identityInput'>
-      <mt-field label="身份证号：" placeholder="请输入你的身份证号" v-model="identityNum" @input="identityNumCheck"></mt-field>
-      <dd v-if="!identityNumValid"><div v-html="identityNumMessage"></div></dd>
+    <!-- 填写通行证号 mt-field -->
+    <p  id="word">请输入你的通行证号：</p>
+    <div id='mtpInput'>
+      <mt-field label="通行证号：" placeholder="请输入你的通行证号" v-model="mtpNum" @input="mtpNumCheck"></mt-field>
+      <dd v-if="!mtpNumValid"><div v-html="mtpNumMessage"></div></dd>
     </div>
     <div id="checkButton">
       <button size="small" @click="submit">确认</button>
@@ -36,7 +36,7 @@ import MtField from "mint-ui/packages/field/src/field";
 import { userJuniorLogin ,getStatus } from "../../../utils/stuAPI";
 import Cookies from 'js-cookie';
 import MtCell from "mint-ui/packages/cell/src/cell";
-import {checkIdentityNum} from "../../../utils/checkList";
+import {checkMtpNum} from "../../../utils/checkList";
 
 export default {
   name: 'Identity',
@@ -44,9 +44,12 @@ export default {
   data () {
     return {
       originPlace: '',
-      identityNum: '',
-      identityNumValid: true,
-      identityNumMessage: '',
+      mtpNum: '',
+      mtpNumValid: false,
+      mtpNumMessage: '请输入正确格式的通行证号！例如：<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp香港：H12345678<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp澳门：M12345678<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp台湾：12345678',
       options : [
         {
           label: '台湾',
@@ -67,45 +70,44 @@ export default {
     Cookies.set('id','');
   },
   methods:{
-    identityNumCheck () {
-      let result = checkIdentityNum(this.identityNum);
-      this.identityNumValid = result.res;
-      this.identityNumMessage = result.msg
+    mtpNumCheck () {
+      let result = checkMtpNum(this.mtpNum);
+      this.mtpNumValid = result.res;
+      this.mtpNumMessage = result.msg
     },
     // 测试方法，直接进入下一环节
     go:function(){
       Cookies.set('id','171250639');
-      this.$router.push('/stu/faceVerify')
+      // this.$router.push('/stu/faceVerify')
     },
     // 发送信息确认，弹框提示
     submit:function () {
-      if (this.identityNum !== '' && this.identityNumValid && this.originPlace !== ''){
+      if (this.mtpNum !== '' && this.mtpNumValid && this.originPlace !== ''){
         console.log({
-          identityNum:this.identityNum,
-          originPlace:parseInt(this.originPlace)
+          mtpNum:this.mtpNum,
+          region:parseInt(this.originPlace)
         });
         Indicator.open({text:'匹配中，请稍等……',spinnerType:'fading-circle'});
         userJuniorLogin({
-          identityNum:this.identityNum,
-          originPlace:parseInt(this.originPlace)
+          mtpNum:this.mtpNum,
+          region:parseInt(this.originPlace)
           }
         ).then(response =>{
           Indicator.close();
           if(response.succeed === true){
-            Cookies.set('id',this.identityNum);
-            Cookies.set('place',this.originPlace)
+            Cookies.set('id',response.msg);
             MessageBox.alert('', {
               message: '成功匹配信息，点击进入下一步！',
-              title: '成功',
+              title: '找到你啦！',
               confirmButtonText: '下一步'
             }).then(action => {
               if (action === 'confirm') {
                 getStatus().then( response =>{
-                  if (response.ocrCheck === false){
-                    this.$router.push('/stu/OCRVerify')
-                  } else if (response.ocrCheck === true && response.infoCheck === false){
-                    this.$router.push('/stu/informationVerify')
-                  } else if (response.ocrCheck === true && response.infoCheck === true){
+                  if (response.basicInfoCheck === 0){
+                    this.$router.push('/stu/basicInfoVerify')
+                  } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 0){
+                    this.$router.push('/stu/otherInfoVerify')
+                  } else if (response.basicInfoCheck === 1 && response.otherInfoCheck === 1){
                     this.$router.push('/end')
                   } else {
                     this.$router.push('/stu/OCRVerify')
@@ -113,25 +115,27 @@ export default {
                 })
               }
             })
-          } else if(response.msg === '无照片信息'){
-            MessageBox.alert('', {
-              message: response.msg,
-              title: '提示',
-              confirmButtonText: '反馈'
-            }).then(action => {
-              if (action === 'confirm') {     //反馈的回调
-                this.$router.push('/feedback')
-              }
-            })
-          } else {
+          }
+          // else if(response.msg === '无照片信息'){
+          //   MessageBox.alert('', {
+          //     message: response.msg,
+          //     title: '提示',
+          //     confirmButtonText: '反馈'
+          //   }).then(action => {
+          //     if (action === 'confirm') {     //反馈的回调
+          //       this.$router.push('/feedback')
+          //     }
+          //   })
+          // }
+          else {
             MessageBox.confirm('', {
               message: response.msg,
-              title: '提示',
-              confirmButtonText: '反馈',
+              title: '哎呀没找到你！',
+              confirmButtonText: 'OCR识别',
               cancelButtonText: '重试'
             }).then(action => {
               if (action === 'confirm') {     //反馈的回调
-                this.$router.push('/feedback')
+                this.$router.push('/stu/OCRVerify')
               }
             }).catch(err => {
               if (err === 'cancel') {     //重试的回调
@@ -140,9 +144,9 @@ export default {
             })
           }
         })
-      } else if (this.identityNum === '') {
-        this.identityNumValid = false;
-        this.identityNumMessage = '请输入身份证号！'
+      } else if (this.mtpNum === '') {
+        this.mtpNumValid = false;
+        this.mtpNumMessage = '请输入身份证号！'
       }
     },
   }

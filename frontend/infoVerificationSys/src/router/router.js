@@ -17,17 +17,17 @@ router.beforeEach((to, from, next) => {
     next('/stu')
   }
   else {
-    if (to.meta.num === 0) {
+    // if (to.meta.num === 0) {
+    //   document.title = to.meta.title
+    //   next()
+    // } else if (to.meta.num < from.meta.num) {
+    //   document.title = from.meta.title
+    //   to.path = this.path
+    //   next(to.path)
+    // } else {
       document.title = to.meta.title
       next()
-    } else if (to.meta.num < from.meta.num) {
-      document.title = from.meta.title
-      to.path = this.path
-      next(to.path)
-    } else {
-      document.title = to.meta.title
-      next()
-    }
+    // }
   }
 })
 

@@ -106,6 +106,25 @@ export function checkIdentityNum (value) {
   return {res: res, msg: msg}
 }
 
+// 检测通行证号
+export function checkMtpNum (value) {
+  let res = true;
+  let msg = '';
+  if (value === '') {
+    res = true
+  } else {
+    let identityNumPattern = /^[A-Z]?[0-9]{8}$/;
+    res = identityNumPattern.test(value);
+    if (!res) {
+      msg = '请输入正确格式的通行证号！例如：<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp香港：H12345678<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp澳门：M12345678<br>' +
+        '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp台湾：12345678'
+    }
+  }
+  return {res: res, msg: msg}
+}
+
 // 检测邮政编码
 export function checkPostal (value) {
   let res = true;

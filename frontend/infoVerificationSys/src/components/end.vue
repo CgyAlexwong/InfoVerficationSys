@@ -23,7 +23,6 @@ export default {
   components: {MtButton},
   mounted:function () {
     Cookies.remove('id');
-    Cookies.remove('place');
   }
 }
 </script>

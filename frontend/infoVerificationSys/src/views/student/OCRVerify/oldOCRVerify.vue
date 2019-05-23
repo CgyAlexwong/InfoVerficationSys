@@ -2,20 +2,17 @@
 
 <template>
   <div id="OCRVerify">
-    <mt-header fixed title="（1 / 4）OCR身份识别">
-      <router-link to="/stu" slot="left">
-        <mt-button icon="back">首页</mt-button>
+    <mt-header fixed title="（1 / 4）本式台胞证OCR">
+      <router-link to="/stu/OCRVerify" slot="left">
+        <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
 
-    <p id="word3">提示：<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;如果你使用的是本式台胞证，请点击<router-link to="/stu/oldOCRVerify">前往此处</router-link>验证</p>
-    <hr/>
     <!--<div id="box" v-if="typeChoose">-->
       <!--<mt-radio title="请选择你的通行证新旧类型：" v-model="type" :options="options"></mt-radio>-->
     <!--</div>-->
 
-    <p id="word1">请拍摄你的通行证正面：</p>
+    <p id="word1">请拍摄&nbsp;<b>本式台胞证</b>&nbsp;中通行证正面：</p>
     <div id="front" >
       <div class="front-upload" id="frontCamera">
         <input id='cam1' type="file" accept="image/*" capture="camera" @change="previewFront">
@@ -84,20 +81,20 @@ export default {
       //     value: 'old'
       //   }
       // ],
-      type:'new',
+      type:'old',
       frontCommitState: true,
       frontCommitAble: false,
       backCommitState: false,
       backCommitAble:false,
       sheetVisible:false,
       img1:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/default.jpg?raw=true',
-      // img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/default.jpg?raw=true',
+      img2:'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/default.jpg?raw=true',
       formData1 : new FormData(),
-      // formData2 : new FormData(),
+      formData2 : new FormData(),
       r1: 0,
-      // r2: 0,
+      r2: 0,
       rotateTimesFront: 0,
-      // rotateTimesBack: 0
+      rotateTimesBack: 0
     }
   },
   // mounted:function(){
@@ -330,18 +327,10 @@ export default {
     border-top-width: 5px;
     border-bottom-color: #888888;
   }
-  #word1,#word2{
+  #word1,#word2,#word3,#word4{
     font-size: 16px;
-    margin: 4px 9px 9px;
-    padding: 4px 0 4px;
-    display: block;
-    color: #888;
-    text-align: left;
-  }
-  #word3{
-    font-size: 16px;
-    margin: 9px 9px 2px;
-    padding: 8px 0 0;
+    margin: 9px;
+    padding: 8px 0 4px;
     display: block;
     color: #888;
     text-align: left;
@@ -368,7 +357,6 @@ export default {
     top: 0;
     opacity: 0;
     filter: alpha(opacity=0);
-    /*cursor: pointer;*/
     outline: none;
   }
   .back-upload {
@@ -406,7 +394,6 @@ export default {
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;
-    margin-bottom: 100px;
   }
   #commitFront:disabled{
     opacity: 0.6;
