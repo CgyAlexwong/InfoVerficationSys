@@ -93,6 +93,7 @@ export default {
   methods: {
     //获取学生状态
     getStatus () {
+
       getUserStatus()
         .then(res => {
           this.tableData = res.data
@@ -143,8 +144,7 @@ export default {
 
       handleFeedback(row.identityNum)
         .then(res => {
-          console.log(res)
-          this.ocrPhoto ="res.data.ocrPhoto"
+          this.ocrPhoto =res.data.ocrPhoto
           this.queryInfo = res.data.queryInfo
         })
         .catch(err => {
