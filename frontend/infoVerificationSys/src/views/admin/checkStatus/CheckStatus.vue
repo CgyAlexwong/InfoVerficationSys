@@ -59,22 +59,29 @@
         </el-table>
 
 
-        <el-dialog title="学生存疑信息" :visible.sync="queryFormVisible" :before-close="handleDialogClose">
-            <el-form>
+        <el-dialog style='padding-top:0' title="学生存疑信息" :visible.sync="queryFormVisible"
+                   :before-close="handleDialogClose">
+            <p style="font-size: larger;font-weight:bolder">⚠️ 第一项为数据库信息；第二项为学生填写信息</p>
+            <el-form v-loading="loading" element-loading-text="拼命加载中"  element-loading-background="rgba(0, 0, 0, 0.9)"
+                     element-loading-spinner="el-icon-loading">
                 <el-form-item v-for="(info,index) in queryInfo" :key="index" :label="info.prop">
                     <template>
                         <el-radio v-model="info.selectedInfo" :label="info.databaseInfo">{{info.databaseInfo}}
                         </el-radio>
                         <el-radio v-model="info.selectedInfo" :label="info.studentInfo">{{info.studentInfo}}</el-radio>
-                        <el-radio  label="其他">
-                            其他 <el-input v-model="info.selectedInfo" style="margin-left: 10px;width: 100px" clearable></el-input>
+                        <el-radio label="其他">
+                            其他
+                            <el-input v-model="info.selectedInfo" style="margin-left: 10px;width: 100px"
+                                      clearable></el-input>
                         </el-radio>
 
                     </template>
                 </el-form-item>
+                <el-form-item>
+                    <img :src="ocrPhoto.split('\n').join('')" style='height: 600px' alt="无法显示图片">
+                </el-form-item>
             </el-form>
 
-            <img  :src="ocrPhoto.split('\n').join('')" style='height: 600px'alt="无法显示图片">
             <div slot="footer" class="dialog-footer">
                 <el-button @click="queryFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="editQuerySubmit">提交修改</el-button>

@@ -5,7 +5,7 @@ import {
   getUserInfo,
   changeUserInfo
 } from '../../../utils/adminAPI'
-
+import * as Loading from 'element-ui'
 
 export default {
   name: 'CheckStatus',
@@ -73,6 +73,7 @@ export default {
       search: '',
       dialogFormVisible: false,
       queryFormVisible: false,
+      loading: true
     }
   },
 
@@ -126,26 +127,12 @@ export default {
       this.queryFormVisible = true
       this.currentIdentityNum = row.identityNum
 
-      // this.ocrPhoto = 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Biometric_Two-way_Permit_%28Front%29.jpg'
-      // this.queryInfo = [
-      //   {
-      //     prop: '性别',
-      //     selectedInfo: '',
-      //     databaseInfo: '女',
-      //     studentInfo: '男'
-      //   },
-      //   {
-      //     prop: '学校',
-      //     selectedInfo: '',
-      //     databaseInfo: '南开大学',
-      //     studentInfo: '南京大学'
-      //   }
-      // ]
 
       handleFeedback(row.identityNum)
         .then(res => {
-          this.ocrPhoto =res.data.ocrPhoto
+          this.ocrPhoto = res.data.ocrPhoto
           this.queryInfo = res.data.queryInfo
+          this.loading=false
         })
         .catch(err => {
             this.$message({
@@ -161,7 +148,7 @@ export default {
     editQuerySubmit () {
       let flag = true
       this.queryInfo.forEach(info => {
-        if (info.selectedInfo === '' || info.selectedInfo===undefined) {
+        if (info.selectedInfo === '' || info.selectedInfo === undefined) {
           flag = false
         }
       })

@@ -50,7 +50,7 @@
 }
 
 /deep/ .el-dialog__body {
-    padding: 50px 40px !important;
+    padding: 0 40px !important;
 }
 
 /deep/ .el-form-item__content {
