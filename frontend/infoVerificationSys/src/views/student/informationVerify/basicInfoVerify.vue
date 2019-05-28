@@ -15,7 +15,7 @@
         <!--<mt-tab-item id="2" @click="tab2">可修改信息</mt-tab-item>-->
       <!--</mt-navbar>-->
 
-      <p id="word">请仔细确认以下信息！<br>如无误请点击提交，如有误请点击底部修改</p>
+      <!--<p id="word">请仔细确认以下信息！<br>如无误请点击提交，如有误请点击底部修改</p>-->
       <div style="display: flex">
         <p id="word">当前状态：
           <img src="../../../assets/错.png" alt="" style="width: 15px;height: 15px" v-if="a">
@@ -115,6 +115,12 @@ export default {
   },
   components: {MtField, MtCell, MtTabContainerItem, MtTabContainer, MtTabItem, MtNavbar, MtButton, MtHeader},
   mounted:function(){
+    MessageBox.alert('', {
+      message: '请仔细确认以下信息！如无误请点击提交，如有误请点击底部修改',
+      title: '请仔细阅读',
+      confirmButtonText: '我记住了'
+    });
+
     getInfo(
     ).then(response => {
       this.examNum = response.examNum;
@@ -176,8 +182,14 @@ export default {
     },
     sexCheck () {
       sessionStorage.setItem('sex',this.sex);
-      this.sexValid = true;
-      this.sexMessage = ''
+      if(this.sex === '男'||this.sex === '女'||this.sex === ''){
+        this.sexValid = true;
+        this.sexMessage = ''
+      }
+      else{
+        this.sexValid = false;
+        this.sexMessage = '请输入‘男’或‘女’'
+      }
     },
     nationCheck(){
       sessionStorage.setItem('nation',this.nation);
@@ -190,8 +202,13 @@ export default {
     },
     subjectCheck () {
       sessionStorage.setItem('subject',this.subject);
-      this.subjectValid = true;
-      this.subjectMessage = ''
+      if(this.subject === '文科'||this.subject === '理科'||this.subject === '不分文理'||this.subject === ''){
+        this.subjectValid = true;
+        this.subjectMessage = ''
+      }else{
+        this.subjectValid = false;
+        this.subjectMessage = '请输入‘文科’、‘理科’或‘不分文理’'
+      }
     },
     emailCheck () {
       sessionStorage.setItem('email',this.email);
