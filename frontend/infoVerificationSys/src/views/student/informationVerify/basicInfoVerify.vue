@@ -242,7 +242,7 @@ export default {
     },
     submit:function(){
       if(this.stuName!==''&&this.sex!==''&&this.birthdate!==''&&this.subject!==''&&this.email!==''&&this.phoneNumber!==''
-        &&this.stuNameValid&&this.emailValid){
+        &&this.stuNameValid&&this.emailValid&&this.birthdateValid&&this.subjectValid&&this.sexValid){
         let sex = this.sex==='男'? 1 : 0;
         let subject = 0;
         if(this.subject === '文科'){
