@@ -127,12 +127,13 @@ export default {
       this.queryFormVisible = true
       this.currentIdentityNum = row.identityNum
 
-
       handleFeedback(row.identityNum)
         .then(res => {
-          this.ocrPhoto = res.data.ocrPhoto
+          if(res.data.ocrPhoto!=='') {
+            this.ocrPhoto = res.data.ocrPhoto
+          }
           this.queryInfo = res.data.queryInfo
-          this.loading=false
+          this.loading = false
         })
         .catch(err => {
             this.$message({
