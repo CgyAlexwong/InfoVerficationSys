@@ -127,9 +127,19 @@ export default {
       this.queryFormVisible = true
       this.currentIdentityNum = row.identityNum
 
+      this.ocrPhoto = 'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true'
+      this.queryInfo = [{
+        databaseInfo: '',
+        studentInfo: '',
+        prop: '',
+        selectedInfo: ''
+      }]
+
+      this.loading = true
+
       handleFeedback(row.identityNum)
         .then(res => {
-          if(res.data.ocrPhoto!=='') {
+          if (res.data.ocrPhoto !== '') {
             this.ocrPhoto = res.data.ocrPhoto
           }
           this.queryInfo = res.data.queryInfo
