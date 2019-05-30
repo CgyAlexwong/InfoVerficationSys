@@ -116,6 +116,13 @@ export default {
           }
           if (this.queryFormVisible === true) {
             this.queryFormVisible = false
+            this.ocrPhoto = 'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true'
+            this.queryInfo = [{
+              databaseInfo: '',
+              studentInfo: '',
+              prop: '',
+              selectedInfo: ''
+            }]
           }
         })
         .catch(() => {
@@ -124,8 +131,6 @@ export default {
 
     //修改存疑信息
     handleQueryEdit (row) {
-      this.queryFormVisible = true
-      this.currentIdentityNum = row.identityNum
 
       this.ocrPhoto = 'https://github.com/CgyAlexwong/InfoVerficationSys/blob/uc1/frontend/infoVerificationSys/src/assets/da8e974dc.jpg?raw=true'
       this.queryInfo = [{
@@ -134,8 +139,9 @@ export default {
         prop: '',
         selectedInfo: ''
       }]
-
       this.loading = true
+      this.queryFormVisible = true
+      this.currentIdentityNum = row.identityNum
 
       handleFeedback(row.identityNum)
         .then(res => {
@@ -189,6 +195,7 @@ export default {
                 message: '修改成功',
                 type: 'success'
               })
+
               this.getStatus()
               this.queryFormVisible = false
             } else {
