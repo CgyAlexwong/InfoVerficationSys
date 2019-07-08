@@ -118,7 +118,7 @@ export default {
     MessageBox.alert('', {
       message: '请仔细确认以下信息！如无误请点击提交，如有误请点击底部修改',
       title: '请仔细阅读',
-      confirmButtonText: '我记住了'
+      confirmButtonText: '我明白了'
     });
 
     getInfo(

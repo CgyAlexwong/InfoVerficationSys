@@ -260,16 +260,14 @@ export default {
         setTimeout(() => Indicator.close(), 0);
       }else {
         lrz(file,{
-          quality:0.7
+          quality:0.35
         }).then(rst =>{
           console.log(file)
           let newFile = rst.file;
           newFile.name = file.name;
           this.formData1.delete('file');
           this.formData1.append('file',newFile,file.name);
-          Indicator.close();
-        }).error(err=>{
-          console.log(err);
+          console.log(newFile.size)
           Indicator.close();
         })
       }
